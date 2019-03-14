@@ -10,6 +10,6 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server started on ${port}...`));
 
-app.get('/', (req, res, next) => {
-    res.send('Hello World').end();
+app.get('/', (req, res) => {
+    res.sendFile('./index.html', { root : __dirname});
 });
