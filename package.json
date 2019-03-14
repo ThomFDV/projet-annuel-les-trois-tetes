@@ -4,6 +4,8 @@
   "description": "### Les trois têtes",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/ThomFDV/projet-annuel-les-trois-tetes/issues"
   },
-  "homepage": "https://github.com/ThomFDV/projet-annuel-les-trois-tetes#readme"
+  "homepage": "https://github.com/ThomFDV/projet-annuel-les-trois-tetes#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "fh-cards": "^1.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }
