@@ -1,3 +1,35 @@
-<p>
-  article works!
-</p>
+<section class="container">
+  <h2 class="text-center">Créer un article</h2>
+  <form action="" class="d-flex flex-column">
+    <input type="text" placeholder="Titre de l'article" class="border mb-4 mt-5 py-3">
+    <textarea name="article" id="" cols="30" rows="30" placeholder="Contenu de l'article" class="border mb-4"></textarea>
+    <div class="d-inline-flex mb-5">
+      <button class="btn-secondary w-25 mr-2">Importer un fichier</button>
+      <p>0 fichier(s) importé(s)</p>
+    </div>
+    <div class="d-inline-flex my-5">
+      <div class="w-50">
+        <label for="">Selectionner un/des tag(s) :</label><br>
+        <!--Mettre les tags dans un autre component et afficher avec un for-->
+        <input type="checkbox">Tag 1
+        <input type="checkbox">Tag 2<br>
+        <input type="checkbox">Tag 3
+        <input type="checkbox">Tag 4<br>
+        <input type="checkbox">Tag 5
+        <input type="checkbox">Tag 6
+      </div>
+      <div class="d-flex flex-column w-50">
+        <label for="categorie">Séléctionner une catégorie :</label>
+        <select name="categories" id="categorie" class="border-dark w-25">
+          <option value="Cours" selected="selected">Cours</option>
+          <option value="News">News</option>
+          <option value="Stratégie">Stratégie</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn-success">Valider</button>
+      <button class="btn-danger">Annuler</button>
+    </div>
+  </form>
+</section>
