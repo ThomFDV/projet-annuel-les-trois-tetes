@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { DefaultComponent } from './default/default.component';
 import { ArticleComponent } from './article/article.component';
 import { MenuComponent } from './menu/menu.component';
+import { ArticleCollectionComponent } from './article/article-collection/article-collection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DefaultComponent,
     ArticleComponent,
-    MenuComponent
+    MenuComponent,
+    ArticleCollectionComponent
   ],
   imports: [
     NgbModule,

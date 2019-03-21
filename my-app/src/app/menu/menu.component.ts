@@ -10,23 +10,28 @@ export class MenuComponent implements OnInit {
   menuItems = [
     {
       id: 1,
-      name: 'Articles'
+      name: 'Articles',
+      url: 'articles/collection'
     },
     {
       id: 2,
-      name: 'Cours'
+      name: 'Cours',
+      url: 'courses'
     },
     {
       id: 3,
-      name: 'Jouer en ligne'
+      name: 'Jouer en ligne',
+      url: 'play'
     },
     {
       id: 4,
-      name: 'Mis en situation'
+      name: 'Mis en situation',
+      url: 'course-test'
     },
     {
       id: 5,
-      name: 'Contact'
+      name: 'Contact',
+      url: 'contact'
     }
   ];
 
