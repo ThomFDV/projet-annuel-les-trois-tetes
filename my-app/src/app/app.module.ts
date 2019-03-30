@@ -8,6 +8,7 @@ import { DefaultComponent } from './default/default.component';
 import { ArticleComponent } from './article/article.component';
 import { MenuComponent } from './menu/menu.component';
 import { ArticleCollectionComponent } from './article/article-collection/article-collection.component';
+import { ArticleCreationComponent } from './article/article-creation/article-creation.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ArticleCollectionComponent } from './article/article-collection/article
     DefaultComponent,
     ArticleComponent,
     MenuComponent,
-    ArticleCollectionComponent
+    ArticleCollectionComponent,
+    ArticleCreationComponent
   ],
   imports: [
     NgbModule,
