@@ -9,6 +9,9 @@ import { ArticleComponent } from './article/article.component';
 import { MenuComponent } from './menu/menu.component';
 import { ArticleCollectionComponent } from './article/article-collection/article-collection.component';
 import { ArticleCreationComponent } from './article/article-creation/article-creation.component';
+import { SimulationComponent } from './simulation/simulation.component';
+import { SimulationCollectionComponent } from './simulation/simulation-collection/simulation-collection.component';
+import { SimulationPlayerComponent } from './simulation/simulation-player/simulation-player.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ArticleCreationComponent } from './article/article-creation/article-cre
     ArticleComponent,
     MenuComponent,
     ArticleCollectionComponent,
-    ArticleCreationComponent
+    ArticleCreationComponent,
+    SimulationComponent,
+    SimulationCollectionComponent,
+    SimulationPlayerComponent
   ],
   imports: [
     NgbModule,

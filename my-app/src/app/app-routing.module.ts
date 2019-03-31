@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import {DefaultComponent} from './default/default.component';
 import {ArticleCollectionComponent} from './article/article-collection/article-collection.component';
 import {ArticleCreationComponent} from './article/article-creation/article-creation.component';
+import {SimulationCollectionComponent} from './simulation/simulation-collection/simulation-collection.component';
+import {SimulationPlayerComponent} from './simulation/simulation-player/simulation-player.component';
 
 const routes: Routes = [
   { path : 'articles/collection', component: ArticleCollectionComponent },
   { path : 'articles/nouveau', component: ArticleCreationComponent },
+  { path : 'simulation/collection', component: SimulationCollectionComponent },
+  { path : 'simulation/mise-en-situation-1', component: SimulationPlayerComponent },
   { path : '**', component: DefaultComponent }
 ];
 
