@@ -12,6 +12,8 @@ import { ArticleCreationComponent } from './article/article-creation/article-cre
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationCollectionComponent } from './simulation/simulation-collection/simulation-collection.component';
 import { SimulationPlayerComponent } from './simulation/simulation-player/simulation-player.component';
+import { StatusBarComponent } from './account/status-bar/status-bar.component';
+import { HomeAccountComponent } from './account/home-account/home-account.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { SimulationPlayerComponent } from './simulation/simulation-player/simula
     ArticleCreationComponent,
     SimulationComponent,
     SimulationCollectionComponent,
-    SimulationPlayerComponent
+    SimulationPlayerComponent,
+    StatusBarComponent,
+    HomeAccountComponent
   ],
   imports: [
     NgbModule,

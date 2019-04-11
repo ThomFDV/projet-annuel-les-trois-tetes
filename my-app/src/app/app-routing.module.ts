@@ -5,8 +5,10 @@ import {ArticleCollectionComponent} from './article/article-collection/article-c
 import {ArticleCreationComponent} from './article/article-creation/article-creation.component';
 import {SimulationCollectionComponent} from './simulation/simulation-collection/simulation-collection.component';
 import {SimulationPlayerComponent} from './simulation/simulation-player/simulation-player.component';
+import {HomeAccountComponent} from './account/home-account/home-account.component';
 
 const routes: Routes = [
+  { path : 'account', component: HomeAccountComponent },
   { path : 'articles/collection', component: ArticleCollectionComponent },
   { path : 'articles/nouveau', component: ArticleCreationComponent },
   { path : 'simulation/collection', component: SimulationCollectionComponent },
