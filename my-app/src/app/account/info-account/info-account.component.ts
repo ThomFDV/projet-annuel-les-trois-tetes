@@ -8,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class InfoAccountComponent implements OnInit {
 
   profilePicturePath: string = '../../../assets/images/thomas.png';
+  isDisplayed: boolean = false;
+  displayPseudo: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  open() {
+    this.displayPseudo = true;
+  }
 }

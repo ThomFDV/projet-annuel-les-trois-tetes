@@ -12,25 +12,73 @@
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#user"></use>
         </svg>
-        <a href="" class="text-reset">Changer mon pseudo</a>
+        <a class="text-reset" (click)="displayPseudo = true">Changer mon pseudo</a>
+        <div id="changePseudo" *ngIf="displayPseudo">
+          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
+            <svg class="c-account__icons">
+              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+            </svg>
+            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn-success">Valider</button>
+            <button class="btn-danger" (click)="displayPseudo = false">Annuler</button>
+          </div>
+        </div>
       </div>
       <div class="col-12 col-md-6 mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
         </svg>
         <a href="" class="text-reset">Changer mon mot de passe</a>
+        <div id="changePassword" *ngIf="isDisplayed">
+          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
+            <svg class="c-account__icons">
+              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+            </svg>
+            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn-success">Valider</button>
+            <button class="btn-danger">Annuler</button>
+          </div>
+        </div>
       </div>
       <div class="col-12 col-md-6 mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#mail"></use>
         </svg>
         <a href="" class="text-reset">Changer mon email</a>
+        <div id="changeEmail" *ngIf="isDisplayed">
+          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
+            <svg class="c-account__icons">
+              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+            </svg>
+            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn-success">Valider</button>
+            <button class="btn-danger">Annuler</button>
+          </div>
+        </div>
       </div>
       <div class="col-12 col-md-6 mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#location"></use>
         </svg>
         <a href="" class="text-reset">Changer mon adresse</a>
+        <div id="changeAddress" *ngIf="isDisplayed">
+          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
+            <svg class="c-account__icons">
+              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+            </svg>
+            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn-success">Valider</button>
+            <button class="btn-danger">Annuler</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
