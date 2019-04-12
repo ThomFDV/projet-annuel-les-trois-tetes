@@ -14,6 +14,7 @@ import { SimulationCollectionComponent } from './simulation/simulation-collectio
 import { SimulationPlayerComponent } from './simulation/simulation-player/simulation-player.component';
 import { StatusBarComponent } from './account/status-bar/status-bar.component';
 import { HomeAccountComponent } from './account/home-account/home-account.component';
+import { InfoAccountComponent } from './account/info-account/info-account.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HomeAccountComponent } from './account/home-account/home-account.compon
     SimulationCollectionComponent,
     SimulationPlayerComponent,
     StatusBarComponent,
-    HomeAccountComponent
+    HomeAccountComponent,
+    InfoAccountComponent
   ],
   imports: [
     NgbModule,
