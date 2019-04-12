@@ -3,3 +3,24 @@
 svg {
   fill: currentColor;
 }
+
+.c-account__icons {
+  width: 32px;
+  height: 32px;
+  padding-right: .5rem;
+}
+
+.c-account__inputs {
+  background-color: white;
+  border-bottom: 2px solid #007bff;
+  border-radius: 4px;
+  padding: 0 .5rem;
+}
+
+.c-account__field {
+  width: 300px;
+  height: 40px;
+  padding: .5rem;
+  border: 0;
+  border-radius: 4px;
+}
