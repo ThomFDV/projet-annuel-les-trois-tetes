@@ -6,9 +6,11 @@ import {ArticleCreationComponent} from './article/article-creation/article-creat
 import {SimulationCollectionComponent} from './simulation/simulation-collection/simulation-collection.component';
 import {SimulationPlayerComponent} from './simulation/simulation-player/simulation-player.component';
 import {HomeAccountComponent} from './account/home-account/home-account.component';
+import {InfoAccountComponent} from './account/info-account/info-account.component';
 
 const routes: Routes = [
   { path : 'account', component: HomeAccountComponent },
+  { path : 'account/info', component: InfoAccountComponent },
   { path : 'articles/collection', component: ArticleCollectionComponent },
   { path : 'articles/nouveau', component: ArticleCreationComponent },
   { path : 'simulation/collection', component: SimulationCollectionComponent },

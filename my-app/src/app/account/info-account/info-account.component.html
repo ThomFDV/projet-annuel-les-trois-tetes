@@ -1,3 +1,37 @@
-<p>
-  info-account works!
-</p>
+<app-status-bar></app-status-bar>
+<section class="container-fluid bg-light col-lg-8 d-flex flex-column mt-5">
+  <div class="d-flex flex-wrap text-center">
+    <h1 class="col-12 my-4">Mes informations personnelles</h1>
+    <img src="{{ profilePicturePath }}" alt="" width="150" height="150" class="my-auto ml-auto mr-3">
+    <button class="btn-primary my-auto mr-auto ml-3">Changer ma photo de profil</button>
+  </div>
+  <hr class="w-75">
+  <div class="d-flex">
+    <div class="d-flex flex-wrap col-9 m-auto">
+      <div class="col-12 col-md-6 mb-4">
+        <svg class="c-info-account__icons">
+          <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+        </svg>
+        <a href="" class="text-reset">Changer mon pseudo</a>
+      </div>
+      <div class="col-12 col-md-6 mb-4">
+        <svg class="c-info-account__icons">
+          <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
+        </svg>
+        <a href="" class="text-reset">Changer mon mot de passe</a>
+      </div>
+      <div class="col-12 col-md-6 mb-4">
+        <svg class="c-info-account__icons">
+          <use xlink:href="../../../assets/icons/icons.svg#mail"></use>
+        </svg>
+        <a href="" class="text-reset">Changer mon email</a>
+      </div>
+      <div class="col-12 col-md-6 mb-4">
+        <svg class="c-info-account__icons">
+          <use xlink:href="../../../assets/icons/icons.svg#location"></use>
+        </svg>
+        <a href="" class="text-reset">Changer mon adresse</a>
+      </div>
+    </div>
+  </div>
+</section>

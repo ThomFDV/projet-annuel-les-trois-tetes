@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoAccountComponent implements OnInit {
 
+  profilePicturePath: string = '../../../assets/images/thomas.png';
+
   constructor() { }
 
   ngOnInit() {
