@@ -12,8 +12,10 @@ import {RegisterAccountComponent} from './account/register-account/register-acco
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 import {StatisticHomeComponent} from './statistic/statistic-home/statistic-home.component';
 import {CourseCollectionComponent} from './course/course-collection/course-collection.component';
+import {PlayComponent} from './play/play.component';
 
 const routes: Routes = [
+  { path : 'play', component: PlayComponent },
   { path : 'courses/collection', component: CourseCollectionComponent },
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },

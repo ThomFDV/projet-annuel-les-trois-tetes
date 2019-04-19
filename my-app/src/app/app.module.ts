@@ -21,6 +21,7 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
 import { StatisticHomeComponent } from './statistic/statistic-home/statistic-home.component';
 import { CourseCollectionComponent } from './course/course-collection/course-collection.component';
 import { GameComponent } from './game/game.component';
+import { PlayComponent } from './play/play.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { GameComponent } from './game/game.component';
     ContactFormComponent,
     StatisticHomeComponent,
     CourseCollectionComponent,
-    GameComponent
+    GameComponent,
+    PlayComponent
   ],
   imports: [
     NgbModule,
