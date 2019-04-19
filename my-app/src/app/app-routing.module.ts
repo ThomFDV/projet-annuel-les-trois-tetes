@@ -11,8 +11,10 @@ import {LoginAccountComponent} from './account/login-account/login-account.compo
 import {RegisterAccountComponent} from './account/register-account/register-account.component';
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 import {StatisticHomeComponent} from './statistic/statistic-home/statistic-home.component';
+import {CourseCollectionComponent} from './course/course-collection/course-collection.component';
 
 const routes: Routes = [
+  { path : 'courses/collection', component: CourseCollectionComponent },
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },
   { path : 'account', component: HomeAccountComponent },

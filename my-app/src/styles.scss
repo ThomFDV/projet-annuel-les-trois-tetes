@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: rgb(130,162,194);
+  background: -moz-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
+  background: linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%) no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#82a2c2",endColorstr="#d5d5d5",GradientType=1);
+}
 
 svg {
   fill: currentColor;

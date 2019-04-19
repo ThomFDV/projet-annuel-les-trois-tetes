@@ -19,6 +19,8 @@ import { LoginAccountComponent } from './account/login-account/login-account.com
 import { RegisterAccountComponent } from './account/register-account/register-account.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { StatisticHomeComponent } from './statistic/statistic-home/statistic-home.component';
+import { CourseCollectionComponent } from './course/course-collection/course-collection.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { StatisticHomeComponent } from './statistic/statistic-home/statistic-hom
     LoginAccountComponent,
     RegisterAccountComponent,
     ContactFormComponent,
-    StatisticHomeComponent
+    StatisticHomeComponent,
+    CourseCollectionComponent,
+    GameComponent
   ],
   imports: [
     NgbModule,

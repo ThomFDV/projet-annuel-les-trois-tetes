@@ -1,0 +1,17 @@
+.bg-locked {
+  background: repeating-linear-gradient(-55deg, #f2f2f2, #f2f2f2 10px, #f8f9fa 10px, #f8f9fa 20px);
+}
+
+.course-locked {
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.course-locked--right {
+  position: absolute;
+  right: 0;
+  width: 24px;
+  height: 24px;
+}
