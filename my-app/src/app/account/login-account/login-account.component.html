@@ -1,7 +1,7 @@
 <section class="container-fluid col-lg-8 d-flex flex-column mt-5">
   <div class="bg-light p-5">
     <h1 class="pb-3 text-center">Connexion</h1>
-    <form action="" class="d-flex flex-column">
+    <form action="/account" class="d-flex flex-column">
       <div class="c-account__inputs mx-auto mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#mail"></use>
@@ -14,7 +14,11 @@
         </svg>
         <input class="c-account__field border-0 rounded" type="password" placeholder="mypassword">
       </div>
-      <button class="btn-primary m-auto">Se connecter</button>
+      <button class="btn-primary m-auto" type="submit">Se connecter</button>
     </form>
+    <div class="border-top text-center mx-auto mt-5 pt-3">
+      <h5>Pas encore de compte ?</h5>
+      <button class="btn-primary mt-2" onclick="window.location.href = '/register';">Inscrivez-vous !</button>
+    </div>
   </div>
 </section>
