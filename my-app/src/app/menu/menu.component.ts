@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
     },
     {
       id: 4,
-      name: 'Mis en situation',
+      name: 'Mise en situation',
       url: 'simulation/collection'
     },
     {

@@ -1,0 +1,13 @@
+.c-statistic__container {
+  border-radius: 25px;
+  background: rgb(130,162,194);
+  background: -moz-linear-gradient(90deg, rgba(130,162,194,0.5760679271708684) 0%, rgba(191,191,191,0.592874649859944) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(130,162,194,0.5760679271708684) 0%, rgba(191,191,191,0.592874649859944) 100%);
+  background: linear-gradient(90deg, rgba(130,162,194,0.5760679271708684) 0%, rgba(191,191,191,0.592874649859944) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#82a2c2",endColorstr="#bfbfbf",GradientType=1);
+}
+
+.c-statistic__bulle {
+  border-radius: 25px;
+  background-color: transparentize(rgba(255, 255, 255, 1), 0.8);
+}

@@ -10,9 +10,11 @@ import {InfoAccountComponent} from './account/info-account/info-account.componen
 import {LoginAccountComponent} from './account/login-account/login-account.component';
 import {RegisterAccountComponent} from './account/register-account/register-account.component';
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
+import {StatisticHomeComponent} from './statistic/statistic-home/statistic-home.component';
 
 const routes: Routes = [
   { path : 'contact', component: ContactFormComponent },
+  { path : 'statistics', component: StatisticHomeComponent },
   { path : 'account', component: HomeAccountComponent },
   { path : 'login', component: LoginAccountComponent },
   { path : 'register', component: RegisterAccountComponent },

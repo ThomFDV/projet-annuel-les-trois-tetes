@@ -18,6 +18,7 @@ import { InfoAccountComponent } from './account/info-account/info-account.compon
 import { LoginAccountComponent } from './account/login-account/login-account.component';
 import { RegisterAccountComponent } from './account/register-account/register-account.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { StatisticHomeComponent } from './statistic/statistic-home/statistic-home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
     InfoAccountComponent,
     LoginAccountComponent,
     RegisterAccountComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    StatisticHomeComponent
   ],
   imports: [
     NgbModule,
