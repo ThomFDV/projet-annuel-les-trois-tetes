@@ -17,6 +17,7 @@ import { HomeAccountComponent } from './account/home-account/home-account.compon
 import { InfoAccountComponent } from './account/info-account/info-account.component';
 import { LoginAccountComponent } from './account/login-account/login-account.component';
 import { RegisterAccountComponent } from './account/register-account/register-account.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { RegisterAccountComponent } from './account/register-account/register-ac
     HomeAccountComponent,
     InfoAccountComponent,
     LoginAccountComponent,
-    RegisterAccountComponent
+    RegisterAccountComponent,
+    ContactFormComponent
   ],
   imports: [
     NgbModule,
