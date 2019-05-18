@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
     {
       id: 3,
       name: 'Jouer en ligne',
-      url: 'play'
+      url: 'games/home'
     },
     {
       id: 4,

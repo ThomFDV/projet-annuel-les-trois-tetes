@@ -12,10 +12,13 @@ import {RegisterAccountComponent} from './account/register-account/register-acco
 import {ContactFormComponent} from './contact/contact-form/contact-form.component';
 import {StatisticHomeComponent} from './statistic/statistic-home/statistic-home.component';
 import {CourseCollectionComponent} from './course/course-collection/course-collection.component';
-import {PlayComponent} from './play/play.component';
+import {PlayComponent} from './games/play/play.component';
+import {HomeComponent} from './home/home.component';
+import {HomeGameComponent} from './games/home-game/home-game.component';
 
 const routes: Routes = [
-  { path : 'play', component: PlayComponent },
+  { path : 'games/home', component: HomeGameComponent },
+  { path : 'games/play', component: PlayComponent },
   { path : 'courses/collection', component: CourseCollectionComponent },
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },
@@ -27,6 +30,7 @@ const routes: Routes = [
   { path : 'articles/nouveau', component: ArticleCreationComponent },
   { path : 'simulation/collection', component: SimulationCollectionComponent },
   { path : 'simulation/mise-en-situation-1', component: SimulationPlayerComponent },
+  { path : '', component: HomeComponent },
   { path : '**', component: DefaultComponent }
 ];
 

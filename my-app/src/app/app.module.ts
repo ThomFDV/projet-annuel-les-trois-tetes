@@ -20,8 +20,10 @@ import { RegisterAccountComponent } from './account/register-account/register-ac
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { StatisticHomeComponent } from './statistic/statistic-home/statistic-home.component';
 import { CourseCollectionComponent } from './course/course-collection/course-collection.component';
-import { GameComponent } from './game/game.component';
-import { PlayComponent } from './play/play.component';
+import { GameComponent } from './games/game/game.component';
+import { PlayComponent } from './games/play/play.component';
+import { HomeComponent } from './home/home.component';
+import { HomeGameComponent } from './games/home-game/home-game.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { PlayComponent } from './play/play.component';
     StatisticHomeComponent,
     CourseCollectionComponent,
     GameComponent,
-    PlayComponent
+    PlayComponent,
+    HomeComponent,
+    HomeGameComponent
   ],
   imports: [
     NgbModule,
