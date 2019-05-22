@@ -1,31 +1,37 @@
 <section class="container-fluid col-lg-8 d-flex flex-column mt-5">
   <div class="bg-light p-5">
     <h1 class="pb-3 text-center">Création du compte</h1>
-    <form action="/account" class="d-flex flex-column">
+    <form class="d-flex flex-column" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="c-account__inputs mx-auto mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#user"></use>
         </svg>
-        <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
+        <input class="c-account__field border-0 rounded" type="text" placeholder="firstname" formControlName="firstname">
+      </div>
+      <div class="c-account__inputs mx-auto mb-4">
+        <svg class="c-account__icons">
+          <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+        </svg>
+        <input class="c-account__field border-0 rounded" type="text" placeholder="lastname" formControlName="lastname">
       </div>
       <div class="c-account__inputs mx-auto mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#mail"></use>
         </svg>
-        <input class="c-account__field border-0 rounded" type="email" placeholder="email@something.com">
+        <input class="c-account__field border-0 rounded" type="email" placeholder="email@something.com" formControlName="email">
       </div>
       <div class="c-account__inputs mx-auto mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#unlock"></use>
         </svg>
-        <input class="c-account__field border-0 rounded" type="password" placeholder="my password">
+        <input class="c-account__field border-0 rounded" type="password" placeholder="my password" formControlName="password">
       </div>
-      <div class="c-account__inputs mx-auto mb-4">
-        <svg class="c-account__icons">
-          <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
-        </svg>
-        <input class="c-account__field border-0 rounded" type="password" placeholder="confirm password">
-      </div>
+<!--      <div class="c-account__inputs mx-auto mb-4">-->
+<!--        <svg class="c-account__icons">-->
+<!--          <use xlink:href="../../../assets/icons/icons.svg#lock"></use>-->
+<!--        </svg>-->
+<!--        <input class="c-account__field border-0 rounded" type="password" placeholder="confirm password">-->
+<!--      </div>-->
       <button class="btn-primary m-auto" type="submit">Créer</button>
     </form>
   </div>

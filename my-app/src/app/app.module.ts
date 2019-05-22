@@ -24,6 +24,7 @@ import { GameComponent } from './components/games/game/game.component';
 import { PlayComponent } from './components/games/play/play.component';
 import { HomeComponent } from './components/home/home.component';
 import { HomeGameComponent } from './components/games/home-game/home-game.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,11 +50,13 @@ import { HomeGameComponent } from './components/games/home-game/home-game.compon
     HomeComponent,
     HomeGameComponent
   ],
-  imports: [
-    NgbModule,
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        NgbModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
