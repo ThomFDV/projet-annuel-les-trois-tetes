@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { PlayComponent } from './components/games/play/play.component';
 import { HomeComponent } from './components/home/home.component';
 import { HomeGameComponent } from './components/games/home-game/home-game.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -55,9 +57,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@
  * get and format the current datetime
  */
 var newDate = function dateNow() {
-  var dateNow = new Date();
+  var dateNow = Date(Date.now());
   var day = dateNow.getDate();
   var month = dateNow.getMonth();
   var year = dateNow.getFullYear();
