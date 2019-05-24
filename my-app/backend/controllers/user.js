@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
 
+const jwt = require('jsonwebtoken');
+
 const User = require("../models/user");
 
 exports.createUser = (req, res, next) => {
@@ -25,3 +27,14 @@ exports.createUser = (req, res, next) => {
         });
   });
 };
+
+exports.login = (req, res) => {
+  let user = req.user;
+  let token = generateToken(user);
+  res.json({ user, token });
+};
+
+function generateToken(user) {
+  const payload = JSON.stringify(user);
+  return jwt.sign(payload, "JWSecret-PA-poker-is-incredible");
+}

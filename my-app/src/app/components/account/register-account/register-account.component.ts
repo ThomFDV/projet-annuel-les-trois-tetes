@@ -34,7 +34,6 @@ export class RegisterAccountComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    alert(this.registerForm.value);
     this.userService.register(this.registerForm.value)
         .pipe(first())
         .subscribe(

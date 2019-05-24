@@ -6,15 +6,15 @@
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#mail"></use>
         </svg>
-        <input class="c-account__field border-0 rounded" type="email" placeholder="email@something.com">
+        <input class="c-account__field border-0 rounded" type="email" placeholder="email@something.com" [(ngModel)]="email" name="email" required>
       </div>
       <div class="c-account__inputs mx-auto mb-4">
         <svg class="c-account__icons">
           <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
         </svg>
-        <input class="c-account__field border-0 rounded" type="password" placeholder="mypassword">
+        <input class="c-account__field border-0 rounded" type="password" placeholder="mypassword" [(ngModel)]="password" name="password" required>
       </div>
-      <button class="btn-primary m-auto" type="submit">Se connecter</button>
+      <button class="btn-primary m-auto" type="submit" (click)="login()">Se connecter</button>
     </form>
     <div class="border-top text-center mx-auto mt-5 pt-3">
       <h5>Pas encore de compte ?</h5>

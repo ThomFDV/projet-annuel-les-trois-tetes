@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-const dateNow = require('../scripts');
 
 const userSchema = mongoose.Schema({
   firstname: {

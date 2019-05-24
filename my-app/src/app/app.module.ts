@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeGameComponent } from './components/games/home-game/home-game.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from './services/user.service';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {UserService} from './services/user.service';
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        CommonModule
     ],
   providers: [UserService],
   bootstrap: [AppComponent]
