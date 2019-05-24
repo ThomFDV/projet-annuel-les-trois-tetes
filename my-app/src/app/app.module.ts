@@ -28,6 +28,7 @@ import { HomeGameComponent } from './components/games/home-game/home-game.compon
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from './services/user.service';
 import {CommonModule} from '@angular/common';
+import {TokenStorageService} from './services/token-storage.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import {CommonModule} from '@angular/common';
         HttpClientModule,
         CommonModule
     ],
-  providers: [UserService],
+  providers: [UserService, TokenStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

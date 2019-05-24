@@ -21,6 +21,7 @@ export class LoginAccountComponent implements OnInit {
     this.userService.login(this.email, this.password)
         .subscribe(
             data => {
+              alert('Logged in !');
               this.router.navigate(['/account']);
             },
             error => {

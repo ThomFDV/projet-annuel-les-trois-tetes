@@ -38,6 +38,7 @@ export class RegisterAccountComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
+              alert('Successfully registered!');
               this.router.navigate(['/']);
             },
             error => {
