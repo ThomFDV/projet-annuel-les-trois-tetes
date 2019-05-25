@@ -27,4 +27,10 @@ export class UserService {
             })
         });
     }
+
+    signOut(): void {
+        this.token.signOut();
+        delete (<any>window).user;
+        alert('Deconnected! See you soon!');
+    }
 }

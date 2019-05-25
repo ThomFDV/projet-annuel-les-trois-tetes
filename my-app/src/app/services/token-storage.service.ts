@@ -10,4 +10,9 @@ export class TokenStorageService {
         window.localStorage.removeItem('AuthToken');
         window.localStorage.setItem('AuthToken',  token);
     }
+
+    signOut() {
+        window.localStorage.removeItem('AuthToken');
+        window.localStorage.clear();
+    }
 }
