@@ -33,4 +33,8 @@ export class UserService {
         delete (<any>window).user;
         alert('Deconnected! See you soon!');
     }
+
+    getToken(): string {
+        return window.localStorage.getItem('AuthToken');
+    }
 }

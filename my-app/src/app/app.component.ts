@@ -17,6 +17,10 @@ export class AppComponent implements OnInit{
   ngOnInit() {
   }
 
+  token(): string {
+    return this.userService.getToken();
+  }
+
   logout(): void {
     this.userService.signOut();
     this.router.navigate(['/']);

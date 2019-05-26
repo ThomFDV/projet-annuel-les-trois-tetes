@@ -9,9 +9,10 @@
             </ul>
         </nav>
         <div>
-            <img src="../assets/images/thomas.png" alt="user icon" width="150" routerLink="login" *ngIf="!user">
-            <div class="rounded-circle border bg-light" style="width: 150px;height: 150px" *ngIf="user" (click)="logout()">
-                <p class="deconnected">Déconnexion</p>
+            <img src="../assets/images/thomas.png" alt="user icon" width="150" routerLink="login" *ngIf="!token()">
+            <div class="d-flex align-items-center flex-wrap rounded-circle border bg-img-account" style="width: 150px;height: 150px" *ngIf="token()">
+                <p class="m-auto" (click)="logout()">Déconnexion</p>
+                <p class="m-auto" routerLink="/account">Mon Compte</p>
             </div>
         </div>
     </section>

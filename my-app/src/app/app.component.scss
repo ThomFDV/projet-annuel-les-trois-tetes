@@ -5,9 +5,7 @@
   text-align: center;
 }
 
-.deconnected {
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+.bg-img-account {
+  background-image: url("../assets/images/thomas.png");
+  background-size: cover;
 }
