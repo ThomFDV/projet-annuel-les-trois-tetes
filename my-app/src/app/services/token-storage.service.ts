@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class TokenStorageService {
@@ -14,5 +15,15 @@ export class TokenStorageService {
     signOut() {
         window.localStorage.removeItem('AuthToken');
         window.localStorage.clear();
+    }
+
+    getToken(): string {
+        return window.localStorage.getItem('AuthToken');
+    }
+
+    getHeaderToken(): HttpHeaders {
+        const httpOptions = new HttpHeaders({ 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.getToken()});
+        return httpOptions;
     }
 }

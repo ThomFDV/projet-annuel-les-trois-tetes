@@ -1,8 +1,12 @@
 <section class="container">
   <h2 class="text-center">Créer un article</h2>
-  <form action="" class="d-flex flex-column">
-    <input type="text" placeholder="Titre de l'article" class="border mb-4 mt-5 py-3 px-2">
-    <textarea name="article" id="" cols="20" rows="20" placeholder="Contenu de l'article" class="border p-2 mb-4"></textarea>
+  <form action="" class="d-flex flex-column" [formGroup]="newArticleForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Titre de l'article" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+    <textarea name="article" id="" cols="20" rows="20" placeholder="Contenu de l'article" class="border p-2 mb-4" formControlName="content"></textarea>
+    <select formControlName="type" class="col-3 mb-4">
+      <option value="article">Article</option>
+      <option value="cours">Cours</option>
+    </select>
     <div class="d-inline-flex mb-5">
       <button class="btn-secondary w-25 mr-2">Importer un fichier</button>
       <p class="my-auto">0 fichier(s) importé(s)</p>
@@ -28,7 +32,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-around">
-      <button class="btn-success">Valider</button>
+      <button class="btn-success" type="submit">Valider</button>
       <button class="btn-danger">Annuler</button>
     </div>
   </form>

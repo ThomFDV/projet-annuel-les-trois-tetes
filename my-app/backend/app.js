@@ -1,9 +1,12 @@
-const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const cors = require("cors");
 
 const userRoutes = require("./routes/user");
+const articleRoutes = require("./routes/article");
 
 const app = express();
 
@@ -21,6 +24,9 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(cors());
+app.use(passport.initialize());
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,5 +42,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/user", userRoutes);
+
+app.use("/article", articleRoutes);
 
 module.exports = app;

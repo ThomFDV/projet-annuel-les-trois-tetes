@@ -34,6 +34,10 @@ exports.login = (req, res) => {
   res.json({ user, token });
 };
 
+exports.profile = (req, res) => {
+  res.json({user: req.user});
+};
+
 function generateToken(user) {
   const payload = JSON.stringify(user);
   return jwt.sign(payload, "JWSecret-PA-poker-is-incredible");

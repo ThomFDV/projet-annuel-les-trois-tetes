@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import {Router} from '@angular/router';
+import {TokenStorageService} from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,15 @@ export class AppComponent implements OnInit{
 
   @Input() user: any = {};
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
   }
 
   token(): string {
-    return this.userService.getToken();
+    return this.tokenStorageService.getToken();
   }
 
   logout(): void {

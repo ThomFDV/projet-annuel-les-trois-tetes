@@ -29,8 +29,6 @@ export class RegisterAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
     if (this.registerForm.invalid) {
       return;
     }
@@ -40,6 +38,7 @@ export class RegisterAccountComponent implements OnInit {
             data => {
               alert('Successfully registered!');
               this.router.navigate(['/']);
+              this.submitted = true;
             },
             error => {
               alert('error !');
