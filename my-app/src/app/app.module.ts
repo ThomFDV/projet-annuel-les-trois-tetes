@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from './services/user.service';
 import {CommonModule} from '@angular/common';
 import {TokenStorageService} from './services/token-storage.service';
+import {MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,11 @@ import {TokenStorageService} from './services/token-storage.service';
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
-        CommonModule
+        CommonModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatNativeDateModule
     ],
   providers: [UserService, TokenStorageService],
   bootstrap: [AppComponent]

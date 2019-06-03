@@ -9,4 +9,6 @@ const router = express.Router();
 
 router.post("/create", passport.authenticate("jwt", { session: false }), ArticleController.create);
 
+router.get("/collection", ArticleController.getCollection);
+
 module.exports = router;

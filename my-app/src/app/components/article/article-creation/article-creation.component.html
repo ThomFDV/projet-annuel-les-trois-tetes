@@ -3,10 +3,15 @@
   <form action="" class="d-flex flex-column" [formGroup]="newArticleForm" (ngSubmit)="onSubmit()">
     <input type="text" placeholder="Titre de l'article" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
     <textarea name="article" id="" cols="20" rows="20" placeholder="Contenu de l'article" class="border p-2 mb-4" formControlName="content"></textarea>
-    <select formControlName="type" class="col-3 mb-4">
-      <option value="article">Article</option>
-      <option value="cours">Cours</option>
-    </select>
+    <div>
+      <mat-form-field class="col-3 mx-0 mb-3 px-0">
+        <mat-label>Sélectionnez un type</mat-label>
+        <mat-select name="type" formControlName="type" required>
+          <mat-option value="article">Article</mat-option>
+          <mat-option value="cours">Cours</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="d-inline-flex mb-5">
       <button class="btn-secondary w-25 mr-2">Importer un fichier</button>
       <p class="my-auto">0 fichier(s) importé(s)</p>

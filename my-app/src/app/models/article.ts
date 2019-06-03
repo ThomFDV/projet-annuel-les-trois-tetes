@@ -3,4 +3,6 @@ export class Article {
     title: string;
     content: string;
     type: string;
+    creator: string;
+    updatedAt: string;
 }

@@ -41,7 +41,7 @@ export class ArticleCreationComponent implements OnInit {
               this.submitted = true;
             },
             error => {
-              alert('erreur !');
+              alert('Vous n\'êtes pas connecté, échec de la création');
             });
   }
 

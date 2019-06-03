@@ -25,3 +25,8 @@ exports.create = async (req, res, next) => {
     }).end();
   }
 };
+
+exports.getCollection = async (req, res) => {
+  const articles = await Article.find();
+  res.json(articles);
+};

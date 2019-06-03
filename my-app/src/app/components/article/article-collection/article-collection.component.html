@@ -3,32 +3,20 @@
     <h5 class="mr-2">Envie de partager une idée, un cours ou autre ?</h5>
     <button class="btn-primary" onclick="window.location.href = '/articles/nouveau';">Créer votre article !</button>
   </div>
-  <h3 class="mb-4">Les derniers articles</h3>
-  <div class="d-inline-flex bg-light rounded mb-4">
-    <div class="d-flex flex-column align-items-center border-right w-25 p-2">
-      <h5 class="m-auto">Titre de l'article</h5>
-      <ul class="d-flex justify-content-around list-unstyled w-100 p-0 m-0">
-        <li>tag 1</li>
-        <li>tag 2</li>
-      </ul>
+  <div class="col-12">
+    <h3 class="mb-4">Les derniers articles</h3>
+    <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let article of articles">
+      <div class="d-flex flex-column align-items-center border-right w-25 p-2">
+        <h5 class="m-auto">{{article.title}}</h5>
+        <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+          <li>{{article.creator}}</li>
+          <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+        </ul>
+      </div>
+      <p class="p-4 m-0">
+        {{article.content}}
+      </p>
     </div>
-    <p class="p-4 m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur, eum laboriosam laudantium magni quibusdam ut.<br>
-      Adipisci animi architecto consequatur cumque exercitationem id iure, minus molestiae numquam, odio quibusdam repudiandae!
-    </p>
-  </div>
-  <div class="d-inline-flex bg-light rounded mb-4">
-    <div class="d-flex flex-column align-items-center border-right w-25 p-2">
-      <h5 class="m-auto">Titre de l'article</h5>
-      <ul class="d-flex justify-content-around list-unstyled w-100 p-0 m-0">
-        <li>tag 1</li>
-        <li>tag 2</li>
-      </ul>
-    </div>
-    <p class="p-4 m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur, eum laboriosam laudantium magni quibusdam ut.<br>
-      Adipisci animi architecto consequatur cumque exercitationem id iure, minus molestiae numquam, odio quibusdam repudiandae!
-    </p>
   </div>
   <h3 class="mb-4">Top articles</h3>
   <div class="d-inline-flex bg-light rounded mb-4">
