@@ -27,6 +27,6 @@ exports.create = async (req, res, next) => {
 };
 
 exports.getCollection = async (req, res) => {
-  const articles = await Article.find();
+  const articles = await Article.find({ type: "article"}).sort({updatedAt: "desc"});
   res.json(articles);
 };

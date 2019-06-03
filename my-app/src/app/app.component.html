@@ -11,8 +11,8 @@
         <div>
             <img src="../assets/images/thomas.png" alt="user icon" width="150" routerLink="login" *ngIf="!token()">
             <div class="d-flex align-items-center flex-wrap rounded-circle border bg-img-account" style="width: 150px;height: 150px" *ngIf="token()">
-                <p class="m-auto" (click)="logout()">Déconnexion</p>
-                <p class="m-auto" routerLink="/account">Mon Compte</p>
+                <button mat-button color="primary" class="m-auto" (click)="logout()">Deconnexion</button>
+                <button mat-button color="primary" class="m-auto" routerLink="/account">Mon compte</button>
             </div>
         </div>
     </section>

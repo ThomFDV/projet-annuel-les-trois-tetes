@@ -30,7 +30,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from './services/user.service';
 import {CommonModule} from '@angular/common';
 import {TokenStorageService} from './services/token-storage.service';
-import {MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,8 @@ import {MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular
         BrowserAnimationsModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatButtonModule
     ],
   providers: [UserService, TokenStorageService],
   bootstrap: [AppComponent]
