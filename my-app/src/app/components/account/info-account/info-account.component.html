@@ -2,52 +2,68 @@
 <section class="container-fluid bg-light col-lg-8 d-flex flex-column mt-5">
   <div class="d-flex flex-wrap text-center">
     <h1 class="col-12 my-4">Mes informations personnelles</h1>
-    <div class="d-flex flex-column">
-      <p>Firstname : {{user.firstname}}</p>
-      <p>Lastname : {{user.lastname}}</p>
-      <p>Email : {{user.email}}</p>
-    </div>
     <img src="{{ profilePicturePath }}" alt="" width="150" height="150" class="my-auto ml-auto mr-3">
-    <button class="btn-primary my-auto mr-auto ml-3">Changer ma photo de profil</button>
+    <button mat-raised-button color="primary" class="my-auto mr-auto ml-3">Changer ma photo de profil</button>
   </div>
   <hr class="w-75">
   <div class="d-flex">
     <div class="d-flex flex-wrap col-9 m-auto">
       <div class="col-12 col-md-6 mb-4">
-        <svg class="c-account__icons">
-          <use xlink:href="../../../assets/icons/icons.svg#user"></use>
-        </svg>
-        <a class="text-reset" (click)="displayPseudo = true">Changer mon pseudo</a>
-        <div id="changePseudo" *ngIf="displayPseudo">
-          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
-            <svg class="c-account__icons">
-              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
-            </svg>
-            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
-          </div>
-          <div class="d-flex justify-content-around">
-            <button class="btn-success">Valider</button>
-            <button class="btn-danger" (click)="displayPseudo = false">Annuler</button>
-          </div>
-        </div>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <svg class="c-account__icons">
+                  <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+                </svg>
+                <span class="m-auto">Pseudo : {{user.pseudo ? user.pseudo : "inconnu"}}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <input matInput placeholder="First name">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Age">
+            </mat-form-field>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
       <div class="col-12 col-md-6 mb-4">
-        <svg class="c-account__icons">
-          <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
-        </svg>
-        <a href="" class="text-reset">Changer mon mot de passe</a>
-        <div id="changePassword" *ngIf="isDisplayed">
-          <div class="c-account__inputs d-flex align-items-center mx-auto my-2">
-            <svg class="c-account__icons">
-              <use xlink:href="../../../assets/icons/icons.svg#user"></use>
-            </svg>
-            <input class="c-account__field border-0 rounded" type="text" placeholder="pseudo">
-          </div>
-          <div class="d-flex justify-content-around">
-            <button class="btn-success">Valider</button>
-            <button class="btn-danger">Annuler</button>
-          </div>
-        </div>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <svg class="c-account__icons">
+                  <use xlink:href="../../../assets/icons/icons.svg#lock"></use>
+                </svg>
+                <span class="m-auto">Changer mon mot de passe</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form action="">
+              <mat-form-field>
+                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required [(ngModel)]="oldPassword">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                </button>
+              </mat-form-field>
+              <p>{{oldPassword}}</p>
+              <mat-form-field>
+                <input matInput placeholder="Enter your password" [type]="hide2 ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                  <i class="material-icons">{{hide2 ? 'visibility_off' : 'visibility'}}</i>
+                </button>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Enter your password" [type]="hide3 ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
+                  <i class="material-icons">{{hide3 ? 'visibility_off' : 'visibility'}}</i>
+                </button>
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
       <div class="col-12 col-md-6 mb-4">
         <svg class="c-account__icons">

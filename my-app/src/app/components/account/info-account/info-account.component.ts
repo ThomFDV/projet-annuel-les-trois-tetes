@@ -8,10 +8,12 @@ import {UserService} from '../../../services/user.service';
 })
 export class InfoAccountComponent implements OnInit {
 
-  profilePicturePath: string = '../../../assets/images/thomas.png';
-  isDisplayed: boolean = false;
-  displayPseudo: boolean = false;
+  profilePicturePath = '../../../assets/images/thomas.png';
   user: any;
+  hide = true;
+  hide2 = true;
+  hide3 = true;
+  oldPassword: string;
 
   constructor(private userService: UserService) { }
 
@@ -21,9 +23,5 @@ export class InfoAccountComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
-  }
-
-  open() {
-    this.displayPseudo = true;
   }
 }
