@@ -43,20 +43,19 @@
             </mat-expansion-panel-header>
             <form action="">
               <mat-form-field>
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required [(ngModel)]="oldPassword">
+                <input matInput placeholder="Enter your old password" [type]="hide ? 'password' : 'text'" required [(ngModel)]="oldPassword">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
                 </button>
               </mat-form-field>
-              <p>{{oldPassword}}</p>
               <mat-form-field>
-                <input matInput placeholder="Enter your password" [type]="hide2 ? 'password' : 'text'" required>
+                <input matInput placeholder="Enter your new password" [type]="hide2 ? 'password' : 'text'" required>
                 <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
                   <i class="material-icons">{{hide2 ? 'visibility_off' : 'visibility'}}</i>
                 </button>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Enter your password" [type]="hide3 ? 'password' : 'text'" required>
+                <input matInput placeholder="Confirm your password" [type]="hide3 ? 'password' : 'text'" required>
                 <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
                   <i class="material-icons">{{hide3 ? 'visibility_off' : 'visibility'}}</i>
                 </button>

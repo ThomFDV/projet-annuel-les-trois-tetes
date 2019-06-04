@@ -1,0 +1,36 @@
+<section class="container">
+  <div class="m-auto bg-light rounded my-5 col-8">
+    <h2 class="text-center py-3">Créer une partie</h2>
+    <form action="" class="d-flex flex-column py-3 col-8 m-auto" [formGroup]="newGameForm" (ngSubmit)="onSubmit()">
+      <mat-form-field hintLabel="Max 40 characters">
+        <input matInput #title maxlength="40" placeholder="Entrez un titre" formControlName="title" required>
+        <mat-hint align="end">{{title.value?.length || 0}}/40</mat-hint>
+        <mat-error *ngIf="newGameForm.controls.title.invalid">Veuillez remplir ce champ</mat-error>
+      </mat-form-field>
+      <div class="d-flex mt-3 mb-1">
+        <label class="mr-3">Mode: </label>
+        <mat-radio-group formControlName="mode" required>
+          <mat-radio-button value="cashgame" class="mr-3">Cash Game</mat-radio-button>
+          <mat-radio-button value="MTT">MTT</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Entrez un Buy In" formControlName="buyIn" #buyIn min="0" required>
+        <mat-error *ngIf="newGameForm.controls.buyIn.invalid">Veuillez remplir ce champ</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Entrez un nombre de joueur max" formControlName="maxPlayer" min="2" max="9" required>
+        <mat-error *ngIf="newGameForm.controls.maxPlayer.invalid">Veuillez remplir ce champ</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Entrez un cash price" formControlName="cashPrice" min="{{buyIn.value * 3}}" required>
+        <mat-error *ngIf="newGameForm.controls.cashPrice.invalid">Veuillez remplir ce champ</mat-error>
+      </mat-form-field>
+
+      <div class="d-flex justify-content-around">
+        <button mat-raised-button color="primary" type="submit">Valider</button>
+        <button mat-raised-button color="warn">Annuler</button>
+      </div>
+    </form>
+  </div>
+</section>

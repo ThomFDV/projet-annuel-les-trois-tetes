@@ -15,10 +15,12 @@ import {CourseCollectionComponent} from './components/course/course-collection/c
 import {PlayComponent} from './components/games/play/play.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeGameComponent} from './components/games/home-game/home-game.component';
+import {GameCreationComponent} from './components/games/game-creation/game-creation.component';
 
 const routes: Routes = [
   { path : 'games/home', component: HomeGameComponent },
   { path : 'games/play', component: PlayComponent },
+  { path : 'games/nouveau', component: GameCreationComponent },
   { path : 'courses/collection', component: CourseCollectionComponent },
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },

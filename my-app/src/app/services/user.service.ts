@@ -7,19 +7,18 @@ import {TokenStorageService} from './token-storage.service';
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    private url = 'http://localhost:3000/user';
 
     constructor(private http: HttpClient, private token: TokenStorageService) { }
 
     register(user: User) {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.http.post<User[]>(`http://localhost:3000/api/user/register`, user, httpOptions);
+        return this.http.post<User[]>(this.url + `/register`, user, httpOptions);
     }
 
     login(email: string, password: string): Observable <any> {
         return Observable.create(observer => {
-            this.http.post('http://localhost:3000/api/user/login', {
+            this.http.post(this.url + '/login', {
                 email,
                 password
             }).subscribe((data: any) => {
@@ -31,7 +30,7 @@ export class UserService {
     }
 
     profile(): Observable<any> {
-        return this.http.get('http://localhost:3000/api/user/profile', {
+        return this.http.get(this.url + '/profile', {
             headers: this.token.getHeaderToken()
         });
     }

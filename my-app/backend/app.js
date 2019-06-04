@@ -7,6 +7,7 @@ const cors = require("cors");
 
 const userRoutes = require("./routes/user");
 const articleRoutes = require("./routes/article");
+const gameRoutes = require("./routes/game");
 
 const app = express();
 
@@ -41,8 +42,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/api/user", userRoutes);
+app.use("/user", userRoutes);
 
 app.use("/article", articleRoutes);
+
+app.use("/game", gameRoutes);
 
 module.exports = app;

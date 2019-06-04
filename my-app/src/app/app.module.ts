@@ -35,10 +35,11 @@ import {
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule,
+    MatNativeDateModule, MatRadioModule,
     MatSelectModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {MatIconModule} from '@angular/material/icon';
     GameComponent,
     PlayComponent,
     HomeComponent,
-    HomeGameComponent
+    HomeGameComponent,
+    GameCreationComponent
   ],
     imports: [
         NgbModule,
@@ -79,7 +81,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatButtonModule,
         MatExpansionModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        MatRadioModule
     ],
   providers: [UserService, TokenStorageService],
   bootstrap: [AppComponent]
