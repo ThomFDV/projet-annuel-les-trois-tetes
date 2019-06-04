@@ -8,4 +8,5 @@ export class Game {
     cashPrice: number;
     creator: string;
     updatedAt: string;
+    createddAt: string;
 }

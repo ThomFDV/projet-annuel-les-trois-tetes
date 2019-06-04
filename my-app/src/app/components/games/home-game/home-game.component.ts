@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Game} from '../../../models/game';
+import {GameService} from '../../../services/game.service';
 
 @Component({
   selector: 'app-home-game',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeGameComponent implements OnInit {
 
-  constructor() { }
+  private games: Game[] = [];
+
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
+    this.gameService.getCollection().subscribe((res: Game[]) => {
+      this.games = res;
+    }), err => {
+      alert('Une erreur est survenue' + err);
+    };
   }
 
 }
