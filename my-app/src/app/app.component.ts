@@ -11,8 +11,6 @@ import {TokenStorageService} from './services/token-storage.service';
 export class AppComponent implements OnInit{
   title = 'my-app';
 
-  @Input() user: any = {};
-
   constructor(private userService: UserService,
               private router: Router,
               private tokenStorageService: TokenStorageService) { }

@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+}
 body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
   background: rgb(130,162,194);
   background: -moz-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
   background: -webkit-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
