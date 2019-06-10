@@ -19,8 +19,8 @@ import {GameCreationComponent} from './components/games/game-creation/game-creat
 
 const routes: Routes = [
   { path : 'games/home', component: HomeGameComponent },
-  { path : 'games/play', component: PlayComponent },
   { path : 'games/nouveau', component: GameCreationComponent },
+  { path : 'games/:id', component: PlayComponent },
   { path : 'courses/collection', component: CourseCollectionComponent },
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },

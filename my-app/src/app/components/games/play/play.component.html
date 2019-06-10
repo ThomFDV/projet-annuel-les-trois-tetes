@@ -1,4 +1,16 @@
 <section class="container">
-  <h1 class="text-center mb-5">Jouer en ligne</h1>
+  <h1 class="text-center mb-5">{{game.title}}</h1>
   <app-game></app-game>
+  <div>
+    <p>{{game._id}}</p>
+    <p>{{game.buyIn}}</p>
+    <p>{{game.maxPlayer}}</p>
+    <p>{{game.mode}}</p>
+    <p>{{game.createddAt}}</p>
+    <div>
+      <p>Players :</p>
+      <p *ngFor="let player of game.players">{{player.email}}</p>
+    </div>
+  </div>
+  <button mat-raised-button color="warn" routerLink="../home" (click)="leave(game._id)">Quitter la partie</button>
 </section>

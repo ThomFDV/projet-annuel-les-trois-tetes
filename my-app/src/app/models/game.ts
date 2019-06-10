@@ -1,10 +1,10 @@
 export class Game {
-    id: number;
+    _id: number;
     title: string;
     mode: string;
     buyIn: number;
     maxPlayer: number;
-    currentPlayerNbr: number;
+    players: any;
     cashPrice: number;
     creator: string;
     updatedAt: string;

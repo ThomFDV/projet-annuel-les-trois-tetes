@@ -23,7 +23,6 @@ export class GameCreationComponent implements OnInit {
       mode: ['', [Validators.required]],
       buyIn: ['', [Validators.required]],
       maxPlayer: ['', [Validators.required]],
-      currentPlayerNbr: ['0', [Validators.required]],
       cashPrice: ['', [Validators.required]],
     });
   }

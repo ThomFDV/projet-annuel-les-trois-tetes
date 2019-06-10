@@ -18,14 +18,35 @@ export class GameService {
       mode: `${game.mode}`,
       buyIn: `${game.buyIn}`,
       maxPlayer: `${game.maxPlayer}`,
-      currentPlayerNbr: `${game.currentPlayerNbr}`,
       cashPrice: `${game.cashPrice}`
     }, {
       headers: this.tokenStorage.getHeaderToken()
     });
   }
 
+  joinGame(gameId): Observable <any> {
+    return this.http.put(`${this.url}/join/${gameId}`,
+        null,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
+  }
+
+  leaveGame(gameId): Observable <any> {
+    return this.http.put(`${this.url}/leave/${gameId}`,
+        null,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
+  }
+
   getCollection() {
     return this.http.get(this.url + '/collection');
+  }
+
+  getGame(gameId): Observable <Game> {
+    return this.http.get<Game>(`${this.url}/${gameId}`);
   }
 }

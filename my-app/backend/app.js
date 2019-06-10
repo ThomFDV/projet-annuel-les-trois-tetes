@@ -14,7 +14,10 @@ const app = express();
 mongoose
     .connect(
         "mongodb+srv://thomfdv:jQ79foIEddShxDzf@clustermean-jbibp.mongodb.net/api-poker?retryWrites=true",
-        { useNewUrlParser: true }
+        {
+            useCreateIndex: true,
+            useNewUrlParser: true
+        }
     )
     .then(() => {
         console.log("Connected to database!");
