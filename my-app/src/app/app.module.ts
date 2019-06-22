@@ -31,12 +31,12 @@ import {UserService} from './services/user.service';
 import {CommonModule} from '@angular/common';
 import {TokenStorageService} from './services/token-storage.service';
 import {
-    MatButtonModule,
+    MatButtonModule, MatCardModule, MatCheckboxModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule, MatRadioModule,
-    MatSelectModule
+    MatSelectModule, MatSliderModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
@@ -82,7 +82,10 @@ import { GameCreationComponent } from './components/games/game-creation/game-cre
         MatExpansionModule,
         MatInputModule,
         MatIconModule,
-        MatRadioModule
+        MatRadioModule,
+        MatCardModule,
+        MatSliderModule,
+        MatCheckboxModule
     ],
   providers: [UserService, TokenStorageService],
   bootstrap: [AppComponent]
