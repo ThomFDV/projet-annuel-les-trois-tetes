@@ -1,17 +1,22 @@
 <section class="container">
   <h1 class="text-center mb-5">Nos Cours</h1>
-  <h3 class="mb-4">Préflop</h3>
-  <div class="d-inline-flex bg-light rounded mb-4">
-    <div class="d-flex flex-column align-items-center border-right w-25 p-2">
-      <h5 class="m-auto">Titre du cours</h5>
-      <p class="w-100 p-0 m-0">Auteur : auteur</p>
-      <p class="w-100 p-0 m-0">Niveau : débutant</p>
+
+  <div class="col-12">
+    <h3 class="mb-4">Les derniers cours</h3>
+    <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let uncours of cours">
+      <div class="d-flex flex-column align-items-center border-right w-25 p-2">
+        <h5 class="m-auto">{{uncours.title}}</h5>
+        <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+          <li>{{uncours.creator}}</li>
+          <li>{{uncours.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+        </ul>
+      </div>
+      <p class="p-4 m-0">
+        {{uncours.content}}
+      </p>
     </div>
-    <p class="p-4 m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur, eum laboriosam laudantium magni quibusdam ut.<br>
-      Adipisci animi architecto consequatur cumque exercitationem id iure, minus molestiae numquam, odio quibusdam repudiandae!
-    </p>
   </div>
+  <h3 class="mb-4">Préflop</h3>
   <div class="d-inline-flex position-relative bg-locked rounded mb-4">
     <div class="position-absolute col-12">
       <svg class="course-locked text-secondary bg-transparent">

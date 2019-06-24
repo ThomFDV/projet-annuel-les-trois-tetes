@@ -23,7 +23,10 @@ export class ArticleService {
     });
   }
 
-  getCollection() {
-    return this.http.get(this.url + '/collection');
+  getArticle() {
+    return this.http.get(this.url + '/articles');
+  }
+  getCours() {
+    return this.http.get(this.url + '/courses');
   }
 }

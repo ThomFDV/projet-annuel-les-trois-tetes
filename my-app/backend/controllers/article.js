@@ -26,7 +26,12 @@ exports.create = async (req, res, next) => {
   }
 };
 
-exports.getCollection = async (req, res) => {
+exports.getArticle = async (req, res) => {
   const articles = await Article.find({ type: "article"}).sort({updatedAt: "desc"});
   res.json(articles);
+};
+
+exports.getCours = async (req, res) => {
+  const cours = await Article.find({ type: "cours"}).sort({updatedAt: "desc"});
+  res.json(cours);
 };

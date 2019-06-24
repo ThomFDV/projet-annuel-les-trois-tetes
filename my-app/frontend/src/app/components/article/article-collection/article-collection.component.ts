@@ -14,11 +14,10 @@ export class ArticleCollectionComponent implements OnInit {
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articleService.getCollection().subscribe((res: Article[]) => {
+    this.articleService.getArticle().subscribe((res: Article[]) => {
       this.articles = res;
     }), err => {
       alert('Une erreur est survenue' + err);
     };
   }
-
 }

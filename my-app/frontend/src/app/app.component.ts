@@ -9,7 +9,7 @@ import {TokenStorageService} from './services/token-storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'my-app';
+  title = 'frontend';
 
   constructor(private userService: UserService,
               private router: Router,
