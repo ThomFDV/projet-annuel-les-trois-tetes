@@ -13,7 +13,7 @@ const app = express();
 
 mongoose
     .connect(
-        "mongodb+srv://thomfdv:jQ79foIEddShxDzf@clustermean-jbibp.mongodb.net/api-poker?retryWrites=true",
+        "mongodb+srv://admin:IemImhlH9KTwSU3m@clustermean-jbibp.mongodb.net/test?retryWrites=true&w=majority",
         {
             useCreateIndex: true,
             useNewUrlParser: true
