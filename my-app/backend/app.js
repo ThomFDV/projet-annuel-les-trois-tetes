@@ -1,3 +1,4 @@
+const dotenv = require('dotenv');
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,11 +10,12 @@ const userRoutes = require("./routes/user");
 const articleRoutes = require("./routes/article");
 const gameRoutes = require("./routes/game");
 
+dotenv.config();
 const app = express();
 
 mongoose
     .connect(
-        "mongodb+srv://admin:IemImhlH9KTwSU3m@clustermean-jbibp.mongodb.net/test?retryWrites=true&w=majority",
+        process.env.DB_CONNECT,
         {
             useCreateIndex: true,
             useNewUrlParser: true
