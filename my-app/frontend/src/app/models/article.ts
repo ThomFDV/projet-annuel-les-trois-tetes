@@ -3,6 +3,7 @@ export class Article {
     title: string;
     content: string;
     type: string;
+    comments: any;
     creator: string;
     updatedAt: string;
 }

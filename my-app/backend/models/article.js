@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 
+const commentSchema = mongoose.Schema({
+  email: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  }
+}, {timestamps: true});
+
 const articleSchema = mongoose.Schema({
   title: {
     type: String,
@@ -14,6 +29,7 @@ const articleSchema = mongoose.Schema({
     required: true,
     enum: ["article", "cours"]
   },
+  comments: [commentSchema],
   creator: {
     type: String,
     required: true

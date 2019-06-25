@@ -11,6 +11,7 @@ export class ArticleCollectionComponent implements OnInit {
 
   private articles: Article[] = [];
 
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
@@ -20,4 +21,13 @@ export class ArticleCollectionComponent implements OnInit {
       alert('Une erreur est survenue' + err);
     };
   }
+
+  view(articleId) {
+
+    this.articleService.getArticleById(articleId).subscribe(() => {
+    }), () => {
+      alert('Une erreur est survenue');
+    };
+  }
 }
+

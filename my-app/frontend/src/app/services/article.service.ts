@@ -4,6 +4,7 @@ import {Article} from '../models/article';
 import {TokenStorageService} from './token-storage.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Game} from "../models/game";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class ArticleService {
   }
   getCours() {
     return this.http.get(this.url + '/courses');
+  }
+
+  getArticleById(articleId): Observable <Article> {
+    return this.http.get<Article>(`${this.url}/article/${articleId}`);
   }
 }

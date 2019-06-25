@@ -35,3 +35,28 @@ exports.getCours = async (req, res) => {
   const cours = await Article.find({ type: "cours"}).sort({updatedAt: "desc"});
   res.json(cours);
 };
+
+exports.getArticleById = async (req, res) => {
+
+  const article = await Article.findById(req.params.id, (err, doc) => {
+    if (err) return err;
+  });
+  res.json(article);
+};
+
+exports.addComment = async (req, res) => {
+
+  const article = await Article.findById(req.params.id, (err, doc) => {
+    if (err) return err;
+    const email = req.user.email;
+    const title = req.body.title;
+    const content = req.body.content;
+
+    doc.comments.push({
+      email,
+      title,
+      content
+    });
+    doc.save();
+  });
+};

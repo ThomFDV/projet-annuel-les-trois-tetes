@@ -1,1 +1,16 @@
-<h1>Bienvenue dans la section article</h1>
+<section class="container">
+  <h2 class="text-center">{{article.title}}</h2>
+  <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+    <li>{{article.creator}} </li>
+    <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+  </ul>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100">
+    <p class="text-center">{{article.content}}</p>
+  </div>
+
+  <h2 class="text-left">Commentaires</h2>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100"  *ngFor="let comment of article.comments">
+    <p class="text-center">{{comment}}</p>
+  </div>
+
+</section>

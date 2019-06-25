@@ -16,6 +16,7 @@ import {PlayComponent} from './components/games/play/play.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeGameComponent} from './components/games/home-game/home-game.component';
 import {GameCreationComponent} from './components/games/game-creation/game-creation.component';
+import {ArticleComponent} from "./components/article/article.component";
 
 const routes: Routes = [
   { path : 'games/home', component: HomeGameComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path : 'register', component: RegisterAccountComponent },
   { path : 'account/info', component: InfoAccountComponent },
   { path : 'articles/collection', component: ArticleCollectionComponent },
+  { path : 'article/:id', component: ArticleComponent },
   { path : 'articles/nouveau', component: ArticleCreationComponent },
   { path : 'simulation/collection', component: SimulationCollectionComponent },
   { path : 'simulation/mise-en-situation-1', component: SimulationPlayerComponent },

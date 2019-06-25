@@ -13,4 +13,8 @@ router.get("/articles", ArticleController.getArticle);
 
 router.get("/courses", ArticleController.getCours);
 
+router.get("/article/:id", ArticleController.getArticleById);
+
+router.post("/article/:id", ArticleController.addComment);
+
 module.exports = router;
