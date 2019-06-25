@@ -10,7 +10,7 @@
 
   <h2 class="text-left">Commentaires</h2>
   <div class="d-inline-flex bg-light rounded mb-4 w-100"  *ngFor="let comment of article.comments">
-    <p class="text-center">{{comment}}</p>
+    <p class="text-left">{{comment.content}}</p>
   </div>
-
+  <a href="/article/{{article._id}}/comment"><button mat-raised-button color="primary" class="m-auto" (click)="comment(article._id)">Ajouter un commentaire</button></a>
 </section>

@@ -11,10 +11,10 @@ router.post("/create", passport.authenticate("jwt", { session: false }), Article
 
 router.get("/articles", ArticleController.getArticle);
 
-router.get("/courses", ArticleController.getCours);
+router.get("/courses", passport.authenticate("jwt", { session: false }), ArticleController.getCours);
 
-router.get("/article/:id", ArticleController.getArticleById);
+router.get("/:id", ArticleController.getArticleById);
 
-router.post("/article/:id", ArticleController.addComment);
+router.post("/:id", passport.authenticate("jwt", { session: false }), ArticleController.addComment);
 
 module.exports = router;

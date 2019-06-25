@@ -32,4 +32,8 @@ export class ArticleComponent implements OnInit {
 
 
   }
+
+  comment(articleId) {
+
+  }
 }

@@ -32,6 +32,6 @@ export class ArticleService {
   }
 
   getArticleById(articleId): Observable <Article> {
-    return this.http.get<Article>(`${this.url}/article/${articleId}`);
+    return this.http.get<Article>(`${this.url}/${articleId}`);
   }
 }
