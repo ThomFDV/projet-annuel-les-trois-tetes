@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {DefaultComponent} from './components/default/default.component';
 import {ArticleCollectionComponent} from './components/article/article-collection/article-collection.component';
-import {ArticleCommentComponent} from './components/article/article-comment/article-comment.component';
 import {ArticleCreationComponent} from './components/article/article-creation/article-creation.component';
 import {SimulationCollectionComponent} from './components/simulation/simulation-collection/simulation-collection.component';
 import {SimulationPlayerComponent} from './components/simulation/simulation-player/simulation-player.component';
@@ -32,7 +31,6 @@ const routes: Routes = [
   { path : 'account/info', component: InfoAccountComponent },
   { path : 'articles/collection', component: ArticleCollectionComponent },
   { path : 'article/:id', component: ArticleComponent },
-  { path : 'article/:id/comment', component: ArticleCommentComponent },
   { path : 'articles/nouveau', component: ArticleCreationComponent },
   { path : 'simulation/collection', component: SimulationCollectionComponent },
   { path : 'simulation/mise-en-situation-1', component: SimulationPlayerComponent },

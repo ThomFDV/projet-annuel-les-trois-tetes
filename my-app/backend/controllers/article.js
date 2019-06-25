@@ -52,11 +52,13 @@ exports.addComment = async (req, res) => {
     const title = req.body.title;
     const content = req.body.content;
 
-    doc.comments.push({
+    const comment = {
       email,
       title,
       content
-    });
+    };
+    doc.comments.push(comment);
     doc.save();
+    return res.json(comment).status(201).end();
   });
 };

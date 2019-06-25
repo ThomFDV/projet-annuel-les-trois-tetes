@@ -12,10 +12,32 @@
   <div  *ngFor="let comment of article.comments">
 
     <p class="text-left">{{comment.email}}</p>
+    <p class="text-left">{{comment.createdAt | date: "dd/MM/yyyy, à HH'h'mm"}}</p>
     <div class="d-inline-flex bg-light rounded mb-4 w-100">
       <p class="text-left">{{comment.content}}</p>
     </div>
 
   </div>
-  <button mat-raised-button color="primary" routerLink="/article/{{article._id}}/comment" (click)="comment(article._id)">Ajouter un commentaire</button>
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4>Ajouter un commentaire</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <form action="" class="d-flex flex-column" [formGroup]="newCommentForm" (ngSubmit)="onSubmit()">
+            <input type="text" placeholder="Titre du commentaire" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+            <textarea name="comment" id="" cols="10" rows="5" placeholder="Contenu du commentaire" class="border p-2 mb-4" formControlName="content"></textarea>
+
+            <div class="d-flex justify-content-around">
+              <button mat-raised-button color="primary" type="submit">Valider</button>
+              <button mat-raised-button color="warn" type="reset">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </section>

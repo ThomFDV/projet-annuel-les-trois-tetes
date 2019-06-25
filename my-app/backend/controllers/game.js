@@ -14,6 +14,12 @@ class Gameplay {
          return this.games[i];
        }
      }
+     return undefined;
+  }
+
+  addPlayer(id, player) {
+    let game = this.findGame(id);
+    game.players.push(new PlayerIG(player, game.initialStack));
   }
 
   async create(req, res) {
@@ -44,7 +50,7 @@ class Gameplay {
         creator
       });
       await game.save();
-      this.games.push(game);
+      this.games.push(new GameInstance(game));
       return res.status(201).json({"message": "Partie créée !"}).end();
     } catch {
       res.status(409).json({
@@ -68,8 +74,9 @@ class Gameplay {
 
   async join(req, res) {
 
+    const id = req.params.id;
     let isAlready = false;
-    const game = await Game.findById(req.params.id, (err, doc) => {
+    const game = await Game.findById(id, (err, doc) => {
       if (err) return err;
       const email = req.user.email;
       doc.players.forEach((player) => {
@@ -78,13 +85,12 @@ class Gameplay {
         }
       });
       if (!isAlready) {
-        doc.players.push({
-          email,
-          cards: "back",
-          chipsAmount: 500,
-          rank: 1
-        });
+        const player = {
+          email
+        };
+        doc.players.push(player);
         doc.save();
+        addPlayers(id, player);
       }
     });
     if (isAlready) {

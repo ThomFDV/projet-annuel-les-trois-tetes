@@ -4,18 +4,6 @@ const playerSchema = mongoose.Schema({
   email: {
     type: String,
     required: true
-  },
-  cards: {
-    type: String,
-    required: true
-  },
-  chipsAmount: {
-    type: Number,
-    required: true
-  },
-  rank: {
-    type: Number,
-    required: true
   }
 }, {timestamps: true});
 

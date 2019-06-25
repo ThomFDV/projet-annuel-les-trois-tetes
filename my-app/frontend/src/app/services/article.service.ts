@@ -39,8 +39,9 @@ export class ArticleService {
     return this.http.get<Article>(`${this.url}/${articleId}`);
   }
 
-  addComment(comment: Comment): Observable <any> {
-    return this.http.post(this.url + `/comment`, {
+  addComment(comment: Comment, articleId): Observable <any> {
+    console.log(`\n\n${this.url}/${articleId}\n\n`);
+    return this.http.post(`${this.url}/${articleId}`, {
       'title': `${comment.title}`,
       'content': `${comment.content}`,
     }, {

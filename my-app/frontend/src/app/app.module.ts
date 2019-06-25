@@ -40,7 +40,6 @@ import {
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
-import { ArticleCommentComponent } from './components/article/article-comment/article-comment.component';
 
 @NgModule({
   declarations: [
@@ -65,8 +64,7 @@ import { ArticleCommentComponent } from './components/article/article-comment/ar
     PlayComponent,
     HomeComponent,
     HomeGameComponent,
-    GameCreationComponent,
-    ArticleCommentComponent
+    GameCreationComponent
   ],
     imports: [
         NgbModule,
