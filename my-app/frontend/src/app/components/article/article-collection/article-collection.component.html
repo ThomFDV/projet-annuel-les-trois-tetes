@@ -16,7 +16,7 @@
       <p class="p-4 m-0">
         {{article.content}}
       </p>
-      <a href="/article/{{article._id}}"><button mat-raised-button color="primary" class="m-auto" (click)="view(article._id)">Voir l'article</button></a>
+      <button mat-raised-button color="primary" routerLink="/article/{{article._id}}" (click)="view(article._id)">Voir l'article</button>
     </div>
 
   </div>
