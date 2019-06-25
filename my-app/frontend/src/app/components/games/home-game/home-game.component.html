@@ -27,9 +27,8 @@
     <h5 class="m-auto">{{game.title}}</h5>
     <i class="m-auto">{{game.updatedAt | date: "dd/MM, à HH'h'mm" }}</i>
     <p class="m-auto">{{game.mode}}</p>
-    <p class="m-auto">{{game.players}}/{{game.maxPlayer}} Joueurs</p>
+    <p class="m-auto">{{game.players.length}}/{{game.maxPlayer}} Joueurs</p>
     <p class="m-auto">BuyIn : {{game.buyIn}} jetons</p>
-<!--    <button mat-raised-button color="primary" class="m-auto" routerLink="../play" (click)="addPlayer(game._id)">Rejoindre</button>-->
     <a href="/games/{{game._id}}"><button mat-raised-button color="primary" class="m-auto" (click)="join(game._id)">Rejoindre</button></a>
   </div>
 </section>

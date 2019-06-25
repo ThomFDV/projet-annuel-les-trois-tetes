@@ -18,7 +18,8 @@ export class GameService {
       mode: `${game.mode}`,
       buyIn: `${game.buyIn}`,
       maxPlayer: `${game.maxPlayer}`,
-      cashPrice: `${game.cashPrice}`
+      cashPrice: `${game.cashPrice}`,
+      initialStack: `${game.initialStack}`
     }, {
       headers: this.tokenStorage.getHeaderToken()
     });
@@ -49,4 +50,6 @@ export class GameService {
   getGame(gameId): Observable <Game> {
     return this.http.get<Game>(`${this.url}/${gameId}`);
   }
+
+
 }

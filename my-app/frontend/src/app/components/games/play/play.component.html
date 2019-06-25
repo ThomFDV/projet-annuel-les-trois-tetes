@@ -9,6 +9,7 @@
         <button mat-stroked-button color="primary">1/2 pot</button>
         <button mat-stroked-button color="primary">3/4 pot</button>
       </div>
+      {{user.email}}
       <div class="d-flex justify-content-around mt-3">
         <mat-form-field class="col-2">
           <input matInput type="number" placeholder="Mise" [(ngModel)]="value">
@@ -28,7 +29,7 @@
     <p>{{game.buyIn}}</p>
     <p>{{game.maxPlayer}}</p>
     <p>{{game.mode}}</p>
-    <p>{{game.createddAt}}</p>
+    <p>{{game.pot}}</p>
     <div>
       <p>Players :</p>
       <p *ngFor="let player of game.players">{{player.email}}</p>

@@ -24,6 +24,7 @@ export class GameCreationComponent implements OnInit {
       buyIn: ['', [Validators.required]],
       maxPlayer: ['', [Validators.required]],
       cashPrice: ['', [Validators.required]],
+      initialStack: ['', [Validators.required]],
     });
   }
 

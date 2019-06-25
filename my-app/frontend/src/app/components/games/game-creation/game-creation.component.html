@@ -26,6 +26,10 @@
         <input matInput type="number" placeholder="Entrez un cash price" formControlName="cashPrice" min="{{buyIn.value * 3}}" required>
         <mat-error *ngIf="newGameForm.controls.cashPrice.invalid">Veuillez remplir ce champ</mat-error>
       </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Entrez un nombre de jeton de départ" formControlName="initialStack" min="0" required>
+        <mat-error *ngIf="newGameForm.controls.cashPrice.invalid">Veuillez remplir ce champ</mat-error>
+      </mat-form-field>
 
       <div class="d-flex justify-content-around">
         <button mat-raised-button color="primary" type="submit">Valider</button>

@@ -3,8 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Article} from '../models/article';
 import {TokenStorageService} from './token-storage.service';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Game} from "../models/game";
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +23,13 @@ export class ArticleService {
   }
 
   getArticle() {
-    return this.http.get(this.url + '/articles');
+    return this.http.get(this.url);
   }
+
   getCours() {
-    return this.http.get(this.url + '/courses');
+    return this.http.get(this.url + '/courses', {
+      headers: this.tokenStorage.getHeaderToken()
+    });
   }
 
   getArticleById(articleId): Observable <Article> {
