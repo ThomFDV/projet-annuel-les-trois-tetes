@@ -46,6 +46,11 @@ const gameSchema = mongoose.Schema({
     required: true,
     min: 0
   },
+  initialStack: {
+    type: Number,
+    required: true,
+    min: 0
+  },
   creator: {
     type: String,
     required: true

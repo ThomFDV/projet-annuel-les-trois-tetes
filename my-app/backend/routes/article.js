@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post("/create", passport.authenticate("jwt", { session: false }), ArticleController.create);
 
-router.get("/articles", ArticleController.getArticle);
+router.get("", ArticleController.getArticle);
 
 router.get("/courses", passport.authenticate("jwt", { session: false }), ArticleController.getCours);
 
