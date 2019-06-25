@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Game} from "../../models/game";
 import {ActivatedRoute} from "@angular/router";
-import {GameService} from "../../services/game.service";
 import {Article} from "../../models/article";
 import {ArticleService} from "../../services/article.service";
 
@@ -34,6 +32,9 @@ export class ArticleComponent implements OnInit {
   }
 
   comment(articleId) {
-
+    // this.articleService.addComment(articleId).subscribe(() => {
+    // }), () => {
+    //   alert('Une erreur est survenue');
+    // };
   }
 }

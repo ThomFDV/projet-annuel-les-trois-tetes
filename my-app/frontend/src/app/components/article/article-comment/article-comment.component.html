@@ -1,0 +1,12 @@
+<section class="container">
+  <h2 class="text-center">Créer un commentaire</h2>
+  <form action="" class="d-flex flex-column" [formGroup]="newCommentForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Titre du commentaire" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+    <textarea name="comment" id="" cols="20" rows="20" placeholder="Contenu du commentaire" class="border p-2 mb-4" formControlName="content"></textarea>
+
+    <div class="d-flex justify-content-around">
+      <button mat-raised-button color="primary" type="submit">Valider</button>
+      <button mat-raised-button color="warn" type="reset">Annuler</button>
+    </div>
+  </form>
+</section>

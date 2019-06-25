@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Article} from '../models/article';
+import {Comment} from '../models/comment';
 import {TokenStorageService} from './token-storage.service';
 import {Observable} from 'rxjs';
 
@@ -9,6 +10,8 @@ import {Observable} from 'rxjs';
 })
 export class ArticleService {
   url = 'http://localhost:3000/article';
+
+
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
@@ -34,5 +37,14 @@ export class ArticleService {
 
   getArticleById(articleId): Observable <Article> {
     return this.http.get<Article>(`${this.url}/${articleId}`);
+  }
+
+  addComment(comment: Comment): Observable <any> {
+    return this.http.post(this.url + `/comment`, {
+      'title': `${comment.title}`,
+      'content': `${comment.content}`,
+    }, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
   }
 }
