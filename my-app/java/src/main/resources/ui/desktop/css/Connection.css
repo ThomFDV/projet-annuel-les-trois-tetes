@@ -1,0 +1,4 @@
+.connection_error_message {
+    -fx-color-label-visible: red;
+    -fx-content-display: none;
+}
