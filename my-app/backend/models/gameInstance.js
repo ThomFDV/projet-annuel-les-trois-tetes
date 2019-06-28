@@ -1,5 +1,7 @@
 'use strict';
 
+const PlayerIG = require("./playerIG");
+
 class GameInstance {
 
   constructor(game, players) {
@@ -20,15 +22,18 @@ class GameInstance {
       TURN: 'TURN',
       RIVER: 'RIVER'
     };
-    this.players.push(new PlayerIG(players));
+    this.players.push(new PlayerIG(players[0], this.initialStack));
     this.board = [];
     this.deck = [];
     this.pot = 0;
     this.activePlayer = undefined;
     this.lastBet = 0;
+    console.log("\n;lrsghvndls 2\n");
   }
 
   // bet() {
   //   blabla;
   // }
 }
+
+module.exports = GameInstance;

@@ -1,17 +1,16 @@
 "use strict";
 
 const Game = require("../models/game");
+const GameInstance = require("../models/gameInstance");
+
+let games = [];
 
 class Gameplay {
 
-  constructor() {
-    this.games = [];
-  }
-
   findGame(id) {
-     for (let i; i < this.games.length; i++) {
-       if (this.games[i].id === id) {
-         return this.games[i];
+     for (let i; i < games.length; i++) {
+       if (games[i].id === id) {
+         return games[i];
        }
      }
      return undefined;
@@ -29,10 +28,7 @@ class Gameplay {
     const buyIn = req.body.buyIn;
     const maxPlayer = req.body.maxPlayer;
     const players = [{
-      email: req.user.email,
-      cards: "back",
-      chipsAmount: 500,
-      rank: 1
+      email: req.user.email
     }];
     const cashPrice = req.body.cashPrice;
     const initialStack = req.body.initialStack;
@@ -50,7 +46,19 @@ class Gameplay {
         creator
       });
       await game.save();
-      this.games.push(new GameInstance(game));
+      const gameInfo = {
+        title,
+        mode,
+        buyIn,
+        maxPlayer,
+        players,
+        cashPrice,
+        initialStack,
+        creator
+      };
+      const myGame = new GameInstance(gameInfo, players);
+      games.push(myGame);
+      console.log(`\n${games[0].initialStack}\n`);
       return res.status(201).json({"message": "Partie créée !"}).end();
     } catch {
       res.status(409).json({
@@ -90,7 +98,7 @@ class Gameplay {
         };
         doc.players.push(player);
         doc.save();
-        addPlayers(id, player);
+        this.addPlayer(id, player);
       }
     });
     if (isAlready) {
@@ -118,4 +126,4 @@ class Gameplay {
   }
 }
 
-module.exports = new Gameplay();
+module.exports = Gameplay;

@@ -3,6 +3,7 @@
 class PlayerIG {
 
   constructor(player, initialStack) {
+    console.log("\nil rentre bien la\n");
     this.email = player.email;
     this.hand = "back";
     this.initialStack = initialStack;
@@ -19,3 +20,5 @@ class PlayerIG {
     this.lastBet = 0;
   }
 }
+
+module.exports = PlayerIG;
