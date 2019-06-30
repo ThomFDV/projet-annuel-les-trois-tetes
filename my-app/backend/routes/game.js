@@ -1,8 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 
-const Gameplay = require("../controllers/game");
-const GameController = new Gameplay();
+const GameController = require("../controllers/game");
 
 const router = express.Router();
 
