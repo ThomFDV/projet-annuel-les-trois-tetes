@@ -1,5 +1,5 @@
 export class Game {
-    _id: number;
+    id: number;
     title: string;
     mode: string;
     buyIn: number;

@@ -28,16 +28,4 @@ export class HomeGameComponent implements OnInit {
       alert('Vous êtes déjà de la partie !');
     });
   }
-  // addPlayer(gameId) {
-  //   // Faire en sorte que ce ne soit pas possible de rejoindre si on l'a deja fait
-  //   return this.gameService.addPlayer(gameId).subscribe(() => {
-  //     this.games.forEach((value, key) => {
-  //       if (value._id === gameId) {
-  //         value.currentPlayerNbr += 1;
-  //       }
-  //     });
-  //   }, (err) => {
-  //     err.status = 401 ? alert('Sorry, you have to be connected') : alert(err.status);
-  //   });
-  // }
 }

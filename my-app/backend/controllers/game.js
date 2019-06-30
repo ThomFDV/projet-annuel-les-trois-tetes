@@ -2,6 +2,7 @@
 
 const Game = require("../models/game");
 const GameInstance = require("../models/gameInstance");
+const PlayerIG = require("../models/playerIG");
 const mongoose = require("mongoose");
 
 let games = [];
@@ -9,15 +10,15 @@ let games = [];
 let findGame = (id) => {
   for (let i = 0; i < games.length; i++) {
     if (games[i].id == id) {
-      return games[i];
+      return i;
     }
   }
   return undefined;
 };
 
 let addPlayer = (id, player) => {
-  let game = findGame(id);
-  game.players.push(new PlayerIG(player, game.initialStack));
+  const index = findGame(id);
+  games[index].players.push(new PlayerIG(player, games[index].initialStack));
 };
 
 exports.create = async (req, res, next) => {
@@ -33,18 +34,18 @@ exports.create = async (req, res, next) => {
   const initialStack = req.body.initialStack;
   const creator = req.user.email;
   try {
-    const game = new Game({
-      _id: gameId,
-      title,
-      mode,
-      buyIn,
-      maxPlayer,
-      players,
-      cashPrice,
-      initialStack,
-      creator
-    });
-    await game.save();
+    // const game = new Game({
+    //   _id: gameId,
+    //   title,
+    //   mode,
+    //   buyIn,
+    //   maxPlayer,
+    //   players,
+    //   cashPrice,
+    //   initialStack,
+    //   creator
+    // });
+    // await game.save();
     const gameInfo = {
       id: gameId,
       title,
@@ -63,19 +64,19 @@ exports.create = async (req, res, next) => {
       }).end();
   } catch {
     res.status(409).json({
-      message: "Problème lors de l'ajout dans la bdd"
+      message: "Problème lors de la création de la partie"
     }).end();
   }
 };
 
 exports.getCollection = async (req, res) => {
-  const game = await Game.find().sort({updatedAt: "desc"});
-  res.json(game);
+  res.status(200).json(games).end();
 };
 
 exports.getGame = async (req, res) => {
   let id = req.params.id;
-  const game = await findGame(id);
+  const index = await findGame(id);
+  const game = games[index];
   if (!game) {
     return res.status(400).end();
   }
@@ -84,44 +85,54 @@ exports.getGame = async (req, res) => {
 
 exports.join = async (req, res, next) => {
   const id = req.params.id;
+  const email = req.user.email;
   let isAlready = false;
-  const game = await Game.findById(id, (err, doc) => {
-    if (err) return err;
-    const email = req.user.email;
-    doc.players.forEach((player) => {
-      if (player.email === email) {
-        isAlready = true;
-      }
-    });
-    if (!isAlready) {
-      const player = {
-        email
-      };
-      doc.players.push(player);
-      doc.save();
-      addPlayer(id, player);
+  const index = findGame(id);
+  await games[index].players.forEach((player) => {
+    if (player.email === email) {
+      isAlready = true;
     }
   });
-  if (isAlready) {
-    res.status(401).send("Vous êtes déjà connecté !");
+  if (!isAlready) {
+    const player = {
+      email
+    };
+    addPlayer(id, player);
+    res.status(200).json(games[index]).end();
   } else {
-    res.json(game);
+    res.status(401).send("Vous êtes déjà connecté !");
   }
 };
 
 exports.leave = async (req, res) => {
-  const game = await Game.updateOne({
-    _id: req.params.id
-  }, {
-    $pull: {
-      players: {
-        email: req.user.email
+  const id = req.params.id;
+  const index = findGame(id);
+  const email = req.user.email;
+  try {
+    console.log(`\n${games[index].players}\n`);
+    await games[index].players.forEach((player, i) => {
+      if (player.email === email) {
+        console.log(`\n${games[index].players[i]}\n${i}`);
+        games[index].players.slice(i,1);
+        console.log(`\n${games[index].players}\n`);
       }
-    }
-  }, (err) => {
-    if (err) {
-      return res.sendStatus(400);
-    }
-  });
-  res.sendStatus(200).end();
+    });
+    return res.status(200).json(games[index].players).end();
+  } catch (e) {
+    return res.sendStatus(400).end();
+  }
+  // const game = await Game.updateOne({
+  //   _id: req.params.id
+  // }, {
+  //   $pull: {
+  //     players: {
+  //       email: req.user.email
+  //     }
+  //   }
+  // }, (err) => {
+  //   if (err) {
+  //     return res.sendStatus(400);
+  //   }
+  // });
+  // res.sendStatus(200).end();
 };

@@ -29,6 +29,6 @@
     <p class="m-auto">{{game.mode}}</p>
     <p class="m-auto">{{game.players.length}}/{{game.maxPlayer}} Joueurs</p>
     <p class="m-auto">BuyIn : {{game.buyIn}} jetons</p>
-    <a href="/games/{{game._id}}"><button mat-raised-button color="primary" class="m-auto" (click)="join(game._id)">Rejoindre</button></a>
+    <a href="/games/{{game.id}}"><button mat-raised-button color="primary" class="m-auto" (click)="join(game.id)">Rejoindre</button></a>
   </div>
 </section>
