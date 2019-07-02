@@ -69,4 +69,28 @@ public class Home {
         }
     }
 
+    @FXML
+    public void onProfilePressed() {
+        System.out.println("Hello");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/RunScenario.fxml"));
+        try {
+            AnchorPane pane = loader.load();
+            mainContainer.setPrefWidth(pane.getPrefWidth());
+            mainContainer.setPrefHeight(pane.getPrefHeight());
+            RunScenario scenarioController = loader.getController();
+            scenarioController.setStage(mainApp);
+            scenarioController.setMainContainer(mainContainer);
+            scenarioController.setRunScenarioContainer(pane);
+            mainContainer.setCenter(pane);
+            mainApp.sizeToScene();
+            mainApp.setMinHeight(720);
+            mainApp.setMaxHeight(720);
+            mainApp.setMinWidth(1280);
+            mainApp.setMaxWidth(1280);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
