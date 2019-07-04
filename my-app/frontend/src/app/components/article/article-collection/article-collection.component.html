@@ -16,9 +16,10 @@
       <p class="p-4 m-0">
         {{article.content}}
       </p>
-      <button mat-raised-button color="primary" routerLink="/article/{{article._id}}" (click)="view(article._id)">Voir l'article</button>
+      <div class="d-flex flex-column align-items-center border-left w-25 p-2 m-auto">
+        <button mat-raised-button color="primary" routerLink="/article/{{article._id}}" (click)="view(article._id)">Voir l'article</button>
+      </div>
     </div>
-
   </div>
   <h3 class="mb-4">Top articles</h3>
   <div class="d-inline-flex bg-light rounded mb-4">

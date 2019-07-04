@@ -9,6 +9,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/user");
 const articleRoutes = require("./routes/article");
 const gameRoutes = require("./routes/game");
+const themeRoutes = require("./routes/theme");
 
 dotenv.config();
 const app = express();
@@ -52,5 +53,7 @@ app.use("/user", userRoutes);
 app.use("/article", articleRoutes);
 
 app.use("/game", gameRoutes);
+
+app.use("/theme", themeRoutes);
 
 module.exports = app;
