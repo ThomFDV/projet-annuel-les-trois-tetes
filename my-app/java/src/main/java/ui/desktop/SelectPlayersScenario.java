@@ -1,21 +1,19 @@
 package ui.desktop;
 
+import core.enums.Difficulty;
+import core.enums.Turn;
 import core.game.Card;
 import core.game.Deck;
 import core.scenario.NumberPlayersChoice;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 /**
  * Cette classe gère l'écran d'initialisation de la création d'un scénario
@@ -38,6 +36,15 @@ public class SelectPlayersScenario {
 
     @FXML
     private GridPane listPlayersPane;
+
+    @FXML
+    private ChoiceBox<String> dealerBox;
+
+    @FXML
+    private ChoiceBox<Turn> turnBox;
+
+    @FXML
+    private ChoiceBox<Difficulty> difficultyBox;
 
     public void setStage(Stage mainStage) {
         this.mainStage = mainStage;
@@ -75,6 +82,41 @@ public class SelectPlayersScenario {
                 generatePlayersInputs();
             }
         });
+        this.setUpCoicesValues();
+    }
+
+    /**
+     * Lance la fonction de vérification de la saisie de l'utilisateur
+     * et passe à l'étape suivante si tout est valide.
+     * Sinon, affiche un message d'erreur
+     * @TODO
+     */
+
+    @FXML
+    public void onContinueScenarioClicked() {
+        System.out.println("Vérifier inputs scénario");
+    }
+
+    /**
+     * Demande à l'utilisateur si il veut vraiment abandonner la saisie du scénario
+     * Si oui, renvoie au menu
+     * @TODO
+     */
+
+    @FXML
+    public void onReturnScenarioClicked() {
+
+    }
+
+    public void setUpCoicesValues() {
+        for(Difficulty difficulty: Difficulty.values()) {
+            difficultyBox.getItems().add(difficulty);
+        }
+        difficultyBox.getSelectionModel().selectFirst();
+        for(Turn turn: Turn.values()) {
+            if(turn != Turn.PREFLOP) turnBox.getItems().add(turn);
+        }
+        turnBox.getSelectionModel().selectFirst();
     }
 
     /**
@@ -88,20 +130,12 @@ public class SelectPlayersScenario {
         this.currentPlayers = nbPlayers.getValue();
         int selectedNumber = this.currentPlayers.getNumberPlayers();
         if(currentPlayersNumber == 0) {
-//            listPlayersPane.add(new Label("Vous"), 0, 0);
-//            listPlayersPane.add(new TextFieldNumbersOnly("1000"), 1, 0);
             addLineInGridPane("Vous", 0);
             for(int i = 1; i < selectedNumber; i++) {
-//                listPlayersPane.add(new Label("Joueur " + i), 0, i);
-//                listPlayersPane.add(new TextFieldNumbersOnly("1000"), 1, i);
-//                listPlayersPane.add(this.cardChoiceBox, 2, i);
-//                listPlayersPane.add(this.cardChoiceBox, 3, i);
                 this.addLineInGridPane("Joueur " + i, i);
             }
         } else if(currentPlayersNumber < selectedNumber) {
             for(int i = currentPlayersNumber; i < selectedNumber; i++) {
-//                listPlayersPane.add(new Label("Joueur " + i), 0, i);
-//                listPlayersPane.add(new TextFieldNumbersOnly("1000"), 1, i);
                 this.addLineInGridPane("Joueur " + i, i);
             }
         } else {
@@ -110,7 +144,15 @@ public class SelectPlayersScenario {
                 listPlayersPane.getChildren().remove(listPlayersPane.getChildren().get(i));
             }
         }
+        this.updateDealerValues();
     }
+
+    /**
+     * Ajoute une ligne de saisie pour un nouveau joueur avec :
+     * le nom, le champ de saisie du stack et de sa main
+     * @param name
+     * @param x
+     */
 
     public void addLineInGridPane(String name, int x) {
         ChoiceBox<Card> card1 = this.generateChoiceBox();
@@ -123,6 +165,26 @@ public class SelectPlayersScenario {
         listPlayersPane.add(card1, 2, x);
         listPlayersPane.add(card2, 3, x);
     }
+
+    /**
+     * Met à jour les valeurs possibles pour le choix du dealer
+     */
+
+    public void updateDealerValues() {
+        dealerBox.getItems().clear();
+        for(int i = 0; i < listPlayersPane.getChildren().size(); i += 4) {
+            Label temp = (Label) listPlayersPane.getChildren().get(i);
+            dealerBox.getItems().add(temp.getText());
+        }
+        dealerBox.getSelectionModel().selectFirst();
+    }
+
+    /**
+     * Génère une nouvelle ChoiceBox pour chaque carte de chaque main de chaque joueur,
+     * on ne peut pas utiliser la même à chaque fois car on ne peut pas ajouter
+     * plusieurs fois le même objet dans une page
+     * @return une ChoiceBox avec la liste des cartes
+     */
 
     public ChoiceBox<Card> generateChoiceBox() {
         ChoiceBox<Card> newCardChoiceBox = new ChoiceBox<Card>();
