@@ -20,6 +20,12 @@ public class Home {
     @FXML
     private Button playGameButton;
 
+    @FXML
+    private Button createScenario;
+
+    @FXML
+    private Button profile;
+
     private Stage mainApp;
 
     private Scene previousScene;
@@ -53,6 +59,11 @@ public class Home {
     }
 
     @FXML
+    public void initialize() {
+
+    }
+
+    @FXML
     public void onPlayGamePressed() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/PlayGame.fxml"));
@@ -71,7 +82,6 @@ public class Home {
 
     @FXML
     public void onProfilePressed() {
-        System.out.println("Hello");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/RunScenario.fxml"));
         try {
@@ -84,13 +94,33 @@ public class Home {
             scenarioController.setRunScenarioContainer(pane);
             mainContainer.setCenter(pane);
             mainApp.sizeToScene();
-            mainApp.setMinHeight(720);
-            mainApp.setMaxHeight(720);
-            mainApp.setMinWidth(1280);
-            mainApp.setMaxWidth(1280);
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void onCreateScenarioPressed() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/SelectPlayersScenario.fxml"));
+        try {
+            AnchorPane pane = loader.load();
+            mainContainer.setPrefWidth(pane.getPrefWidth());
+            mainContainer.setPrefHeight(pane.getPrefHeight());
+            SelectPlayersScenario selectPlayersScenarioController = loader.getController();
+            selectPlayersScenarioController.setStage(mainApp);
+            selectPlayersScenarioController.setMainContainer(mainContainer);
+            selectPlayersScenarioController.setRunScenarioContainer(pane);
+            mainContainer.setCenter(pane);
+            mainApp.sizeToScene();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onQuitPressed() {
+
     }
 
 }

@@ -109,6 +109,11 @@ public class Connection {
         generalMenuController.setHomeContent();
         mainStage.setScene(scene);
         mainStage.setTitle("Les Trois Têtes - Accueil");
+        mainStage.sizeToScene();
+        mainStage.setMinHeight(720);
+        mainStage.setMaxHeight(720);
+        mainStage.setMinWidth(1280);
+        mainStage.setMaxWidth(1280);
         mainStage.show();
     }
 

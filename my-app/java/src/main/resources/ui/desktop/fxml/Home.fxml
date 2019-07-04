@@ -5,27 +5,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.desktop.Home">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.desktop.Home">
    <children>
-      <Button fx:id="playGameButton" layoutX="226.0" layoutY="150.0" mnemonicParsing="false" onAction="#onPlayGamePressed" prefHeight="47.0" prefWidth="131.0" text="Jouer">
+      <Button fx:id="playGameButton" layoutX="514.0" layoutY="255.0" mnemonicParsing="false" onAction="#onPlayGamePressed" prefHeight="80.0" prefWidth="270.0" text="Jouer">
          <font>
-            <Font name="Arial Black" size="14.0" />
+            <Font name="Arial Black" size="21.0" />
          </font>
       </Button>
-      <Button fx:id="profile" layoutX="226.0" layoutY="220.0" mnemonicParsing="false" onAction="#onProfilePressed" prefHeight="47.0" prefWidth="131.0" text="Mon profil">
+      <Button fx:id="createScenario" layoutX="518.0" layoutY="365.0" mnemonicParsing="false" onAction="#onCreateScenarioPressed" prefHeight="80.0" prefWidth="270.0" text="Créer un scénario">
          <font>
-            <Font name="Arial Black" size="14.0" />
+            <Font name="Arial Black" size="21.0" />
          </font>
       </Button>
-      <Button layoutX="226.0" layoutY="294.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="131.0" text="Quitter">
+      <Label fx:id="userName" layoutX="592.0" layoutY="180.0" text="Hello " textAlignment="CENTER">
          <font>
-            <Font name="Arial Black" size="14.0" />
-         </font>
-      </Button>
-      <Label fx:id="userName" layoutX="264.0" layoutY="91.0" text="Hello " textAlignment="CENTER">
-         <font>
-            <Font name="Arial Black" size="18.0" />
+            <Font name="Arial Black" size="37.0" />
          </font>
       </Label>
+      <Button fx:id="profile" layoutX="518.0" layoutY="477.0" mnemonicParsing="false" onAction="#onProfilePressed" prefHeight="80.0" prefWidth="270.0" text="Mon profil">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="leave" layoutX="517.0" layoutY="584.0" mnemonicParsing="false" onAction="#onQuitPressed" prefHeight="80.0" prefWidth="270.0" text="Quitter">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
