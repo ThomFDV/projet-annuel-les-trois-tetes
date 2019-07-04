@@ -34,4 +34,8 @@ public class Deck {
     public Card drawCard() {
         return decklist.get(this.counter++);
     }
+
+    public ArrayList<Card> getDecklist() {
+        return this.decklist;
+    }
 }
