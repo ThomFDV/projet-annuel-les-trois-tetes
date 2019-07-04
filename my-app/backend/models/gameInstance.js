@@ -24,6 +24,7 @@ class GameInstance {
       TURN: 'TURN',
       RIVER: 'RIVER'
     };
+    this.currentTurn = this.turn.PREFLOP;
     this.board = [];
     this.deck = [];
     this.pot = 0;

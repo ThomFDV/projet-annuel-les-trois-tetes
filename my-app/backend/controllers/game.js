@@ -3,9 +3,11 @@
 const Game = require("../models/game");
 const GameInstance = require("../models/gameInstance");
 const PlayerIG = require("../models/playerIG");
+const Deck = require("../models/deck");
 const mongoose = require("mongoose");
 
 let games = [];
+let deck;
 
 let findGame = (id) => {
   for (let i = 0; i < games.length; i++) {
@@ -57,6 +59,7 @@ exports.create = async (req, res, next) => {
       creator
     };
     const myGame = new GameInstance(gameInfo, players);
+    deck = new Deck();
     games.push(myGame);
     return res.status(201).json({
         "message": "Partie créée !",
@@ -71,6 +74,19 @@ exports.create = async (req, res, next) => {
 
 exports.getCollection = async (req, res) => {
   res.status(200).json(games).end();
+};
+
+exports.play = async (req, res) => {
+  deck = new Deck();
+  if (!deck) return res.sendStatus(400).end();
+  deck.shuffleDeck();
+  const firstCard = deck.draw();
+  const secondCard = deck.draw();
+  return res.status(200).json({
+    deck,
+    firstCard,
+    secondCard
+  }).end();
 };
 
 exports.getGame = async (req, res) => {
@@ -113,7 +129,8 @@ exports.leave = async (req, res) => {
     await games[index].players.forEach((player, i) => {
       if (player.email === email) {
         console.log(`\n${games[index].players[i]}\n${i}`);
-        games[index].players.slice(i,1);
+        delete games[index].players[i];
+        //Voir si le fait d'avoir un null et ne pas le retirer est génant plus tard
         console.log(`\n${games[index].players}\n`);
       }
     });
