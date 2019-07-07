@@ -1,6 +1,7 @@
 'use strict';
 
 const Player = require("./playerIG");
+const Deck = require("./deck");
 
 const turns = Object.freeze({
   PREFLOP: 'PREFLOP',
@@ -25,7 +26,6 @@ class GameInstance {
     this.bigBlind = game.initialStack / 100;
     this.smallBlind = this.bigBlind / 2;
     this.dealer = [];
-    this.turn = turns.PREFLOP;
     this.currentTurn = turns.PREFLOP;
     this.board = [];
     this.deck = [];
@@ -147,9 +147,69 @@ class GameInstance {
     }
   }
 
+  checkTurn() {
+    let allPlayed = true;
+    for (const player of this.players) {
+      if (player.status === Player.allStatus.INGAME) {
+        allPlayed = false;
+      }
+    }
+    if (allPlayed) {
+      switch (this.currentTurn) {
+        case "PREFLOP":
+          this.currentTurn = turns.FLOP;
+          this.dropCardsOnBoard(3);
+          for (let player of this.players) {
+            if (player.status !== Player.allStatus.FOLD) {
+              player.status = Player.allStatus.INGAME;
+            }
+          }
+          this.activePlayer = this.dealer;
+          break;
+        case "FLOP":
+          this.currentTurn = turns.TURN;
+          this.dropCardsOnBoard(1);
+          for (let player of this.players) {
+            if (player.status !== Player.allStatus.FOLD) {
+              player.status = Player.allStatus.INGAME;
+            }
+          }
+          this.activePlayer = this.dealer;
+          break;
+        case "TURN":
+          this.currentTurn = turns.RIVER;
+          this.dropCardsOnBoard(1);
+          for (let player of this.players) {
+            if (player.status !== Player.allStatus.FOLD) {
+              player.status = Player.allStatus.INGAME;
+            }
+          }
+          this.activePlayer = this.dealer;
+          break;
+        case "RIVER":
+          this.checkWinner();
+          this.currentTurn = turns.RIVER;
+          this.startGame();
+          break;
+      }
+    }
+  }
+
+  startGame() {
+    console.log(`Vient ici`);
+    this.deck = new Deck();
+    this.deck.shuffleDeck();
+    this.distributeHands();
+    this.updateDealer();
+    this.putBlinds();
+  }
+
+  checkWinner() {
+  }
   nextActivePlayer() {
     //Verifier les status des joueurs, si ils ont tous jouer faire passer au turn suivant
     //Remettre le lastBet à 0 si le turn a changé
+    this.checkTurn();
     let playerIdx = this.players.findIndex(x => x.email === this.activePlayer.email);
     if (playerIdx + 1 > this.players.length - 1) {
       this.activePlayer = this.players[0];

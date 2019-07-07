@@ -3,7 +3,6 @@
 const Game = require("../models/game");
 const GameInstance = require("../models/gameInstance");
 const Player = require("../models/playerIG");
-const Deck = require("../models/deck");
 const mongoose = require("mongoose");
 
 let games = [];
@@ -77,14 +76,8 @@ exports.getCollection = async (req, res) => {
 exports.play = async (req, res) => {
   const id = req.params.id;
   let game = games[findGame(id)];
-  game.deck = new Deck();
-  if (!game.deck) return res.sendStatus(400).end();
-
-  game.deck.shuffleDeck();
-  game.distributeHands();
-  game.updateDealer();
-  game.putBlinds();
-  // game.dropCardsOnBoard(3);
+  if (!game) return res.status(400).send("La partie n'a pas été trouvé").end();
+  game.startGame();
   return res.status(200).json(game).end();
 };
 
