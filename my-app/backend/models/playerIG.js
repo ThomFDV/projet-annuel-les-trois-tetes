@@ -1,23 +1,28 @@
 'use strict';
 
+const allStatus = Object.freeze({
+  ELIMINATED: "Eliminé",
+  FOLD: "Passé",
+  ALLIN: "Tapis",
+  CHECK: "Parole",
+  BET: "Misé",
+  INGAME: "En jeu"
+});
+
 class PlayerIG {
 
   constructor(player, initialStack) {
     this.email = player.email;
-    this.hand = "back";
-    this.initialStack = initialStack;
-    this.rank = 1;
-    this.status = {
-      ELIMINATED: "Eliminé",
-      FOLD: "Passé",
-      ALLIN: "Tapis",
-      CHECK: "Parole",
-      BET: "Misé",
-      INGAME: "En jeu"
-    };
+    this.hand = null;
+    this.stack = initialStack;
+    this.rank = null;
+    this.status = allStatus.FOLD;
     this.personnalPot = 0;
     this.lastBet = 0;
   }
 }
 
-module.exports = PlayerIG;
+module.exports = {
+  PlayerIG: PlayerIG,
+  allStatus: allStatus
+};

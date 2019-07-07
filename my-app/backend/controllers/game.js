@@ -2,12 +2,11 @@
 
 const Game = require("../models/game");
 const GameInstance = require("../models/gameInstance");
-const PlayerIG = require("../models/playerIG");
+const Player = require("../models/playerIG");
 const Deck = require("../models/deck");
 const mongoose = require("mongoose");
 
 let games = [];
-let deck;
 
 let findGame = (id) => {
   for (let i = 0; i < games.length; i++) {
@@ -20,7 +19,7 @@ let findGame = (id) => {
 
 let addPlayer = (id, player) => {
   const index = findGame(id);
-  games[index].players.push(new PlayerIG(player, games[index].initialStack));
+  games[index].players.push(new Player.PlayerIG(player, games[index].initialStack));
 };
 
 exports.create = async (req, res, next) => {
@@ -59,12 +58,11 @@ exports.create = async (req, res, next) => {
       creator
     };
     const myGame = new GameInstance(gameInfo, players);
-    deck = new Deck();
     games.push(myGame);
     return res.status(201).json({
-        "message": "Partie créée !",
-        game: myGame
-      }).end();
+      "message": "Partie créée !",
+      game: myGame
+    }).end();
   } catch {
     res.status(409).json({
       message: "Problème lors de la création de la partie"
@@ -77,16 +75,57 @@ exports.getCollection = async (req, res) => {
 };
 
 exports.play = async (req, res) => {
-  deck = new Deck();
-  if (!deck) return res.sendStatus(400).end();
-  deck.shuffleDeck();
-  const firstCard = deck.draw();
-  const secondCard = deck.draw();
-  return res.status(200).json({
-    deck,
-    firstCard,
-    secondCard
-  }).end();
+  const id = req.params.id;
+  let game = games[findGame(id)];
+  game.deck = new Deck();
+  if (!game.deck) return res.sendStatus(400).end();
+
+  game.deck.shuffleDeck();
+  game.distributeHands();
+  game.updateDealer();
+  game.putBlinds();
+  // game.dropCardsOnBoard(3);
+  return res.status(200).json(game).end();
+};
+
+exports.bet = async (req, res) => {
+  const value = req.body.value;
+  const id = req.params.id;
+  let game = games[findGame(id)];
+  if (!game) {
+    return res.status(400).send("La partie n'a pas été trouvé").end();
+  } else if (req.user.email !==  game.activePlayer.email) {
+    return res.status(403).send("Ce n'est pas à vous de jouer").end();
+  }
+  if (value > game.activePlayer.stack) {
+    return res.status(403).send("Vous emballez pas, misez moins ! Au moins jusqu'au montant max de votre tapis").end();
+  }
+  if (value < game.lastBet) {
+    return res.status(403).send(`C'est trop faible voyons ! Augmente au moins jusqu'au ${game.lastBet} !`).end();
+  }
+  game.bet(value);
+  if (game.activePlayer.stack === 0) {
+    game.activePlayer.status = Player.allStatus.ALLIN;
+  } else if (value === 0 && game.lastBet === 0) {
+    game.activePlayer.status = Player.allStatus.CHECK;
+  } else {
+    game.activePlayer.status = Player.allStatus.BET;
+  }
+  game.nextActivePlayer();
+  return res.status(200).json(game).end();
+};
+
+exports.fold = async (req, res) => {
+  const id = req.params.id;
+  let game = games[findGame(id)];
+  if (!game) {
+    return res.status(400).send("La partie n'a pas été trouvé").end();
+  } else if (req.user.email !==  game.activePlayer.email) {
+    return res.status(403).send("Ce n'est pas à vous de jouer").end();
+  }
+  game.fold();
+  game.nextActivePlayer();
+  return res.status(200).json(game).end();
 };
 
 exports.getGame = async (req, res) => {
@@ -125,13 +164,10 @@ exports.leave = async (req, res) => {
   const index = findGame(id);
   const email = req.user.email;
   try {
-    console.log(`\n${games[index].players}\n`);
     await games[index].players.forEach((player, i) => {
       if (player.email === email) {
-        console.log(`\n${games[index].players[i]}\n${i}`);
         delete games[index].players[i];
         //Voir si le fait d'avoir un null et ne pas le retirer est génant plus tard
-        console.log(`\n${games[index].players}\n`);
       }
     });
     return res.status(200).json(games[index].players).end();
