@@ -10,4 +10,24 @@
       </div>
     </div>
   </div>
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h5>Ajouter un thème</h5>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <form action="" class="d-flex flex-column" [formGroup]="newThemeForm" (ngSubmit)="onSubmit()">
+            <input type="text" placeholder="Titre du theme" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+            <div class="d-flex justify-content-around">
+              <button mat-raised-button color="primary" type="submit">Valider</button>
+              <button mat-raised-button color="warn" type="reset">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </section>

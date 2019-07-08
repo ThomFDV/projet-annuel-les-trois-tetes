@@ -60,10 +60,4 @@ export class ArticleComponent implements OnInit {
             });
   }
 
-  comment(articleId) {
-    // this.articleService.addComment(articleId).subscribe(() => {
-    // }), () => {
-    //   alert('Une erreur est survenue');
-    // };
-  }
 }

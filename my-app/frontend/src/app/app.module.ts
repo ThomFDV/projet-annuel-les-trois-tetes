@@ -40,7 +40,7 @@ import {
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
-import {ThemeCollectionComponent} from "./components/theme/theme-collection/theme-collection.component";
+import {ThemeCollectionComponent} from './components/theme/theme-collection/theme-collection.component';
 import { CourseCreationComponent } from './components/theme/course-creation/course-creation.component';
 
 @NgModule({

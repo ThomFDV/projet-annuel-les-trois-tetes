@@ -7,7 +7,7 @@ const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
-router.post("/create", /*passport.authenticate("jwt", { session: false }),*/ ThemeController.create);
+router.post("/create", passport.authenticate("jwt", { session: false }), ThemeController.create);
 
 router.get("", ThemeController.getThemes);
 

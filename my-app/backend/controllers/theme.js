@@ -10,11 +10,11 @@ exports.create = async (req, res, next) => {
 
     try {
         const theme = await new Theme({
-
             title
         });
         await theme.save();
         res.status(201).json({"message": "Theme créé !"}).end();
+
     } catch(e) {
         res.status(409).json({
             message: "Problème lors de l'ajout dans la bdd"

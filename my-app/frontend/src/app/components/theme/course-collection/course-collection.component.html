@@ -4,7 +4,7 @@
     <button mat-raised-button color="primary" routerLink="/theme/{{theme._id}}/newcourse">Créer votre cours !</button>
   </div>
   <div class="col-12">
-    <h3 class="mb-4">Les Cours du thème {{theme.title}}</h3>
+    <h3 class="mb-4">Les Cours du thème "{{theme.title}}"</h3>
     <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let course of theme.courses">
       <div class="d-flex flex-column align-items-center border-right w-25 p-2">
         <h5 class="m-auto">{{course.title}}</h5>
