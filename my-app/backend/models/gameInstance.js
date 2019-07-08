@@ -15,23 +15,25 @@ class GameInstance {
   constructor(game, players) {
     this.id = game.id;
     this.title = game.title;
+    this.players = [];
+    this.players.push(new Player.PlayerIG(players[0], game.initialStack));
+    this.dealer = [];
+    this.sbPlayer = [];
+    this.bbPlayer = [];
+    this.currentTurn = turns.PREFLOP;
+    this.board = [];
+    this.pot = 0;
+    this.activePlayer = [];
+    this.lastBet = 0;
+    this.creator = game.creator;
     this.mode = game.mode;
     this.buyIn = game.buyIn;
     this.maxPlayer = game.maxPlayer;
     this.cashPrice = game.cashPrice;
     this.initialStack = game.initialStack;
-    this.players = [];
-    this.players.push(new Player.PlayerIG(players[0], this.initialStack));
-    this.creator = game.creator;
     this.bigBlind = game.initialStack / 100;
     this.smallBlind = this.bigBlind / 2;
-    this.dealer = [];
-    this.currentTurn = turns.PREFLOP;
-    this.board = [];
     this.deck = [];
-    this.pot = 0;
-    this.activePlayer = this.dealer;
-    this.lastBet = 0;
   }
 
   /*
@@ -82,6 +84,16 @@ class GameInstance {
   - On recommence
    */
 
+  startGame() {
+    this.deck = new Deck();
+    this.deck.shuffleDeck();
+    this.distributeHands();
+    this.updateDealer();
+    this.updateSbPlayer();
+    this.updateBbPlayer();
+    this.putBlinds();
+  }
+
   distributeHands() {
     for (let player of this.players) {
       player.hand = [this.deck.draw(), this.deck.draw()];
@@ -96,23 +108,12 @@ class GameInstance {
   }
 
   putBlinds() {
-    const dealerIdx = this.players.findIndex(x => x.email === this.dealer.email);
-    if (dealerIdx + 1 >= this.players.length) {
-      this.players[0].stack -= this.smallBlind;
-      this.players[0].lastBet = this.smallBlind;
-      this.players[1].stack -= this.bigBlind;
-      this.players[1].lastBet = this.bigBlind;
-    } else if (dealerIdx + 2 >= this.players.length) {
-      this.players[dealerIdx + 1].stack -= this.smallBlind;
-      this.players[dealerIdx + 1].lastBet = this.smallBlind;
-      this.players[0].stack -= this.bigBlind;
-      this.players[0].lastBet = this.bigBlind;
-    } else {
-      this.players[dealerIdx + 1].stack -= this.smallBlind;
-      this.players[dealerIdx + 1].lastBet = this.smallBlind;
-      this.players[dealerIdx + 2].stack -= this.bigBlind;
-      this.players[dealerIdx + 2].lastBet = this.bigBlind;
-    }
+    this.sbPlayer.stack -= this.smallBlind;
+    this.sbPlayer.lastBet = this.smallBlind;
+    this.sbPlayer.personnalPot = this.smallBlind;
+    this.bbPlayer.stack -= this.bigBlind;
+    this.bbPlayer.lastBet = this.bigBlind;
+    this.bbPlayer.personnalPot = this.bigBlind;
     this.pot = this.smallBlind + this.bigBlind;
     this.lastBet = this.bigBlind;
     this.nextActivePlayer();
@@ -121,11 +122,41 @@ class GameInstance {
   }
 
   bet(value) {
-    this.activePlayer.lastBet = value;
-    this.activePlayer.personnalPot = value;
-    this.activePlayer.stack -= value;
-    this.pot += value;
-    this.lastBet = value;
+    let code = 0;
+    if (value + this.activePlayer.lastBet === 0 && this.lastBet === 0) {
+      //Check
+      this.activePlayer.status = Player.allStatus.CHECK;
+      console.log(`\nCheck de ${this.activePlayer.email}!\n`);
+      return code;
+    } else if (value + this.activePlayer.lastBet < this.lastBet || value + this.activePlayer.lastBet < this.bigBlind) {
+      code = -1;
+    } else if (value + this.activePlayer.lastBet > this.activePlayer.stack) {
+      //Relance pas
+      code = 1;
+    } else if (value + this.activePlayer.lastBet === this.lastBet) {
+      //Faire les changements pour le call
+      this.activePlayer.personnalPot += value;
+      this.activePlayer.lastBet = value;
+      this.activePlayer.stack -= value;
+      this.activePlayer.status = Player.allStatus.BET;
+      this.pot += value;
+      console.log(`\nCall de ${this.activePlayer.email} ! Mise de ${value}, avec un pot perso de ` +
+                  `${this.activePlayer.personnalPot}\n`);
+    } else {
+      //Raise
+      this.lastBet = this.activePlayer.lastBet + value;
+      this.activePlayer.personnalPot += value;
+      this.activePlayer.lastBet = value;
+      this.activePlayer.stack -= value;
+      this.activePlayer.status = Player.allStatus.BET;
+      this.pot += value;
+      console.log(`\nRaise de ${this.activePlayer.email} ! Mise de ${value}, avec un pot perso de ` +
+                  `${this.activePlayer.personnalPot}\n`);
+    }
+    if (this.activePlayer.stack === 0) {
+      this.activePlayer.status = Player.allStatus.ALLIN;
+    }
+    return code;
   }
 
   fold() {
@@ -136,6 +167,24 @@ class GameInstance {
     const selector = Math.floor(Math.random() * this.players.length);
     this.dealer = this.players[selector];
     this.activePlayer = this.players[selector];
+  }
+
+  updateSbPlayer() {
+    let playerIdx = this.players.findIndex(x => x.email === this.dealer.email);
+    if (playerIdx + 1 > this.players.length - 1) {
+      this.sbPlayer = this.players[0];
+      return;
+    }
+    this.sbPlayer = this.players[playerIdx + 1];
+  }
+
+  updateBbPlayer() {
+    let playerIdx = this.players.findIndex(x => x.email === this.sbPlayer.email);
+    if (playerIdx + 1 > this.players.length - 1) {
+      this.bbPlayer = this.players[0];
+      return;
+    }
+    this.bbPlayer = this.players[playerIdx + 1];
   }
 
   kickPlayer() {
@@ -151,6 +200,8 @@ class GameInstance {
     let allPlayed = true;
     for (const player of this.players) {
       if (player.status === Player.allStatus.INGAME) {
+        allPlayed = false;
+      } else if (player.status === Player.allStatus.BET && player.personnalPot < this.lastBet) {
         allPlayed = false;
       }
     }
@@ -192,23 +243,17 @@ class GameInstance {
           this.startGame();
           break;
       }
+      this.lastBet = 0;
+      for (let player of this.players) {
+        player.lastBet = 0;
+      }
     }
   }
 
-  startGame() {
-    console.log(`Vient ici`);
-    this.deck = new Deck();
-    this.deck.shuffleDeck();
-    this.distributeHands();
-    this.updateDealer();
-    this.putBlinds();
-  }
-
   checkWinner() {
+    //TODO
   }
   nextActivePlayer() {
-    //Verifier les status des joueurs, si ils ont tous jouer faire passer au turn suivant
-    //Remettre le lastBet à 0 si le turn a changé
     this.checkTurn();
     let playerIdx = this.players.findIndex(x => x.email === this.activePlayer.email);
     if (playerIdx + 1 > this.players.length - 1) {
@@ -219,16 +264,6 @@ class GameInstance {
     if (this.activePlayer.status === Player.allStatus.FOLD) {
       this.nextActivePlayer();
     }
-    //Faire plus simple en trouvant l'index de l'activePlayer dans players
-    //Vérifier si le prochain est bien INGAME
-    //Si il est pas INGAME et qu'il n'est pas FOLD non plus, passer au turn suivant
-    //Si il est FOLD ajouter 1 tant qu'on trouve quelque chose de valide
-    //Ensuite dire que maintenant activePlayer est cet index + 1
-  }
-
-  updateTurn() {
-    //Mettre tous les joueurs qui ne sont pas FOLD, ELIMINATED OU ALLIN à INGAME
-    //Puis passer au turn suivant
   }
 }
 

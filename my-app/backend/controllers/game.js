@@ -90,22 +90,19 @@ exports.bet = async (req, res) => {
   } else if (req.user.email !==  game.activePlayer.email) {
     return res.status(403).send("Ce n'est pas à vous de jouer").end();
   }
-  if (value > game.activePlayer.stack) {
-    return res.status(403).send("Vous emballez pas, misez moins ! Au moins jusqu'au montant max de votre tapis").end();
+  let code = game.bet(value);
+  switch (code) {
+    case -1:
+      return res.status(403).send(`C'est trop faible voyons ! Tu peux relancé d'au minimum une big bling qui est de` +
+                                  `${game.bigBlind} ! Ou tu peux miser ${game.lastBet}`).end();
+    case 1:
+      return res.status(403).send("Vous emballez pas, misez moins ! Au moins jusqu'au montant de votre tapis").end();
+    case -2:
+      return res.status(403).send(`Impossible de miser en dessous de 0 !`).end();
+    case 0:
+      game.nextActivePlayer();
+      return res.status(200).json(game).end();
   }
-  if (value < game.lastBet) {
-    return res.status(403).send(`C'est trop faible voyons ! Augmente au moins jusqu'au ${game.lastBet} !`).end();
-  }
-  game.bet(value);
-  if (game.activePlayer.stack === 0) {
-    game.activePlayer.status = Player.allStatus.ALLIN;
-  } else if (value === 0 && game.lastBet === 0) {
-    game.activePlayer.status = Player.allStatus.CHECK;
-  } else {
-    game.activePlayer.status = Player.allStatus.BET;
-  }
-  game.nextActivePlayer();
-  return res.status(200).json(game).end();
 };
 
 exports.fold = async (req, res) => {
