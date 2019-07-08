@@ -11,18 +11,22 @@ import {LoginAccountComponent} from './components/account/login-account/login-ac
 import {RegisterAccountComponent} from './components/account/register-account/register-account.component';
 import {ContactFormComponent} from './components/contact/contact-form/contact-form.component';
 import {StatisticHomeComponent} from './components/statistic/statistic-home/statistic-home.component';
-import {CourseCollectionComponent} from './components/course/course-collection/course-collection.component';
+import {CourseCollectionComponent} from './components/theme/course-collection/course-collection.component';
 import {PlayComponent} from './components/games/play/play.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeGameComponent} from './components/games/home-game/home-game.component';
 import {GameCreationComponent} from './components/games/game-creation/game-creation.component';
 import {ArticleComponent} from "./components/article/article.component";
+import {ThemeCollectionComponent} from "./components/theme/theme-collection/theme-collection.component";
+import {CourseCreationComponent} from "./components/theme/course-creation/course-creation.component";
 
 const routes: Routes = [
   { path : 'games/home', component: HomeGameComponent },
   { path : 'games/nouveau', component: GameCreationComponent },
   { path : 'games/:id', component: PlayComponent },
-  { path : 'courses/collection', component: CourseCollectionComponent },
+  { path : 'theme/collection', component: ThemeCollectionComponent},
+  { path : 'theme/:id', component: CourseCollectionComponent},
+  { path : 'theme/:id/newcourse', component: CourseCreationComponent},
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },
   { path : 'account', component: HomeAccountComponent },

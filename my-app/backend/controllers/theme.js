@@ -1,5 +1,6 @@
 "use strict";
 
+const mongoose = require("mongoose");
 const Theme = require("../models/theme");
 const User = require("../models/user");
 
@@ -37,13 +38,16 @@ exports.getThemeById = async (req, res) => {
 };
 
 exports.addCourse = async (req, res) => {
+    let order = await this.countCourse(req, res);
+    order = order[0].numberCourses + 1;
 
     const theme = await Theme.findById(req.params.id, (err, doc) => {
         if (err) return err;
         try {
+
             const title = req.body.title;
             const content = req.body.content;
-            const orderId = req.body.orderId;
+            const orderId = order;
             const creator = req.user.email;
 
             const course = {
@@ -63,4 +67,34 @@ exports.addCourse = async (req, res) => {
         }
 
     });
+};
+
+exports.countCourse = async (req, res) => {
+    const themeId = req.params.id;
+
+    try {
+    let number = await Theme.aggregate([
+
+        {$match: {
+                "_id": mongoose.Types.ObjectId(themeId)
+            }},
+        {$project: {
+                "title": "$title",
+                "numberCourses": {
+                    $cond: {
+                        if: {
+                            $isArray: "$courses"
+                        },
+                        then: {
+                            $size: "$courses"
+                        },
+                        else: 0
+                    }
+                }
+            }}
+        ]);
+    return number;
+    } catch(err){
+        return err;
+    }
 };

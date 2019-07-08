@@ -11,8 +11,6 @@ import {Observable} from 'rxjs';
 export class ArticleService {
   url = 'http://localhost:3000/article';
 
-
-
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
   createArticle(article: Article): Observable <any> {
@@ -27,12 +25,6 @@ export class ArticleService {
 
   getArticle() {
     return this.http.get(this.url);
-  }
-
-  getCours() {
-    return this.http.get(this.url + '/courses', {
-      headers: this.tokenStorage.getHeaderToken()
-    });
   }
 
   getArticleById(articleId): Observable <Article> {

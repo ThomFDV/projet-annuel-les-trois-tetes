@@ -21,7 +21,7 @@ import { LoginAccountComponent } from './components/account/login-account/login-
 import { RegisterAccountComponent } from './components/account/register-account/register-account.component';
 import { ContactFormComponent } from './components/contact/contact-form/contact-form.component';
 import { StatisticHomeComponent } from './components/statistic/statistic-home/statistic-home.component';
-import { CourseCollectionComponent } from './components/course/course-collection/course-collection.component';
+import { CourseCollectionComponent } from './components/theme/course-collection/course-collection.component';
 import { GameComponent } from './components/games/game/game.component';
 import { PlayComponent } from './components/games/play/play.component';
 import { HomeComponent } from './components/home/home.component';
@@ -40,6 +40,8 @@ import {
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
+import {ThemeCollectionComponent} from "./components/theme/theme-collection/theme-collection.component";
+import { CourseCreationComponent } from './components/theme/course-creation/course-creation.component';
 
 @NgModule({
   declarations: [
@@ -59,12 +61,14 @@ import { GameCreationComponent } from './components/games/game-creation/game-cre
     RegisterAccountComponent,
     ContactFormComponent,
     StatisticHomeComponent,
-    CourseCollectionComponent,
     GameComponent,
     PlayComponent,
     HomeComponent,
     HomeGameComponent,
-    GameCreationComponent
+    GameCreationComponent,
+    ThemeCollectionComponent,
+    CourseCollectionComponent,
+    CourseCreationComponent
   ],
     imports: [
         NgbModule,
