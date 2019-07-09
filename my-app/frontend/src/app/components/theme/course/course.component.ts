@@ -28,6 +28,7 @@ export class CourseComponent implements OnInit {
       .subscribe(theme => {
         this.theme = theme[0];
 
+
       }, (err) => {
         console.error(err);
       });

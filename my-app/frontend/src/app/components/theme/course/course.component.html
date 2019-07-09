@@ -1,8 +1,7 @@
 <section class="container">
-  <h3 class="text-left">{{theme.title}}</h3>
+  <h3 class="text-left">Cours {{theme.courses.orderId}} du theme "{{theme.title}}"</h3>
   <h2 class="text-center">{{theme.courses.title}}</h2>
   <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
-    <li>{{theme.courses.orderId}} </li>
     <li>{{theme.courses.creator}} </li>
     <li>{{theme.courses.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
   </ul>

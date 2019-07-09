@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 
-const ThemeController = require("../controllers/theme");
+const ThemeController = require('../controllers/theme');
 
 const checkAuth = require("../middleware/check-auth");
 
@@ -17,7 +17,8 @@ router.post("/:id/newcourse", passport.authenticate("jwt", { session: false }), 
 
 router.get("/:id/countcourse", passport.authenticate("jwt", { session: false }), ThemeController.countCourse);
 
-router.get("/:themeId/course/:courseId", passport.authenticate("jwt", { session: false }), ThemeController.getCourse);
+//router.get("/:themeId/course/:courseId", passport.authenticate("jwt", { session: false }), ThemeController.getCourse);
 
+router.get("/:themeId/course/:courseId", passport.authenticate("jwt", { session: false }), ThemeController.checkUserTheme);
 
 module.exports = router;
