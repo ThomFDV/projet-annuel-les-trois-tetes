@@ -1,6 +1,6 @@
 <section class="container" xmlns="http://www.w3.org/1999/html">
   <div class="d-flex justify-content-center mb-3">
-    <h5 class="mr-2">Envie de partager une idée, un cours ou autre ?</h5>
+    <h5 class="mr-2">Envie de partager une idée ou autre ?</h5>
     <button mat-raised-button color="primary" routerLink="/articles/nouveau">Créer votre article !</button>
   </div>
   <div class="col-12">
@@ -13,7 +13,7 @@
           <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
         </ul>
       </div>
-      <p class="p-4 m-0">
+      <p class="p-4 w-50 m-0">
         {{article.content}}
       </p>
       <div class="d-flex flex-column align-items-center border-left w-25 p-2 m-auto">

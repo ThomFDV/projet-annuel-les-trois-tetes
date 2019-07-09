@@ -31,11 +31,6 @@ exports.getArticle = async (req, res) => {
   res.json(articles);
 };
 
-exports.getCours = async (req, res) => {
-  const cours = await Article.find({ type: "cours"}).sort({updatedAt: "desc"});
-  res.json(cours);
-};
-
 exports.getArticleById = async (req, res) => {
 
   const article = await Article.findById(req.params.id, (err, doc) => {

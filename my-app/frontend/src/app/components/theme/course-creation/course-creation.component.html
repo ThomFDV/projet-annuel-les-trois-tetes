@@ -1,0 +1,16 @@
+<section class="container">
+  <h2 class="text-center">Créer un cours pour le thème "{{theme.title}}"</h2>
+  <form action="" class="d-flex flex-column" [formGroup]="newCourseForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Titre du cours" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+    <textarea name="course" id="" cols="20" rows="20" placeholder="Contenu du cours" class="border p-2 mb-4" formControlName="content"></textarea>
+
+    <div class="d-inline-flex mb-5">
+      <button mat-stroked-button color="primary" class="mr-3">Importer un fichier</button>
+      <p class="my-auto">0 fichier(s) importé(s)</p>
+    </div>
+    <div class="d-flex justify-content-around">
+      <button mat-raised-button color="primary" type="submit">Valider</button>
+      <button mat-raised-button color="warn">Annuler</button>
+    </div>
+  </form>
+</section>
