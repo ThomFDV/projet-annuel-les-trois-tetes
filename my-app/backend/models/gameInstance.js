@@ -128,9 +128,9 @@ class GameInstance {
       this.activePlayer.status = Player.allStatus.CHECK;
       console.log(`\nCheck de ${this.activePlayer.email}!\n`);
       return code;
-    } else if (value + this.activePlayer.lastBet < this.lastBet || value + this.activePlayer.lastBet < this.bigBlind) {
+    } else if (value + this.activePlayer.personnalPot < this.lastBet || value + this.activePlayer.lastBet < this.bigBlind) {
       code = -1;
-    } else if (value + this.activePlayer.lastBet > this.activePlayer.stack) {
+    } else if (value > this.activePlayer.stack) {
       //Relance pas
       code = 1;
     } else if (value + this.activePlayer.lastBet === this.lastBet) {
@@ -201,8 +201,10 @@ class GameInstance {
     for (const player of this.players) {
       if (player.status === Player.allStatus.INGAME) {
         allPlayed = false;
-      } else if (player.status === Player.allStatus.BET && player.personnalPot < this.lastBet) {
-        allPlayed = false;
+      } else if (player.status === Player.allStatus.BET) {
+        for (let p of this.players) {
+          if (p.personnalPot !== player.personnalPot) allPlayed = false;
+        }
       }
     }
     if (allPlayed) {
