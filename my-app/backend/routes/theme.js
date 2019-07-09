@@ -11,12 +11,13 @@ router.post("/create", passport.authenticate("jwt", { session: false }), ThemeCo
 
 router.get("", ThemeController.getThemes);
 
-// router.get("/courses", passport.authenticate("jwt", { session: false }), ThemeController.getCourses);
-
 router.get("/:id", passport.authenticate("jwt", { session: false }), ThemeController.getThemeById);
 
 router.post("/:id/newcourse", passport.authenticate("jwt", { session: false }), ThemeController.addCourse);
 
 router.get("/:id/countcourse", passport.authenticate("jwt", { session: false }), ThemeController.countCourse);
+
+router.get("/:themeId/course/:courseId", passport.authenticate("jwt", { session: false }), ThemeController.getCourse);
+
 
 module.exports = router;

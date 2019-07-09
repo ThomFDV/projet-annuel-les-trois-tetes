@@ -98,3 +98,23 @@ exports.countCourse = async (req, res) => {
         return err;
     }
 };
+
+exports.getCourse = async (req, res) => {
+
+    const themeId = req.params.themeId;
+    const courseId = req.params.courseId;
+
+    try {
+        let course = await Theme.aggregate([
+            {$match: {"_id":mongoose.Types.ObjectId(themeId)}},
+            {$unwind: "$courses"},
+            {$match: {"courses._id":mongoose.Types.ObjectId(courseId)}}
+        ]);
+        return res.json(course).status(200).end();
+    }
+    catch (e) {
+        res.status(409).json({
+            message: "Problème dans la bdd"
+        }).end();
+    }
+};

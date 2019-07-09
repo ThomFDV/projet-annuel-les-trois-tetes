@@ -19,6 +19,7 @@ import {GameCreationComponent} from './components/games/game-creation/game-creat
 import {ArticleComponent} from "./components/article/article.component";
 import {ThemeCollectionComponent} from "./components/theme/theme-collection/theme-collection.component";
 import {CourseCreationComponent} from "./components/theme/course-creation/course-creation.component";
+import {CourseComponent} from "./components/theme/course/course.component";
 
 const routes: Routes = [
   { path : 'games/home', component: HomeGameComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path : 'theme/collection', component: ThemeCollectionComponent},
   { path : 'theme/:id', component: CourseCollectionComponent},
   { path : 'theme/:id/newcourse', component: CourseCreationComponent},
+  { path : 'theme/:themeId/course/:courseId', component: CourseComponent},
   { path : 'contact', component: ContactFormComponent },
   { path : 'statistics', component: StatisticHomeComponent },
   { path : 'account', component: HomeAccountComponent },

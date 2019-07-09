@@ -11,8 +11,6 @@ router.post("/create", passport.authenticate("jwt", { session: false }), Article
 
 router.get("", ArticleController.getArticle);
 
-router.get("/courses", passport.authenticate("jwt", { session: false }), ArticleController.getCours);
-
 router.get("/:id", ArticleController.getArticleById);
 
 router.post("/:id", passport.authenticate("jwt", { session: false }), ArticleController.addComment);

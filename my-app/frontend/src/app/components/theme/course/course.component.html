@@ -1,0 +1,14 @@
+<section class="container">
+  <h3 class="text-left">{{theme.title}}</h3>
+  <h2 class="text-center">{{theme.courses.title}}</h2>
+  <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+    <li>{{theme.courses.orderId}} </li>
+    <li>{{theme.courses.creator}} </li>
+    <li>{{theme.courses.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+  </ul>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100">
+    <p class="p-4 w-50 m-0">
+    {{theme.courses.content}}
+    </p>
+  </div>
+</section>

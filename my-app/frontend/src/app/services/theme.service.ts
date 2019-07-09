@@ -23,7 +23,9 @@ export class ThemeService {
   }
 
   getThemes() {
-    return this.http.get(this.url);
+    return this.http.get(this.url, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
   }
 
   getThemeById(themeId): Observable <Theme> {
@@ -43,4 +45,9 @@ export class ThemeService {
     });
   }
 
+  getCourse(themeId, courseId) : Observable <Theme> {
+    return this.http.get<Theme>(`${this.url}/${themeId}/course/${courseId}`, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
+  }
 }

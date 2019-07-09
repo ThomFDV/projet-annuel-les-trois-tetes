@@ -42,6 +42,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { GameCreationComponent } from './components/games/game-creation/game-creation.component';
 import {ThemeCollectionComponent} from './components/theme/theme-collection/theme-collection.component';
 import { CourseCreationComponent } from './components/theme/course-creation/course-creation.component';
+import { CourseComponent } from './components/theme/course/course.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { CourseCreationComponent } from './components/theme/course-creation/cour
     GameCreationComponent,
     ThemeCollectionComponent,
     CourseCollectionComponent,
-    CourseCreationComponent
+    CourseCreationComponent,
+    CourseComponent
   ],
     imports: [
         NgbModule,

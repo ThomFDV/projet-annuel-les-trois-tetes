@@ -31,5 +31,11 @@ export class CourseCollectionComponent implements OnInit {
       });
 
   }
+  view(themeId, courseId) {
 
+    this.themeService.getCourse(themeId, courseId).subscribe(() => {
+    }), () => {
+      alert('Une erreur est survenue');
+    };
+  }
 }
