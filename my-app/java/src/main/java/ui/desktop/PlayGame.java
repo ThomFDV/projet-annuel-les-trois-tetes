@@ -72,19 +72,23 @@ public class PlayGame {
         mainContainer = pane;
     }
 
+    public void setGameInstance(GameInstance gameInstance) {
+        this.gameInstance = gameInstance;
+    }
+
     /**
      * Initialisation de l'instance de partie
      * @TODO: Récupérer tous les joueurs et créer la partie en fonction du résultat
      */
 
     public void startGame() {
-        ArrayList<User> players = new ArrayList<User>();
-        players.add(new User("Michel"));
-        players.add(new User("Andre"));
-        players.add(new User("Pierre"));
-        players.add(new User("Phillipe"));
-        this.gameInstance = new GameInstance(players, GameType.QUICK, 1000);
-        this.gameInstance.distributeHands();
+//        ArrayList<User> players = new ArrayList<User>();
+//        players.add(new User("Michel"));
+//        players.add(new User("Andre"));
+//        players.add(new User("Pierre"));
+//        players.add(new User("Phillipe"));
+//        this.gameInstance = new GameInstance(players, GameType.QUICK, 1000);
+//        this.gameInstance.distributeHands();
         this.gameInstance.betBlinds();
         feedPlayerInfos(this.gameInstance.getActivePlayer());
     }
@@ -113,7 +117,7 @@ public class PlayGame {
 
     @FXML
     public void feedPlayerInfos(Player player) {
-        activePlayerName.setText("Joueur : " + player.getUser().getPseudo().get());
+        activePlayerName.setText("Joueur : " + player.getName());
         activePlayerStack.setText("Stack : " + player.getStack());
         activePlayerFirstCard.setText(
                 this.gameInstance.getActivePlayer().getHand()[0].toString()

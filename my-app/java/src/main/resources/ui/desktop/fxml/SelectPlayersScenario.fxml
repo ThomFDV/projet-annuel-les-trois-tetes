@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.desktop.SelectPlayersScenario">
    <children>
       <ChoiceBox fx:id="nbPlayers" layoutX="561.0" layoutY="214.0" prefWidth="150.0" />
@@ -87,5 +86,10 @@
             <Font name="Arial" size="30.0" />
          </font>
       </Button>
+      <Label fx:id="errorMessage" layoutX="775.0" layoutY="684.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

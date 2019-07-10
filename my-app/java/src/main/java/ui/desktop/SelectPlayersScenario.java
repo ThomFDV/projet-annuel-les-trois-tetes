@@ -4,16 +4,21 @@ import core.enums.Difficulty;
 import core.enums.Turn;
 import core.game.Card;
 import core.game.Deck;
+import core.game.GameInstance;
+import core.game.Player;
 import core.scenario.NumberPlayersChoice;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Cette classe gère l'écran d'initialisation de la création d'un scénario
@@ -46,6 +51,12 @@ public class SelectPlayersScenario {
     @FXML
     private ChoiceBox<Difficulty> difficultyBox;
 
+    @FXML
+    private TextField scenarioName;
+
+    @FXML
+    private Label errorMessage;
+
     public void setStage(Stage mainStage) {
         this.mainStage = mainStage;
     }
@@ -69,6 +80,7 @@ public class SelectPlayersScenario {
 
     @FXML
     public void initialize() {
+        this.errorMessage.setText("");
         this.deck = new Deck();
         for(int i = 2; i <= 10; i++) {
             nbPlayers.getItems().add(new NumberPlayersChoice(i));
@@ -94,7 +106,33 @@ public class SelectPlayersScenario {
 
     @FXML
     public void onContinueScenarioClicked() {
-        System.out.println("Vérifier inputs scénario");
+        Optional<String> errorMessage = checkScenarioInformations();
+        if(errorMessage.isPresent()) {
+            this.errorMessage.setText(errorMessage.get());
+            return;
+        }
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i = 0; i < listPlayersPane.getChildren().size(); i += 4) {
+            Label name = (Label)(listPlayersPane.getChildren().get(i));
+            TextFieldNumbersOnly initialStack = (TextFieldNumbersOnly)(listPlayersPane.getChildren().get(i + 1));
+            ChoiceBox cardOne = (ChoiceBox)(listPlayersPane.getChildren().get(i + 2));
+            ChoiceBox cardTwo = (ChoiceBox)(listPlayersPane.getChildren().get(i + 3));
+            Player player = new Player(
+                    name.getText(),
+                    Integer.parseInt(initialStack.getText()),
+                    (Card) cardOne.getSelectionModel().getSelectedItem(),
+                    (Card) cardTwo.getSelectionModel().getSelectedItem());
+            players.add(player);
+        }
+        GameInstance newScenarioInstance = new GameInstance(
+            players,
+            1000,
+            dealerBox.getSelectionModel().getSelectedItem(),
+            turnBox.getSelectionModel().getSelectedItem(),
+            scenarioName.getText().trim(),
+            difficultyBox.getSelectionModel().getSelectedItem()
+        );
+        loadNextPage(newScenarioInstance);
     }
 
     /**
@@ -105,7 +143,19 @@ public class SelectPlayersScenario {
 
     @FXML
     public void onReturnScenarioClicked() {
+        Alert returnAlert = new Alert(Alert.AlertType.WARNING);
+        returnAlert.setTitle("Attention");
+        returnAlert.setHeaderText("Êtes-vous sûr(e) de vouloir abandonner la création du scénario ?");
 
+        ButtonType confirm = new ButtonType("Confirmer");
+        ButtonType cancel = new ButtonType("Annuler");
+        returnAlert.getButtonTypes().clear();
+        returnAlert.getButtonTypes().addAll(confirm, cancel);
+
+        Optional<ButtonType> confirmationChoice = returnAlert.showAndWait();
+        if(confirmationChoice.isPresent() && confirmationChoice.get() == confirm) {
+            // retour au menu
+        }
     }
 
     public void setUpCoicesValues() {
@@ -114,7 +164,7 @@ public class SelectPlayersScenario {
         }
         difficultyBox.getSelectionModel().selectFirst();
         for(Turn turn: Turn.values()) {
-            if(turn != Turn.PREFLOP) turnBox.getItems().add(turn);
+            turnBox.getItems().add(turn);
         }
         turnBox.getSelectionModel().selectFirst();
     }
@@ -192,6 +242,67 @@ public class SelectPlayersScenario {
             newCardChoiceBox.getItems().add(card);
         }
         return newCardChoiceBox;
+    }
+
+    /**
+     * Vérifie que les informations entrées par l'utilisateur sont correctes
+     * @return un éventuel message d'erreur
+     */
+
+    public Optional<String> checkScenarioInformations() {
+        // Vérifie que la somme des stacks de départ est conforme
+        int sum = 0;
+        for(int i = 1; i < listPlayersPane.getChildren().size(); i += 4) {
+            TextFieldNumbersOnly stackValue = (TextFieldNumbersOnly) listPlayersPane.getChildren().get(i);
+            sum += Integer.valueOf(stackValue.getText());
+        }
+        int supposedStackSum = 1000 * (listPlayersPane.getChildren().size() / 4);
+        if(sum != supposedStackSum) {
+            return Optional.of("La somme des stacks est incorrecte, elle doit être égale à " + supposedStackSum);
+        }
+        // Vérifie que le nom du scénario n'est pas vide
+        if(scenarioName.getText().isBlank()) {
+            return Optional.of("Le nom du scénario n'est pas renseigné");
+        }
+        // Vérifie que toutes les cartes sélectionnées sont différentes
+        ArrayList<Card> selectedCards = new ArrayList<Card>();
+        for(int i = 2; i < listPlayersPane.getChildren().size(); i += 4) {
+            ChoiceBox cardBox = (ChoiceBox) listPlayersPane.getChildren().get(i);
+            Card card = (Card) cardBox.getSelectionModel().getSelectedItem();
+            if(selectedCards.contains(card)) {
+                return Optional.of("La carte " + card + " apparait en double dans votre sélection");
+            }
+            selectedCards.add(card);
+            cardBox = (ChoiceBox) listPlayersPane.getChildren().get(i + 1);
+            card = (Card) cardBox.getSelectionModel().getSelectedItem();
+            if(selectedCards.contains(card)) {
+                return Optional.of("La carte " + card + " apparait en double dans votre sélection");
+            }
+            selectedCards.add(card);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Charge la page qui va dérouler le scénario
+     * @param newScenarioInstance
+     */
+
+    public void loadNextPage(GameInstance newScenarioInstance) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/PlayGame.fxml"));
+        try {
+            AnchorPane pane = loader.load();
+            PlayGame playGameController = loader.getController();
+            playGameController.setStage(mainStage);
+            playGameController.setMainContainer(mainContainer);
+            playGameController.setPlayGameContainer(pane);
+            mainContainer.setCenter(pane);
+            playGameController.setGameInstance(newScenarioInstance);
+            playGameController.startGame();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

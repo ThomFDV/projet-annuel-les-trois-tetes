@@ -1,10 +1,7 @@
 package core.game;
 
 import core.User;
-import core.enums.Action;
-import core.enums.GameType;
-import core.enums.Status;
-import core.enums.Turn;
+import core.enums.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -28,6 +25,10 @@ public class GameInstance {
     private Player activePlayer;
     private Turn currentTurn;
     private int lastBet;
+    private Turn endTurn;
+    private String scenarioName;
+    private Difficulty difficulty;
+    private boolean create;
 
     public GameInstance(ArrayList<User> users, GameType gameType, int initialStack) {
         this.players = new ArrayList<Player>();
@@ -44,6 +45,24 @@ public class GameInstance {
         this.lastBet = 0;
         this.deck = new Deck();
         this.deck.shuffleDeck();
+    }
+
+    public GameInstance(ArrayList<Player> players, int initialStack, String dealerName, Turn endTurn, String scenarioName, Difficulty difficulty) {
+        this.players = new ArrayList<Player>();
+        for(Player p: players) this.players.add(p);
+        this.board = new ArrayList<Card>();
+        this.pot = 0;
+        initializeDeck();
+        initializeDealer(dealerName);
+        this.currentTurn = Turn.PREFLOP;
+        this.lastBet = 0;
+        this.bigBlind = initialStack / 100;
+        this.smallBlind = this.bigBlind / 2;
+        this.endTurn = endTurn;
+        this.scenarioName = scenarioName;
+        this.difficulty = difficulty;
+        this.create = true;
+        //betBlinds();
     }
 
     /**
@@ -75,32 +94,6 @@ public class GameInstance {
             p.setPersonnalPot(0);
             this.players.add(p);
         }
-    }
-
-    /**
-     * Retourne le nombre de joueurs encore en jeu afin de savoir si la partie est finie ou non
-     * @return nombre de joueurs encore en jeu
-     */
-
-    public int numberIngamePlayers() {
-        int upPlayers = 0;
-        for(Player player: players) {
-            upPlayers += player.getStatus() == Status.INGAME ? 1 : 0;
-        }
-        return upPlayers;
-    }
-
-    /**
-     * Augmente les valeurs des blindes (en fonction du type de partie)
-     */
-
-    public void increaseBlinds() {
-        if(this.gameType == GameType.QUICK) {
-            this.bigBlind *= 2;
-        } else {
-            this.bigBlind *= 1.5;
-        }
-        this.smallBlind = this.bigBlind / 2;
     }
 
     public ArrayList<Card> getBoard() {
@@ -187,7 +180,7 @@ public class GameInstance {
         }
         this.pot += betValue;
         this.lastBet = getActivePlayer().getLastBet();
-        System.out.println(getActivePlayer().getUser().getPseudo() + " a misé " + betValue);
+        System.out.println(getActivePlayer().getName() + " a misé " + betValue);
     }
 
     /**
@@ -207,7 +200,7 @@ public class GameInstance {
         status.add(Status.BET);
         status.add(Status.CHECK);
         Player p = getNextPlayer(status, getActivePlayer());
-        System.out.println("Prochain joueur: " + p.getUser().getPseudo().getValue());
+        System.out.println("Prochain joueur: " + p.getName());
         if(action == Action.CHECK) {
             return p.getStatus() == Status.INGAME ? 0 : 1;
         }
@@ -373,18 +366,49 @@ public class GameInstance {
      */
 
     public Player getNextPlayer(ArrayList<Status> status, Player currentPlayer) {
-        int index = (players.indexOf(currentPlayer) + 1) % players.size();
-        Player player = players.get(index);
+        int index = (this.players.indexOf(currentPlayer) + 1) % this.players.size();
+        Player player = this.players.get(index);
         while(!status.contains(player.getStatus())) {
-            index = (index + 1) % players.size();
-            player = players.get(index);
+            index = (index + 1) % this.players.size();
+            player = this.players.get(index);
         }
         return player;
     }
 
+    /**
+     * Pioche des cartes pour les montrer sur le tableau de jeu
+     * @param nbCards
+     */
+
     public void dropCardsOnBoard(int nbCards) {
         for(int i = 0; i < nbCards; i++) {
             getBoard().add(this.deck.drawCard());
+        }
+    }
+
+    /**
+     * Initialise la liste des cartes disponibles pour dérouler le scénario
+     * @TODO
+     */
+
+    public void initializeDeck() {
+        ArrayList<Card> distributedCards = new ArrayList<Card>();
+        for(Player player: this.players) {
+            distributedCards.add(player.getHand()[0]);
+            distributedCards.add(player.getHand()[1]);
+        }
+        this.deck = new Deck(distributedCards);
+    }
+
+    /**
+     * Définit le dealer
+     * @param dealerName
+     */
+
+    public void initializeDealer(String dealerName) {
+        for(Player player: players) {
+            this.dealer = player;
+            if(this.dealer.getName() == dealerName) break;
         }
     }
 }

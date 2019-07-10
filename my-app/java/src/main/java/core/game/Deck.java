@@ -20,6 +20,19 @@ public class Deck {
         this.counter = 0;
     }
 
+    public Deck(ArrayList<Card> distributedCard) {
+        this.decklist = new ArrayList<Card>();
+        for(Value v: Value.values()) {
+            for(Color c: Color.values()) {
+                Card newCard = new Card(v ,c);
+                if(!distributedCard.contains(newCard)) {
+                    this.decklist.add(newCard);
+                }
+            }
+        }
+        this.counter = 0;
+    }
+
     public void shuffleDeck() {
         Random rand = new Random();
         for(int i = this.decklist.size() - 1; i > 0; i--) {
