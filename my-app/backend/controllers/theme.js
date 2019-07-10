@@ -32,29 +32,29 @@ exports.getThemes = async (req, res) => {
 
 exports.getThemeById = async (req, res) => {
 
-    const userId = req.user._id;
+    // const userId = req.user._id;
     const themeId = req.params.id;
-
-    let userTheme = await UserTheme.aggregate([
-        {$match: {"themeId":mongoose.Types.ObjectId(themeId), "userId":mongoose.Types.ObjectId(userId)}}
-    ]);
-
-    if(userTheme[0] === undefined) { // si le user n'a ouvert encore aucun cours du theme
-
-        try {
-            const userTheme = await new UserTheme({
-                userId,
-                themeId,
-                orderId: 1,
-            });
-            await userTheme.save();
-
-        } catch(e) {
-            res.status(409).json({
-                message: "Problème lors de l'ajout dans la bdd"
-            }).end();
-        }
-    }
+    //
+    // let userTheme = await UserTheme.aggregate([
+    //     {$match: {"themeId":mongoose.Types.ObjectId(themeId), "userId":mongoose.Types.ObjectId(userId)}}
+    // ]);
+    //
+    // if(userTheme[0] === undefined) { // si le user n'a ouvert encore aucun cours du theme
+    //
+    //     try {
+    //         const userTheme = await new UserTheme({
+    //             userId,
+    //             themeId,
+    //             orderId: 1,
+    //         });
+    //         await userTheme.save();
+    //
+    //     } catch(e) {
+    //         res.status(409).json({
+    //             message: "Problème lors de l'ajout dans la bdd"
+    //         }).end();
+    //     }
+    // }
 
     const theme = await Theme.findById(themeId, (err, doc) => {
         if (err) return err;
@@ -197,4 +197,37 @@ exports.checkUserTheme = async (req, res) => {
             message: "Vous n'avez pas accès à ce cours"
         }).end();
     }
+};
+
+exports.getUserTheme = async (req, res) => {
+    const userId = req.user._id;
+    const themeId = req.params.id;
+
+    let userTheme = await UserTheme.aggregate([
+        {$match: {"themeId":mongoose.Types.ObjectId(themeId), "userId":mongoose.Types.ObjectId(userId)}}
+    ]);
+
+    if(userTheme[0] === undefined) { // si le user n'a ouvert encore aucun cours du theme
+
+        try {
+            const userTheme = await new UserTheme({
+                userId,
+                themeId,
+                orderId: 1,
+            });
+            await userTheme.save();
+
+            res.status(201).json(userTheme);
+
+        } catch(e) {
+
+            res.status(409).json({
+                message: "Problème lors de l'ajout dans la bdd"
+            }).end();
+        }
+    }
+    else {
+        res.status(200).json(userTheme);
+    }
+
 };

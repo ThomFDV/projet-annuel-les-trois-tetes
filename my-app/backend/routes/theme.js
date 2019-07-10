@@ -13,6 +13,9 @@ router.get("", ThemeController.getThemes);
 
 router.get("/:id", passport.authenticate("jwt", { session: false }), ThemeController.getThemeById);
 
+router.get("/:id/orderId", passport.authenticate("jwt", { session: false }), ThemeController.getUserTheme);
+
+
 router.post("/:id/newcourse", passport.authenticate("jwt", { session: false }), ThemeController.addCourse);
 
 router.get("/:id/countcourse", passport.authenticate("jwt", { session: false }), ThemeController.countCourse);

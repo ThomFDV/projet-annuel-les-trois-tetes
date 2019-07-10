@@ -32,6 +32,8 @@ export class CourseComponent implements OnInit {
         alert("Vous n'avez pas accès à ce cours");
         this.router.navigate([`theme/${themeId}`]);
       });
+
+
   }
 
 

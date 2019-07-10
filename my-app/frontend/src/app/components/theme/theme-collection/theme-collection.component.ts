@@ -35,10 +35,15 @@ export class ThemeCollectionComponent implements OnInit {
 
   view(themeId) {
 
+    this.themeService.getUserTheme(themeId).subscribe(() => {
+    }), () => {
+      alert('Une erreur est survenue');
+    };
     this.themeService.getThemeById(themeId).subscribe(() => {
     }), () => {
       alert('Une erreur est survenue');
     };
+
   }
 
   onSubmit() {
