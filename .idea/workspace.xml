@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a47fe678-a1e7-4cd9-adb7-3caa0b00ea6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/backend/controllers/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/backend/controllers/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/backend/routes/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/backend/routes/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/services/theme.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/services/theme.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,64 +15,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/backend/routes/theme.js">
+        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="98" lean-forward="true" selection-start-line="15" selection-start-column="98" selection-end-line="15" selection-end-column="98" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/backend/controllers/theme.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="213" column="23" lean-forward="true" selection-start-line="213" selection-start-column="23" selection-end-line="213" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/services/theme.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="53" column="14" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="95" selection-start-line="8" selection-start-column="95" selection-end-line="8" selection-end-column="95" />
+            <state relative-caret-position="238">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -85,20 +26,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="194" selection-start-line="18" selection-start-column="194" selection-end-line="18" selection-end-column="194" />
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="20" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.ts">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="408">
+              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -106,13 +44,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+            <state relative-caret-position="17">
+              <caret line="1" selection-start-line="1" selection-end-line="11" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -137,7 +82,6 @@
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/models/comment.ts" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-comment/article-comment.component.html" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-comment/article-comment.component.ts" />
-        <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html" />
         <option value="$PROJECT_DIR$/my-app/backend/models/cours.js" />
         <option value="$PROJECT_DIR$/my-app/backend/app.js" />
         <option value="$PROJECT_DIR$/my-app/backend/middleware/check-auth.js" />
@@ -147,7 +91,6 @@
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/menu/menu.component.ts" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/services/article.service.ts" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/models/course.ts" />
-        <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-creation/course-creation.component.html" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-creation/course-creation.component.ts" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.html" />
@@ -168,6 +111,9 @@
         <option value="$PROJECT_DIR$/my-app/backend/controllers/theme.js" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.ts" />
         <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts" />
+        <option value="$PROJECT_DIR$/my-app/backend/models/statistic.js" />
+        <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html" />
+        <option value="$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html" />
       </list>
     </option>
   </component>
@@ -214,6 +160,13 @@
               <item name="my-app" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="middleware" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="projet-annuel-les-trois-tetes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="projet-annuel-les-trois-tetes" type="462c0819:PsiDirectoryNode" />
+              <item name="my-app" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="projet-annuel-les-trois-tetes" type="b2602c69:ProjectViewProjectNode" />
@@ -313,16 +266,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="statistic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="projet-annuel-les-trois-tetes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="projet-annuel-les-trois-tetes" type="462c0819:PsiDirectoryNode" />
-              <item name="my-app" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="theme" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -387,7 +330,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562753855480" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562763701750" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../2e Semestre/Tests Unitaires/projet/Test-unitaire-api" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -445,12 +388,12 @@
       <workItem from="1561367796268" duration="31650000" />
       <workItem from="1562249763901" duration="30000" />
       <workItem from="1562250093177" duration="12268000" />
-      <workItem from="1562324083021" duration="49645000" />
+      <workItem from="1562324083021" duration="51393000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98842000" />
+    <option name="totallyTimeSpent" value="100590000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -524,15 +467,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/models/article.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.scss" />
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme.component.ts" />
     <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme.component.html" />
     <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/services/token-storage.service.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -589,12 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/statistic/statistic-home/statistic-home.component.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/statistic/statistic-home/statistic-home.component.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/default/default.component.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -642,13 +570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="58" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/backend/routes/article.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -670,33 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="58" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -735,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/backend/controllers/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="178" column="8" lean-forward="true" selection-start-line="178" selection-start-column="8" selection-end-line="178" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/backend/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -753,20 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="54" column="25" lean-forward="true" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/backend/models/theme.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/backend/models/userTheme.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -814,13 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-creation/course-creation.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
@@ -828,13 +694,6 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="194" selection-start-line="18" selection-start-column="194" selection-end-line="18" selection-end-column="194" />
         </state>
       </provider>
     </entry>
@@ -855,6 +714,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/controllers/theme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="213" column="23" selection-start-line="213" selection-start-column="23" selection-end-line="213" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/theme-collection/theme-collection.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -865,20 +741,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/backend/controllers/theme.js">
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/statistic/statistic-home/statistic-home.component.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/models/statistics">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/app-routing.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="213" column="23" lean-forward="true" selection-start-line="213" selection-start-column="23" selection-end-line="213" selection-end-column="23" />
+        <state relative-caret-position="230">
+          <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.ts">
+    <entry file="file://$PROJECT_DIR$/my-app/backend/models/theme.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        <state relative-caret-position="102">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/models/statistic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/models/userTheme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/statistic/statistic-home/statistic-home.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/controllers/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/backend/models/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article-collection/article-collection.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course-collection/course-collection.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/theme/course/course.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="11" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/frontend/src/app/components/article/article.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
         </state>
       </provider>
     </entry>
