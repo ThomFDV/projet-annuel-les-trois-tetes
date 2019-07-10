@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpClientModule} from '@angular/common/http';
 import {TokenStorageService} from './token-storage.service';
+import {Theme} from "../models/theme";
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
@@ -40,4 +41,10 @@ export class UserService {
         delete (<any>window).user;
         alert('Deconnected! See you soon!');
     }
+
+  getStatistics() : Observable <any> {
+      return this.http.get(`${this.url}/statistics`, {
+          headers: this.token.getHeaderToken()
+      });
+  }
 }

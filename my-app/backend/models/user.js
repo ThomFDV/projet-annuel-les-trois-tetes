@@ -1,6 +1,31 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
+const statisticSchema = mongoose.Schema({
+  gamesPlayed: {
+    type: Number,
+    required: true,
+    defaultValue: 0
+  },
+  gamesWon: {
+    type: Number,
+    required: true,
+    defaultValue: 0
+  },
+  gamesLost: {
+    type: Number,
+    required: true,
+    defaultValue: 0
+  },
+  coursesRead: {
+    type: Number,
+    required: true,
+    defaultValue: 0
+  }
+}, {
+  timestamps: true
+});
+
 const userSchema = mongoose.Schema({
   firstname: {
     type: String,
@@ -20,7 +45,8 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  statistics: statisticSchema
 }, {
   timestamps: true
 });

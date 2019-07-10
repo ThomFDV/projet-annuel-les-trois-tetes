@@ -29,7 +29,6 @@ export class CourseCollectionComponent implements OnInit {
 
       }, (err) => {
 
-        window.location.reload();
       });
 
 
