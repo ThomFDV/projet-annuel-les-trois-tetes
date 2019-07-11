@@ -20,9 +20,6 @@ export class StatisticHomeComponent implements OnInit {
 
         this.user = user;
 
-      }, (err) => {
-
-        alert("fail")
       });
   }
 

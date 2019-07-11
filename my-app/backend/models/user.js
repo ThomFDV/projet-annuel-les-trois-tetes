@@ -46,6 +46,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    required: true,
+    enum: ["user", "teacher", "admin"]
+  },
   statistics: statisticSchema
 }, {
   timestamps: true

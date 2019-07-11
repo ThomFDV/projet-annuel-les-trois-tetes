@@ -11,6 +11,7 @@ exports.createUser = (req, res, next) => {
       lastname: req.body.lastname,
       email: req.body.email,
       password: hash,
+      type: "user",
       statistics: {
         gamesPlayed: 0,
         gamesWon: 0,

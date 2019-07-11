@@ -24,11 +24,6 @@ const articleSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    required: true,
-    enum: ["article", "cours"]
-  },
   comments: [commentSchema],
   creator: {
     type: String,

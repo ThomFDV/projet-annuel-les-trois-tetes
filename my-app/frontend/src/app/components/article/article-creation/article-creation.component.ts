@@ -23,8 +23,7 @@ export class ArticleCreationComponent implements OnInit {
   ngOnInit() {
     this.newArticleForm = this.formBuilder.group({
       title: ['', [Validators.required]],
-      content: ['', [Validators.required]],
-      type: ['', [Validators.required]]
+      content: ['', [Validators.required]]
     });
   }
 

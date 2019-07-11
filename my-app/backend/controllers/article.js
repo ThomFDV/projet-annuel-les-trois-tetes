@@ -3,18 +3,19 @@
 const Article = require("../models/article");
 const User = require("../models/user");
 
+/*
+    Création d'un article
+ */
 exports.create = async (req, res, next) => {
 
   const title = req.body.title;
   const content = req.body.content;
-  const type = req.body.type;
   const creator = req.user.email;
 
   try {
     const article = new Article({
       title,
       content,
-      type,
       creator
     });
     await article.save();
@@ -26,11 +27,17 @@ exports.create = async (req, res, next) => {
   }
 };
 
+/*
+    Récuperation des articles
+ */
 exports.getArticle = async (req, res) => {
-  const articles = await Article.find({ type: "article"}).sort({updatedAt: "desc"});
+  const articles = await Article.find({}).sort({updatedAt: "desc"});
   res.json(articles);
 };
 
+/*
+    Récuperation d'un article en fonction de son id passé en parametre
+ */
 exports.getArticleById = async (req, res) => {
 
   const article = await Article.findById(req.params.id, (err, doc) => {
