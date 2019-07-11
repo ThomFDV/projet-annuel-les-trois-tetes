@@ -5,6 +5,10 @@ const Theme = require("../models/theme");
 const User = require("../models/user");
 const UserTheme = require("../models/userTheme");
 
+
+/*
+    Création d'un theme sans cours
+ */
 exports.create = async (req, res, next) => {
 
     const title = req.body.title;
@@ -23,6 +27,9 @@ exports.create = async (req, res, next) => {
     }
 };
 
+/*
+    Récuperation de tous les themes
+ */
 exports.getThemes = async (req, res) => {
     await Theme.find({}, function (err, themes){
         res.json(themes);
@@ -30,31 +37,12 @@ exports.getThemes = async (req, res) => {
 
 };
 
+/*
+    Récuperation d'un theme en fonction de son id passé en parametre
+ */
 exports.getThemeById = async (req, res) => {
 
-    const userId = req.user._id;
     const themeId = req.params.id;
-
-    let userTheme = await UserTheme.aggregate([
-        {$match: {"themeId":mongoose.Types.ObjectId(themeId), "userId":mongoose.Types.ObjectId(userId)}}
-    ]);
-
-    if(userTheme[0] === undefined) { // si le user n'a ouvert encore aucun cours du theme
-
-        try {
-            const userTheme = await new UserTheme({
-                userId,
-                themeId,
-                orderId: 1,
-            });
-            await userTheme.save();
-
-        } catch(e) {
-            res.status(409).json({
-                message: "Problème lors de l'ajout dans la bdd"
-            }).end();
-        }
-    }
 
     const theme = await Theme.findById(themeId, (err, doc) => {
         if (err) return err;
@@ -64,6 +52,10 @@ exports.getThemeById = async (req, res) => {
 
 };
 
+/*
+    Ajout d'un cours dans un theme en fonction de l'id du theme
+    et incrementation de l'orderId en fonction du total des cours du theme
+ */
 exports.addCourse = async (req, res) => {
     let order = await this.countCourse(req, res);
     order = order[0].numberCourses + 1;
@@ -96,6 +88,9 @@ exports.addCourse = async (req, res) => {
     });
 };
 
+/*
+    Récuperation du nombre de cours total d'un theme en fonction de l'id du theme
+ */
 exports.countCourse = async (req, res) => {
     const themeId = req.params.id;
 
@@ -126,6 +121,10 @@ exports.countCourse = async (req, res) => {
     }
 };
 
+/*
+    Récupération d'un theme en fonction de son id
+    et d'un seul cours de ce theme en fonction de son id
+ */
 exports.getCourse = async (req, res) => {
 
     const themeId = req.params.themeId;
@@ -146,6 +145,15 @@ exports.getCourse = async (req, res) => {
     }
 };
 
+/*
+    Récupere le cours en fonction du themeId et courseId
+    Vérifie que l'orderId du cours pour ce theme est inferieur ou egal à l'orderId du user
+    S'il est inferieur: renvoie le cours
+    S'il est egal:  incremente l'orderId de 1,
+                    met a jour les statisiques du user (nombre de cours lu incrementés de 1)
+                    et renvoie le cours
+    S'il est superieur: renvoie une interdiction
+ */
 exports.checkUserTheme = async (req, res) => {
 
     const userId = req.user._id;
@@ -173,13 +181,19 @@ exports.checkUserTheme = async (req, res) => {
 
         try {
 
-            const userTheme = await UserTheme.findOneAndUpdate(
+            const userTheme = await UserTheme.updateOne(
 
                 { userId: userId, themeId: themeId },
                 { $inc:
-                     {
-                         orderId: 1
-                     }
+                    {orderId: 1}
+                }
+            );
+
+            const user = await User.updateOne(
+
+                { _id: userId},
+                { $inc:
+                    {"statistics.coursesRead": 1}
                 }
             );
 
@@ -197,4 +211,43 @@ exports.checkUserTheme = async (req, res) => {
             message: "Vous n'avez pas accès à ce cours"
         }).end();
     }
+};
+
+/*
+    Verifie si le user a deja lu un cours du theme en fonction du themeId et userId
+    Si ce n'est pas le cas il initialise le userTheme avec un orderId de 1 (pour l'accès au premier cours du theme) et renvoie le userTheme
+    Sinon il renvoie simplement le userTheme
+
+ */
+exports.getUserTheme = async (req, res) => {
+    const userId = req.user._id;
+    const themeId = req.params.id;
+
+    let userTheme = await UserTheme.aggregate([
+        {$match: {"themeId":mongoose.Types.ObjectId(themeId), "userId":mongoose.Types.ObjectId(userId)}}
+    ]);
+
+    if(userTheme[0] === undefined) { // si le user n'a ouvert encore aucun cours du theme
+
+        try {
+            const userTheme = await new UserTheme({
+                userId,
+                themeId,
+                orderId: 1,
+            });
+            await userTheme.save();
+
+            res.status(201).json(userTheme);
+
+        } catch(e) {
+
+            res.status(409).json({
+                message: "Problème lors de l'ajout dans la bdd"
+            }).end();
+        }
+    }
+    else {
+        res.status(200).json(userTheme);
+    }
+
 };

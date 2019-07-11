@@ -16,8 +16,7 @@ export class ArticleService {
   createArticle(article: Article): Observable <any> {
     return this.http.post(this.url + '/create', {
       'title': `${article.title}`,
-      'content': `${article.content}`,
-      'type': `${article.type}`
+      'content': `${article.content}`
     }, {
       headers: this.tokenStorage.getHeaderToken()
     });

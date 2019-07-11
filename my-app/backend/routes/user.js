@@ -12,4 +12,6 @@ router.post('/login', passport.authenticate('local', { session: false }), UserCo
 
 router.get('/profile', passport.authenticate('jwt', { session: false }), UserController.profile);
 
+router.get('/statistics', passport.authenticate('jwt', { session: false }), UserController.getStatistics);
+
 module.exports = router;

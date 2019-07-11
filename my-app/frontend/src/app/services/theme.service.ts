@@ -50,4 +50,10 @@ export class ThemeService {
       headers: this.tokenStorage.getHeaderToken()
     });
   }
+
+  getUserTheme(themeId) : Observable <any> {
+    return this.http.get<any>(`${this.url}/${themeId}/orderId`, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
+  }
 }

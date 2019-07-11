@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class CourseCollectionComponent implements OnInit {
 
   theme: Theme;
+  userTheme;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -20,8 +21,17 @@ export class CourseCollectionComponent implements OnInit {
 
   ngOnInit() {
     let id: string;
-
     this.route.params.subscribe( params => id = params.id);
+
+    this.themeService.getUserTheme(id)
+      .subscribe(userTheme => {
+        this.userTheme = userTheme[0];
+
+      }, (err) => {
+
+      });
+
+
     this.themeService.getThemeById(id)
       .subscribe(theme => {
         console.log(theme.id);
@@ -29,6 +39,8 @@ export class CourseCollectionComponent implements OnInit {
       }, (err) => {
         console.error(err);
       });
+
+
 
   }
   view(themeId, courseId) {

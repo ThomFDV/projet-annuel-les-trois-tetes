@@ -5,7 +5,9 @@
     <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
   </ul>
   <div class="d-inline-flex bg-light rounded mb-4 w-100">
-    <p class="text-left">{{article.content}}</p>
+    <p class="p-4 m-0">
+      {{article.content}}
+    </p>
   </div>
 
   <div class="col-12">
@@ -18,7 +20,7 @@
           <li>{{comment.createdAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
         </ul>
       </div>
-      <p class="p-4 m-0">
+      <p class="p-4 w-75 m-0">
         {{comment.content}}
       </p>
     </div>

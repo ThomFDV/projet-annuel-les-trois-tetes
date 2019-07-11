@@ -10,7 +10,14 @@ exports.createUser = (req, res, next) => {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: hash
+      password: hash,
+      type: "user",
+      statistics: {
+        gamesPlayed: 0,
+        gamesWon: 0,
+        gamesLost: 0,
+        coursesRead: 0
+      }
     });
     user
         .save()
@@ -42,3 +49,12 @@ function generateToken(user) {
   const payload = JSON.stringify(user);
   return jwt.sign(payload, "JWSecret-PA-poker-is-incredible");
 }
+
+exports.getStatistics = async (req, res) => {
+  const userId = req.user._id;
+
+  const user = await User.findById(userId, (err, doc) => {
+    if (err) return err;
+  });
+  res.json(user);
+};
