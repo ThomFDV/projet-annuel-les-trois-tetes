@@ -56,4 +56,10 @@ export class ThemeService {
       headers: this.tokenStorage.getHeaderToken()
     });
   }
+
+  removeTheme(themeId) {
+    return this.http.delete(`${this.url}/${themeId}`, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
+  }
 }

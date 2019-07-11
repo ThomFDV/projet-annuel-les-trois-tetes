@@ -1,4 +1,4 @@
-<section class="container-fluid">
+<section class="container-fluid" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <form action="" class="d-flex justify-content-around bg-light rounded col-lg-6 m-auto px-5 py-2">
     <div class="d-flex">
       <label class="my-auto mr-2" for="gameMode">Mode de jeux :</label>
@@ -19,10 +19,10 @@
     </div>
   </form>
 </section>
-<div class="text-center my-3">
+<div class="text-center my-3" *ngIf="user.type == 'teacher' || user.type == 'admin'">
   <button mat-raised-button color="accent" routerLink="/games/nouveau/">Créer une partie</button>
 </div>
-<section class="container-fluid mt-5">
+<section class="container-fluid mt-5" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <div class="d-flex justify-content-around bg-light rounded col-10 mx-auto my-2 py-2" *ngFor="let game of games">
     <h5 class="m-auto">{{game.title}}</h5>
     <i class="m-auto">{{game.updatedAt | date: "dd/MM, à HH'h'mm" }}</i>

@@ -25,4 +25,6 @@ router.get("/:id/countcourse", passport.authenticate("jwt", { session: false }),
 
 router.get("/:themeId/course/:courseId", passport.authenticate("jwt", { session: false }), ThemeController.checkUserTheme);
 
+router.delete("/:id", passport.authenticate("jwt", { session: false }), isAdmin, ThemeController.removeTheme);
+
 module.exports = router;

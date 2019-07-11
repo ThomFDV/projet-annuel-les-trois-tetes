@@ -74,5 +74,14 @@ export class ThemeCollectionComponent implements OnInit {
           alert('Vous n\'avez pas l\'autorisation, échec de la création');
         });
   }
+
+  remove(themeId) {
+    this.themeService.removeTheme(themeId).subscribe(() => {
+      alert("Le theme a bien ete supprime");
+      this.router.navigate([`theme/collection`]);
+    }), () => {
+      alert('Une erreur est survenue');
+    };
+  }
 }
 

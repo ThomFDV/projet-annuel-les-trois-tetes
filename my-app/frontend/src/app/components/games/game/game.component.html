@@ -1,4 +1,4 @@
-<div class="w-100">
+<div class="w-100" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <div class="d-inline-flex justify-content-around w-100">
     <div>
       <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">

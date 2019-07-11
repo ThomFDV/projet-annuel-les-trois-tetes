@@ -48,5 +48,14 @@ export class ArticleCollectionComponent implements OnInit {
       alert('Une erreur est survenue');
     };
   }
+
+  remove(articleId) {
+    this.articleService.removeArticle(articleId).subscribe(() => {
+      alert("L'article a bien ete supprime");
+      this.router.navigate([`articles/collection`]);
+    }), () => {
+      alert('Une erreur est survenue');
+    };
+  }
 }
 

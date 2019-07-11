@@ -64,3 +64,16 @@ exports.addComment = async (req, res) => {
     return res.json(comment).status(201).end();
   });
 };
+
+
+exports.removeArticle = async (req, res) => {
+
+  const articleId = req.params.id;
+
+  const article = await Article.findById(articleId, (err, doc) => {
+    if (err) return err;
+    doc.remove();
+    return res.json({"message": `L'article ${articleId} a bien ete supprime`}).status(200).end();
+  });
+
+};

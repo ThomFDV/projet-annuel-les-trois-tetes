@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" *ngIf="user.type == 'teacher' || user.type == 'admin'">
   <div class="m-auto bg-light rounded my-5 col-8">
     <h2 class="text-center py-3">Créer une partie</h2>
     <form action="" class="d-flex flex-column py-3 col-8 m-auto" [formGroup]="newGameForm" (ngSubmit)="onSubmit()">

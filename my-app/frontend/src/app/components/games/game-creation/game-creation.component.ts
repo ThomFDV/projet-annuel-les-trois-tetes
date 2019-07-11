@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GameService} from '../../../services/game.service';
 import {Router} from '@angular/router';
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-game-creation',
@@ -12,20 +14,32 @@ export class GameCreationComponent implements OnInit {
 
   newGameForm: FormGroup;
   submitted = false;
+  user: User;
 
   constructor(private formBuilder: FormBuilder,
               private gameService: GameService,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) {
+  }
 
   ngOnInit() {
-    this.newGameForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      mode: ['', [Validators.required]],
-      buyIn: ['', [Validators.required]],
-      maxPlayer: ['', [Validators.required]],
-      cashPrice: ['', [Validators.required]],
-      initialStack: ['', [Validators.required]],
-    });
+
+    this.userService.getUser().subscribe(user => {
+        this.user = user;
+
+        this.newGameForm = this.formBuilder.group({
+          title: ['', [Validators.required]],
+          mode: ['', [Validators.required]],
+          buyIn: ['', [Validators.required]],
+          maxPlayer: ['', [Validators.required]],
+          cashPrice: ['', [Validators.required]],
+          initialStack: ['', [Validators.required]],
+        });
+      },
+      error => {
+        alert('Vous devez vous connecter');
+        this.router.navigate([`login`]);
+      });
   }
 
   onSubmit() {
@@ -34,14 +48,15 @@ export class GameCreationComponent implements OnInit {
       return;
     }
     this.gameService.createGame(this.newGameForm.value)
-        .subscribe(
-            () => {
-              alert('La partie à bien été créé!');
-              this.router.navigate(['games/home']);
-              this.submitted = true;
-            },
-            error => {
-              alert('Vous n\'êtes pas connecté, échec de la création');
-            });
+      .subscribe(
+        () => {
+          alert('La partie à bien été créé!');
+          this.router.navigate(['games/home']);
+          this.submitted = true;
+        },
+        error => {
+          alert('Vous n\'êtes pas connecté, échec de la création');
+        });
+
   }
 }

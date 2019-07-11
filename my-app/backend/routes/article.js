@@ -19,4 +19,6 @@ router.get("/:id", passport.authenticate("jwt", { session: false }), ArticleCont
 
 router.post("/:id", passport.authenticate("jwt", { session: false }), ArticleController.addComment);
 
+router.delete("/:id", passport.authenticate("jwt", { session: false }), isAdmin, ArticleController.removeArticle);
+
 module.exports = router;

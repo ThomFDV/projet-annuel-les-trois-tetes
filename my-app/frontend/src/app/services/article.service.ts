@@ -43,4 +43,10 @@ export class ArticleService {
       headers: this.tokenStorage.getHeaderToken()
     });
   }
+
+  removeArticle(articleId) {
+    return this.http.delete(`${this.url}/${articleId}`, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
+  }
 }

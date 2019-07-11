@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <h1 class="text-center mb-5">{{game.title}}</h1>
   <app-game></app-game>
   <mat-card class="col-6 bg-light ml-auto mr-0 my-4">
