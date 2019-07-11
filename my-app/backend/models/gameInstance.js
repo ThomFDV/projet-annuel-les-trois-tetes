@@ -87,6 +87,8 @@ class GameInstance {
   startGame() {
     this.deck = new Deck();
     this.deck.shuffleDeck();
+    this.board = [];
+    this.currentTurn = turns.PREFLOP;
     this.distributeHands();
     this.updateDealer();
     this.updateSbPlayer();
@@ -98,6 +100,7 @@ class GameInstance {
     for (let player of this.players) {
       player.hand = [this.deck.draw(), this.deck.draw()];
       player.status = Player.allStatus.INGAME;
+      player.personnalPot = 0;
     }
   }
 
@@ -123,6 +126,15 @@ class GameInstance {
 
   bet(value) {
     let code = 0;
+    if (value === this.activePlayer.stack) {
+      this.lastBet = this.activePlayer.lastBet + value;
+      this.activePlayer.personnalPot += value;
+      this.activePlayer.lastBet = value;
+      this.activePlayer.stack -= value;
+      this.activePlayer.status = Player.allStatus.ALLIN;
+      this.pot += value;
+      return code;
+    }
     if (value + this.activePlayer.lastBet === 0 && this.lastBet === 0) {
       //Check
       this.activePlayer.status = Player.allStatus.CHECK;
@@ -152,9 +164,6 @@ class GameInstance {
       this.pot += value;
       console.log(`\nRaise de ${this.activePlayer.email} ! Mise de ${value}, avec un pot perso de ` +
                   `${this.activePlayer.personnalPot}\n`);
-    }
-    if (this.activePlayer.stack === 0) {
-      this.activePlayer.status = Player.allStatus.ALLIN;
     }
     return code;
   }
@@ -203,7 +212,8 @@ class GameInstance {
         allPlayed = false;
       } else if (player.status === Player.allStatus.BET) {
         for (let p of this.players) {
-          if (p.personnalPot !== player.personnalPot) allPlayed = false;
+          if ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
+              && p.personnalPot !== player.personnalPot) allPlayed = false;
         }
       }
     }
