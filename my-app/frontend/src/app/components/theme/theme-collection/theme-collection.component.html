@@ -1,5 +1,5 @@
 <section class="container" xmlns="http://www.w3.org/1999/html">
-  <div class="col-12">
+  <div class="col-12" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
     <h3 class="mb-4">Veuillez choisir un thème</h3>
     <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let theme of themes">
       <div class="d-flex flex-column align-items-center border-right w-75 p-2">
@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div *ngIf="user.type == 'admin' || user.type == 'Teacher'">
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>

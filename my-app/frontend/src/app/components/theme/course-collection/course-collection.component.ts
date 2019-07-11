@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Theme} from '../../../models/theme';
 import {ThemeService} from '../../../services/theme.service';
 import {Course} from "../../../models/course";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-course-collection',
@@ -13,36 +15,44 @@ export class CourseCollectionComponent implements OnInit {
 
   theme: Theme;
   userTheme;
+  user: User;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    let id: string;
-    this.route.params.subscribe( params => id = params.id);
 
-    this.themeService.getUserTheme(id)
-      .subscribe(userTheme => {
-        this.userTheme = userTheme[0];
+    this.userService.getUser().subscribe(user => {
+        this.user = user;
 
-      }, (err) => {
+        let id: string;
+        this.route.params.subscribe(params => id = params.id);
 
+        this.themeService.getUserTheme(id)
+          .subscribe(userTheme => {
+            this.userTheme = userTheme[0];
+
+          }, (err) => {
+
+          });
+
+        this.themeService.getThemeById(id)
+          .subscribe(theme => {
+            console.log(theme.id);
+            this.theme = theme;
+          }, (err) => {
+            console.error(err);
+          });
+      },
+      error => {
+        alert('Vous devez vous connecter');
+        this.router.navigate([`login`]);
       });
-
-
-    this.themeService.getThemeById(id)
-      .subscribe(theme => {
-        console.log(theme.id);
-        this.theme = theme;
-      }, (err) => {
-        console.error(err);
-      });
-
-
-
   }
+
   view(themeId, courseId) {
 
     this.themeService.getCourse(themeId, courseId).subscribe(() => {

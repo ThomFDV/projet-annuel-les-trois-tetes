@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" *ngIf="user.type == 'teacher' || user.type == 'admin'">
   <h2 class="text-center">Créer un cours pour le thème "{{theme.title}}"</h2>
   <form action="" class="d-flex flex-column" [formGroup]="newCourseForm" (ngSubmit)="onSubmit()">
     <input type="text" placeholder="Titre du cours" class="border mb-4 mt-5 py-3 px-2" formControlName="title">

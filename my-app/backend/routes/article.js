@@ -5,6 +5,10 @@ const ArticleController = require("../controllers/article");
 
 const checkAuth = require("../middleware/check-auth");
 
+const isAdmin = require('../middleware/isAdmin');
+
+const isTeacher = require('../middleware/isTeacher');
+
 const router = express.Router();
 
 router.post("/create", passport.authenticate("jwt", { session: false }), ArticleController.create);

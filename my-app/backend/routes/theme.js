@@ -5,18 +5,21 @@ const ThemeController = require('../controllers/theme');
 
 const checkAuth = require("../middleware/check-auth");
 
+const isAdmin = require('../middleware/isAdmin');
+
+const isTeacher = require('../middleware/isTeacher');
+
 const router = express.Router();
 
-router.post("/create", passport.authenticate("jwt", { session: false }), ThemeController.create);
+router.post("/create", passport.authenticate("jwt", { session: false }), isTeacher, ThemeController.create);
 
-router.get("", ThemeController.getThemes);
+router.get("", passport.authenticate("jwt", { session: false }), ThemeController.getThemes);
 
 router.get("/:id", passport.authenticate("jwt", { session: false }), ThemeController.getThemeById);
 
 router.get("/:id/orderId", passport.authenticate("jwt", { session: false }), ThemeController.getUserTheme);
 
-
-router.post("/:id/newcourse", passport.authenticate("jwt", { session: false }), ThemeController.addCourse);
+router.post("/:id/newcourse", passport.authenticate("jwt", { session: false }), isTeacher, ThemeController.addCourse);
 
 router.get("/:id/countcourse", passport.authenticate("jwt", { session: false }), ThemeController.countCourse);
 

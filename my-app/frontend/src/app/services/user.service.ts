@@ -42,8 +42,8 @@ export class UserService {
         alert('Deconnected! See you soon!');
     }
 
-  getStatistics() : Observable <any> {
-      return this.http.get(`${this.url}/statistics`, {
+  getUser() : Observable <User> {
+      return this.http.get<User>(`${this.url}/statistics`, {
           headers: this.token.getHeaderToken()
       });
   }

@@ -10,16 +10,20 @@ import {User} from "../../../models/user";
 })
 export class StatisticHomeComponent implements OnInit {
 
-  user;
+  user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
 
-    this.userService.getStatistics().subscribe(user => {
-
-        this.user = user;
-
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      },
+      error => {
+        alert('Vous devez vous connecter');
+        this.router.navigate([`login`]);
       });
   }
 
