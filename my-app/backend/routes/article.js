@@ -11,11 +11,11 @@ const isTeacher = require('../middleware/isTeacher');
 
 const router = express.Router();
 
-router.post("/create", passport.authenticate("jwt", { session: false }), ArticleController.create);
+router.post("/create", passport.authenticate("jwt", { session: false }), isTeacher, ArticleController.create);
 
-router.get("", ArticleController.getArticle);
+router.get("", passport.authenticate("jwt", { session: false }), ArticleController.getArticle);
 
-router.get("/:id", ArticleController.getArticleById);
+router.get("/:id", passport.authenticate("jwt", { session: false }), ArticleController.getArticleById);
 
 router.post("/:id", passport.authenticate("jwt", { session: false }), ArticleController.addComment);
 

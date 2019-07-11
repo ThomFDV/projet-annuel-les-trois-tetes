@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './components/default/default.component';
-import { ArticleComponent } from './components/article/article.component';
+import { ArticleComponent } from './components/article/article/article.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticleCollectionComponent } from './components/article/article-collection/article-collection.component';
 import { ArticleCreationComponent } from './components/article/article-creation/article-creation.component';

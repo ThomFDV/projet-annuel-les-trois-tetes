@@ -23,11 +23,15 @@ export class ArticleService {
   }
 
   getArticle() {
-    return this.http.get(this.url);
+    return this.http.get(this.url, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
   }
 
   getArticleById(articleId): Observable <Article> {
-    return this.http.get<Article>(`${this.url}/${articleId}`);
+    return this.http.get<Article>(`${this.url}/${articleId}`, {
+      headers: this.tokenStorage.getHeaderToken()
+    });
   }
 
   addComment(comment: Comment, articleId): Observable <any> {

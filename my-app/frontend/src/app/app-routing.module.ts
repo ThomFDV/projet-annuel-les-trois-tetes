@@ -16,7 +16,7 @@ import {PlayComponent} from './components/games/play/play.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeGameComponent} from './components/games/home-game/home-game.component';
 import {GameCreationComponent} from './components/games/game-creation/game-creation.component';
-import {ArticleComponent} from "./components/article/article.component";
+import {ArticleComponent} from "./components/article/article/article.component";
 import {ThemeCollectionComponent} from "./components/theme/theme-collection/theme-collection.component";
 import {CourseCreationComponent} from "./components/theme/course-creation/course-creation.component";
 import {CourseComponent} from "./components/theme/course/course.component";
