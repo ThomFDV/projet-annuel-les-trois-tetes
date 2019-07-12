@@ -4,10 +4,10 @@
     <li>{{article.creator}} </li>
     <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
   </ul>
-  <div class="d-inline-flex bg-light rounded mb-4 w-100">
-    <p class="p-4 m-0">
-      {{article.content}}
-    </p>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100 p-4 m-0">
+
+    <div [ngxSummernoteView]="article.content"></div>
+
   </div>
 
   <div class="col-12">
@@ -36,8 +36,10 @@
         </mat-expansion-panel-header>
         <div>
           <form action="" class="d-flex flex-column" [formGroup]="newCommentForm" (ngSubmit)="onSubmit()">
-            <input type="text" placeholder="Titre du commentaire" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
-            <textarea name="comment" id="" cols="10" rows="5" placeholder="Contenu du commentaire" class="border p-2 mb-4" formControlName="content"></textarea>
+            <input type="text" placeholder="Titre du commentaire" class="border mb-4 mt-5 py-3 px-2"
+                   formControlName="title">
+            <textarea name="comment" id="" cols="10" rows="5" placeholder="Contenu du commentaire"
+                      class="border p-2 mb-4" formControlName="content"></textarea>
 
             <div class="d-flex justify-content-around">
               <button mat-raised-button color="primary" type="submit">Valider</button>
