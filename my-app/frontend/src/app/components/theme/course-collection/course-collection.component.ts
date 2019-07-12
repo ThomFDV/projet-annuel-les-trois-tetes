@@ -42,7 +42,7 @@ export class CourseCollectionComponent implements OnInit {
         this.themeService.getThemeById(id)
           .subscribe(theme => {
             console.log(theme.id);
-            this.theme = theme;
+            this.theme = theme[0];
           }, (err) => {
             console.error(err);
           });

@@ -11,19 +11,25 @@ const UserTheme = require("../models/userTheme");
  */
 exports.create = async (req, res, next) => {
 
-    const title = req.body.title;
+    const title = req.body.title.trim();
+    if (title.length > 2) {
+        try {
+            const theme = await new Theme({
+                title
+            });
+            await theme.save();
+            res.status(201).json({message: "Theme créé !"}).end();
 
-    try {
-        const theme = await new Theme({
-            title
+        } catch (e) {
+            res.status(409).json({
+                message: "Problème lors de l'ajout dans la bdd"
+            }).end();
+        }
+    } else {
+        res.status(400).json({
+            code: "error_validation",
+            message: "Le titre du theme doit faire au moins 2 caractères"
         });
-        await theme.save();
-        res.status(201).json({"message": "Theme créé !"}).end();
-
-    } catch (e) {
-        res.status(409).json({
-            message: "Problème lors de l'ajout dans la bdd"
-        }).end();
     }
 };
 
@@ -31,13 +37,11 @@ exports.create = async (req, res, next) => {
     Récuperation de tous les themes
  */
 exports.getThemes = async (req, res) => {
-    await Theme.find({}, function (err, themes) {
-        if (err) return res.status(409).json({
-            message: "Problème dans la bdd"
-        }).end();
-        res.json(themes);
-    })
 
+    let themes = await Theme.aggregate([
+        {$project: {"courses.content": 0}}
+    ]);
+    res.json(themes);
 };
 
 /*
@@ -47,14 +51,14 @@ exports.getThemeById = async (req, res) => {
 
     const themeId = req.params.id;
 
-    const theme = await Theme.findById(themeId, (err, doc) => {
-        if (err) return res.status(409).json({
-            message: "Problème dans la bdd"
-        }).end();
-    });
+    const theme = await Theme.aggregate([
+        {$match: {"_id": mongoose.Types.ObjectId(themeId)}},
+        {$project: {"courses.content": 0}}
+
+    ]);
     res.json(theme);
 
-
+    //{$project : {"courses.content": 0}}
 };
 
 /*
@@ -70,21 +74,34 @@ exports.addCourse = async (req, res) => {
             message: "Problème dans la bdd"
         }).end();
 
-        const title = req.body.title;
-        const content = req.body.content;
+        const title = req.body.title.trim();
+        const content = req.body.content.trim();
         const orderId = order;
         const creator = req.user.email;
 
-        const course = {
-            title,
-            orderId,
-            content,
-            creator
-        };
-        doc.courses.push(course);
-        doc.save();
-        return res.json(course).status(201).end();
-
+        if (title.length > 2) {
+            if (content.length > 2) {
+                const course = {
+                    title,
+                    orderId,
+                    content,
+                    creator
+                };
+                doc.courses.push(course);
+                doc.save();
+                return res.json(course).status(201).end();
+            } else {
+                res.status(400).json({
+                    code: "error_validation",
+                    message: "Le contenu du cours doit faire au moins 2 caractères"
+                });
+            }
+        } else {
+            res.status(400).json({
+                code: "error_validation",
+                message: "Le titre du cours doit faire au moins 2 caractères"
+            });
+        }
     });
 };
 

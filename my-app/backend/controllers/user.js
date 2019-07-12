@@ -37,8 +37,10 @@ exports.createUser = (req, res, next) => {
 
 exports.login = (req, res) => {
   let user = req.user;
+
   let token = generateToken(user);
   res.json({ user, token });
+
 };
 
 exports.profile = (req, res) => {

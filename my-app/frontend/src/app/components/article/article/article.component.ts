@@ -69,7 +69,7 @@ export class ArticleComponent implements OnInit {
           window.location.reload();
         },
         error => {
-          alert('Vous n\'êtes pas connecté, échec de la création');
+          alert(`${error.error.message}`);
         });
   }
 

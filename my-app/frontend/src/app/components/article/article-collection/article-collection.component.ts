@@ -31,7 +31,7 @@ export class ArticleCollectionComponent implements OnInit {
         this.articleService.getArticle().subscribe((res: Article[]) => {
           this.articles = res;
         }), err => {
-          alert('Une erreur est survenue' + err);
+          alert('Une erreur est survenue');
         };
 
       },
