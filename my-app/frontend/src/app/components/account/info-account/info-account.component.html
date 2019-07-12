@@ -1,5 +1,5 @@
 <app-status-bar></app-status-bar>
-<section class="container-fluid bg-light col-lg-8 d-flex flex-column mt-5">
+<section class="container-fluid bg-light col-lg-8 d-flex flex-column mt-5" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <div class="d-flex flex-wrap text-center">
     <h1 class="col-12 my-4">Mes informations personnelles</h1>
     <img src="{{ profilePicturePath }}" alt="" width="150" height="150" class="my-auto ml-auto mr-3">

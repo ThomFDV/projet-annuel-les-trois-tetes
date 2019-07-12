@@ -179,3 +179,15 @@ exports.leave = async (req, res) => {
   // });
   // res.sendStatus(200).end();
 };
+
+exports.removeGame = async (req, res) => {
+
+  const gameId = req.params.id;
+
+  const game = await Game.findById(gameId, (err, doc) => {
+    if (err) return err;
+    doc.remove();
+    return res.json({"message": `Le game ${gameId} a bien ete supprime`}).status(200).end();
+  });
+
+};

@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
       id: 3,
       name: 'Jouer en ligne',
       url: 'games/home'
-    },
+    }/*,
     {
       id: 4,
       name: 'Mise en situation',
@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
       id: 5,
       name: 'Contact',
       url: 'contact'
-    }
+    }*/
   ];
 
   constructor() { }

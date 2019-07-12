@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/user.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-info-account',
@@ -15,13 +16,15 @@ export class InfoAccountComponent implements OnInit {
   hide3 = true;
   oldPassword: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.user = this.userService.profile().subscribe(user => {
       this.user = user.user;
     }, (err) => {
-      console.error(err);
+      alert('Vous devez vous connecter');
+      this.router.navigate([`login`]);
     });
   }
 }

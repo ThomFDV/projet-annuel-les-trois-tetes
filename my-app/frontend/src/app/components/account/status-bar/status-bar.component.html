@@ -1,4 +1,4 @@
-<section class="container-fluid">
+<section class="container-fluid" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <div class="d-flex justify-content-between bg-light rounded col-lg-6 m-auto px-5 py-2">
     <div class="d-flex align-items-center">
       <svg class="c-status-icons">
