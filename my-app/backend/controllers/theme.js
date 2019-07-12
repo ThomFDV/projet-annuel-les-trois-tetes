@@ -32,6 +32,9 @@ exports.create = async (req, res, next) => {
  */
 exports.getThemes = async (req, res) => {
     await Theme.find({}, function (err, themes) {
+        if (err) return res.status(409).json({
+            message: "Problème dans la bdd"
+        }).end();
         res.json(themes);
     })
 
@@ -45,7 +48,9 @@ exports.getThemeById = async (req, res) => {
     const themeId = req.params.id;
 
     const theme = await Theme.findById(themeId, (err, doc) => {
-        if (err) return err;
+        if (err) return res.status(409).json({
+            message: "Problème dans la bdd"
+        }).end();
     });
     res.json(theme);
 
@@ -61,29 +66,24 @@ exports.addCourse = async (req, res) => {
     order = order[0].numberCourses + 1;
 
     const theme = await Theme.findById(req.params.id, (err, doc) => {
-        if (err) return err;
-        try {
+        if (doc === null || err) return res.status(409).json({
+            message: "Problème dans la bdd"
+        }).end();
 
-            const title = req.body.title;
-            const content = req.body.content;
-            const orderId = order;
-            const creator = req.user.email;
+        const title = req.body.title;
+        const content = req.body.content;
+        const orderId = order;
+        const creator = req.user.email;
 
-            const course = {
-                title,
-                orderId,
-                content,
-                creator
-            };
-            doc.courses.push(course);
-            doc.save();
-            return res.json(course).status(201).end();
-
-        } catch (err) {
-            res.status(409).json({
-                message: "Problème lors de l'ajout dans la bdd"
-            }).end();
-        }
+        const course = {
+            title,
+            orderId,
+            content,
+            creator
+        };
+        doc.courses.push(course);
+        doc.save();
+        return res.json(course).status(201).end();
 
     });
 };
@@ -142,7 +142,7 @@ exports.getCourse = async (req, res) => {
         ]);
         return res.json(course).status(200).end();
     } catch (e) {
-        res.status(409).json({
+        return res.status(409).json({
             message: "Problème dans la bdd"
         }).end();
     }
@@ -163,6 +163,7 @@ exports.checkUserTheme = async (req, res) => {
     const themeId = req.params.themeId;
     const courseId = req.params.courseId;
 
+
     const theme = await Theme.aggregate([
         {$match: {"_id": mongoose.Types.ObjectId(themeId)}},
         {$unwind: "$courses"},
@@ -171,14 +172,15 @@ exports.checkUserTheme = async (req, res) => {
 
     let orderIdTheme = theme[0].courses.orderId;
 
+
     let userTheme = await UserTheme.aggregate([
         {$match: {"themeId": mongoose.Types.ObjectId(themeId), "userId": mongoose.Types.ObjectId(userId)}}
     ]);
 
-
     if (orderIdTheme < userTheme[0].orderId) { // si l'orderId du thème est inferieur à l'orderId du user
 
         this.getCourse(req, res);
+
     } else if (orderIdTheme === userTheme[0].orderId) { // si l'orderId du theme est egal à l'orderId du user
 
         try {
@@ -202,13 +204,13 @@ exports.checkUserTheme = async (req, res) => {
             this.getCourse(req, res);
 
         } catch (e) {
-            res.status(409).json({
+            return res.status(409).json({
                 message: "Problème lors de l'ajout dans la bdd"
             }).end();
         }
     } else if (orderIdTheme > userTheme[0].orderId) { // si l'orderId du theme est supérieur à l'orderId du user
 
-        res.status(403).json({
+        return res.status(403).json({
             message: "Vous n'avez pas accès à ce cours"
         }).end();
     }
@@ -238,16 +240,16 @@ exports.getUserTheme = async (req, res) => {
             });
             await userTheme.save();
 
-            res.status(201).json(userTheme);
+            return res.status(201).json(userTheme);
 
         } catch (e) {
 
-            res.status(409).json({
+            return res.status(409).json({
                 message: "Problème lors de l'ajout dans la bdd"
             }).end();
         }
     } else {
-        res.status(200).json(userTheme);
+        return res.status(200).json(userTheme);
     }
 
 };
@@ -257,9 +259,8 @@ exports.removeTheme = async (req, res) => {
     const themeId = req.params.id;
 
     const theme = await Theme.findById(themeId, (err, doc) => {
-        if (err) return err;
+        if (doc === null || err) return res.json({"message": `Le theme ${themeId} n'a pas pu etre supprime`}).status(409).end();
         doc.remove();
         return res.json({"message": `Le theme ${themeId} a bien ete supprime`}).status(200).end();
     });
-
 };
