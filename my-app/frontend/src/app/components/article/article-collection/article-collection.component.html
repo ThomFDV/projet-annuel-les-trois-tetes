@@ -1,11 +1,11 @@
-<section class="container" xmlns="http://www.w3.org/1999/html" *ngIf="user.type == 'teacher' || user.type == 'admin'">
+<section class="container" xmlns="http://www.w3.org/1999/html" *ngIf="user && (user.type == 'teacher' || user.type == 'admin')">
   <div class="d-flex justify-content-center mb-3">
     <h5 class="mr-2">Envie de partager une idée ou autre ?</h5>
     <button mat-raised-button color="primary" routerLink="/articles/nouveau">Créer votre article !</button>
   </div>
 </section>
 <section class="container" xmlns="http://www.w3.org/1999/html"
-         *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+         *ngIf="user && (user.type == 'user' || user.type == 'teacher' || user.type == 'admin')">
   <h3 class="mb-4">Les derniers articles</h3>
   <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let article of articles">
     <div class="d-flex flex-column align-items-center border-right w-75 p-2">
@@ -16,7 +16,7 @@
       </ul>
     </div>
 
-    <div class="d-flex flex-column align-items-center border-left w-25 p-2 m-auto" *ngIf="user.type == 'admin'">
+    <div class="d-flex flex-column align-items-center border-left w-25 p-2 m-auto" *ngIf="user && (user.type == 'admin')">
       <button mat-raised-button color="warn" routerLink="/article/{{article._id}}" (click)="remove(article._id)">
         Supprimer l'article
       </button>

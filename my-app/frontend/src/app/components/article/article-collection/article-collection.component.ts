@@ -39,6 +39,12 @@ export class ArticleCollectionComponent implements OnInit {
         alert('Vous devez vous connecter');
         this.router.navigate([`login`]);
       });
+
+    this.articleService.subscribeArticle().on('article', (data) => {
+      this.articles.push(data);
+      console.log('lalalalala');
+    });
+    // this.articleService.subscribeArticle().emit('message', 'test');
   }
 
   view(articleId) {

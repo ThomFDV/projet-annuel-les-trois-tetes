@@ -4,6 +4,7 @@ import {Article} from '../models/article';
 import {Comment} from '../models/comment';
 import {TokenStorageService} from './token-storage.service';
 import {Observable} from 'rxjs';
+import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class ArticleService {
     return this.http.get(this.url, {
       headers: this.tokenStorage.getHeaderToken()
     });
+  }
+
+  subscribeArticle() {
+    return io(this.url);
   }
 
   getArticleById(articleId): Observable <Article> {

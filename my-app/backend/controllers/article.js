@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 const Article = require("../models/article");
 const User = require("../models/user");
+const Socket = require("./socket");
 
 /*
     Création d'un article
@@ -22,8 +23,11 @@ exports.create = async (req, res, next) => {
                     creator
                 });
                 await article.save();
+                Socket.io.path('/article').emit('article', article);
+
                 return res.status(201).json({message: "Article créé !"}).end();
-            } catch {
+            } catch (error) {
+                console.log(error);
                 res.status(409).json({
                     code: "error_insertion",
                     message: "Problème lors de l'ajout dans la bdd"

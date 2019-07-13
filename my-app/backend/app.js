@@ -14,6 +14,7 @@ const themeRoutes = require("./routes/theme");
 dotenv.config();
 const app = express();
 
+
 mongoose
     .connect(
         process.env.DB_CONNECT,
@@ -55,5 +56,7 @@ app.use("/article", articleRoutes);
 app.use("/game", gameRoutes);
 
 app.use("/theme", themeRoutes);
+
+
 
 module.exports = app;

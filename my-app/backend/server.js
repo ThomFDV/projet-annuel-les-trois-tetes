@@ -1,6 +1,7 @@
 const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
+const Socket = require("./controllers/socket");
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -48,6 +49,11 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
+
+const io = require('socket.io')(server);
+Socket.io = io;
+
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
+
