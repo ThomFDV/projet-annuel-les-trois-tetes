@@ -12,7 +12,6 @@ class Deck {
         this.decklist.push(aCard);
       }
     }
-    console.log(this.decklist);
   }
 
   shuffleDeck() {

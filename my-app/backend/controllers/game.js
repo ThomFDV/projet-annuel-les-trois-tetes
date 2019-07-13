@@ -114,7 +114,6 @@ exports.fold = async (req, res) => {
         return res.status(403).send("Ce n'est pas à vous de jouer").end();
     }
     game.fold();
-    game.nextActivePlayer();
     return res.status(200).json(game).end();
 };
 
