@@ -78,7 +78,7 @@ export class ThemeCollectionComponent implements OnInit {
   remove(themeId) {
     this.themeService.removeTheme(themeId).subscribe(() => {
       alert("Le theme a bien ete supprime");
-      this.router.navigate([`theme/collection`]);
+      window.location.reload();
     }), () => {
       alert('Une erreur est survenue');
     };

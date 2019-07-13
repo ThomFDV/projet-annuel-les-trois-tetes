@@ -1,4 +1,4 @@
-<section class="container" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+<section class="container" *ngIf="user && (user.type == 'user' || user.type == 'teacher' || user.type == 'admin')">
   <h2 class="text-center">{{article.title}}</h2>
   <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
     <li>{{article.creator}} </li>

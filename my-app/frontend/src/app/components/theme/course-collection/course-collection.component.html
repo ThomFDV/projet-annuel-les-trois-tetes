@@ -1,5 +1,5 @@
 <section class="container">
-  <div class="d-flex justify-content-center mb-3" *ngIf="user.type == 'teacher' || user.type == 'admin'">
+  <div class="d-flex justify-content-center mb-3" *ngIf="user && (user.type == 'teacher' || user.type == 'admin')">
     <h5 class="mr-2">Nouveau cours pour le thème "{{theme.title}}"</h5>
     <button mat-raised-button color="primary" routerLink="/theme/{{theme._id}}/newcourse">Créer votre cours !</button>
   </div>

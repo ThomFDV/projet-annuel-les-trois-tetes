@@ -41,8 +41,10 @@ export class ArticleCollectionComponent implements OnInit {
       });
 
     this.articleService.subscribeArticle().on('article', (data) => {
-      this.articles.push(data);
-      console.log('lalalalala');
+      console.log(data);
+      if (data) {
+        this.articles = [data, ...this.articles];
+      }
     });
     // this.articleService.subscribeArticle().emit('message', 'test');
   }
@@ -58,7 +60,7 @@ export class ArticleCollectionComponent implements OnInit {
   remove(articleId) {
     this.articleService.removeArticle(articleId).subscribe(() => {
       alert("L'article a bien ete supprime");
-      this.router.navigate([`articles/collection`]);
+      window.location.reload();
     }), () => {
       alert('Une erreur est survenue');
     };

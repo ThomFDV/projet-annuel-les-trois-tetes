@@ -1,4 +1,4 @@
-<section class="container" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+<section class="container" *ngIf="user && (user.type == 'user' || user.type == 'teacher' || user.type == 'admin')">
   <h3 class="text-left">Cours {{theme.courses.orderId}} du theme "{{theme.title}}"</h3>
   <h2 class="text-center">{{theme.courses.title}}</h2>
   <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">

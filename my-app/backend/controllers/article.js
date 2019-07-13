@@ -23,7 +23,7 @@ exports.create = async (req, res, next) => {
                     creator
                 });
                 await article.save();
-                Socket.io.path('/article').emit('article', article);
+                Socket.io.emit('article', article);
 
                 return res.status(201).json({message: "Article créé !"}).end();
             } catch (error) {

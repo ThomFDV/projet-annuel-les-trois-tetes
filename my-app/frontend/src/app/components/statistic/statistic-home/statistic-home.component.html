@@ -1,4 +1,4 @@
-<section class="container" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+<section class="container" *ngIf="user && (user.type == 'user' || user.type == 'teacher' || user.type == 'admin')">
   <h1 class="text-center">Statistiques</h1>
   <div class="c-statistic__container d-flex justify-content-around flex-wrap text-center mt-5 row">
     <div class="c-statistic__bulle col-3 mx-2 my-4 px-2 py-5">

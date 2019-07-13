@@ -17,7 +17,7 @@
     </div>
 
     <div class="d-flex flex-column align-items-center border-left w-25 p-2 m-auto" *ngIf="user && (user.type == 'admin')">
-      <button mat-raised-button color="warn" routerLink="/article/{{article._id}}" (click)="remove(article._id)">
+      <button mat-raised-button color="warn" (click)="remove(article._id)">
         Supprimer l'article
       </button>
     </div>
