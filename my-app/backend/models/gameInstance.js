@@ -2,6 +2,8 @@
 
 const Player = require("./playerIG");
 const Deck = require("./deck");
+const Hc = require("../controllers/hand.comparator");
+const _ = require("lodash");
 
 const turns = Object.freeze({
   PREFLOP: 'PREFLOP',
@@ -36,54 +38,6 @@ class GameInstance {
     this.deck = [];
   }
 
-  /*
-  Déroulement d'une partie :
-  - On mélange créer un nouveau paquet de carte
-  - On met tous les joueurs ayant un stack supérieur à 0 leur status INGAME
-  - On mélange le deck
-  - On le distribue à chaque joueur
-  - On détermine le dealer
-  =============== PREFLOP ===================
-  - On fait miser les blinds au SB et BB
-  - On donne la parole au joueur suivant
-  - Le joueur décide soit de se coucher, de check, de call ou de raise
-    - Si il raise :
-      - On vérifie que sont raise soit > ou = au raise précédent
-      - On vérifie que le montant n'est pas négatif
-      - On vérifie que le montant n'est pas supérieur à son stack
-      - On change son status en BET
-
-    - Si il call :
-      - Mêmes vérifications que précédemment
-
-    - Si il fold :
-      - On MAJ son status
-
-  - Il fait sont action est on passe au joueur suivant
-  - Quand tous les joueurs ont joués, on passe au turn suivant
-  =============== FLOP ======================
-  - On vérifie les joueurs encore en course
-  - On met les 3 cartes sur le board
-  - Ensuite on va MAJ l'activeplayer par celui qui est après le dealer
-  - Tant que le prochain joueur est FOLD on incremment de 1
-  - On laisse les joueurs parler
-  - Quand c'est finit on passe au turn suivant
-  =============== TURN ======================
-  - On vérifie les joueurs encore en course
-  - On met la carte sur le board
-  - Pareil que précédemment
-  =============== River =====================
-  - On vérifie les joueurs encore en course
-  - On met la carte sur le board
-  - Pareil que précédemment
-  - Quand chacun des joueurs ont parlés on affiche les cartes et on détermine qui a gagné
-  - Une fois que c'est déterminé, on distribue le pot au joueur gagnant
-  - Les joueurs ayant un stack à 0 on change le status en ELIMINATED
-  - On remet à jour le status de tous les autres joueurs à INGAME
-  - On retire le joueur de la partie
-  - On recommence
-   */
-
   startGame() {
     this.deck = new Deck();
     this.deck.shuffleDeck();
@@ -101,6 +55,7 @@ class GameInstance {
       player.hand = [this.deck.draw(), this.deck.draw()];
       player.status = Player.allStatus.INGAME;
       player.personnalPot = 0;
+      player.lastBet = 0;
     }
   }
 
@@ -170,6 +125,7 @@ class GameInstance {
 
   fold() {
     this.activePlayer.status = Player.allStatus.FOLD;
+    this.nextActivePlayer();
   }
 
   updateDealer() {
@@ -196,26 +152,30 @@ class GameInstance {
     this.bbPlayer = this.players[playerIdx + 1];
   }
 
-  kickPlayer() {
-    for (let i = 0; i < this.players.length; i++) {
-      if (this.players[i].status === Player.allStatus.ELIMINATED) {
-        delete this.players[i];
-      }
-      this.players[i].status = Player.allStatus.INGAME;
-    }
-  }
-
   checkTurn() {
     let allPlayed = true;
+    let playersOut = [];
     for (const player of this.players) {
       if (player.status === Player.allStatus.INGAME) {
         allPlayed = false;
-      } else if (player.status === Player.allStatus.BET) {
+      } else if (player.status === Player.allStatus.BET || player.status === Player.allStatus.ALLIN) {
         for (let p of this.players) {
           if ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
-              && p.personnalPot !== player.personnalPot) allPlayed = false;
+              && p.personnalPot !== player.personnalPot) {
+            allPlayed = false;
+          } else if (player.status === Player.allStatus.ALLIN &&
+              (p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)) {
+            allPlayed = false;
+          }
         }
+      } else if (player.status === Player.allStatus.FOLD) {
+        playersOut.push(player);
       }
+    }
+    if (playersOut.length >= this.players.length - 1) {
+      this.players[this.players.findIndex(x => x.status !== Player.allStatus.FOLD)].stack += this.pot;
+      this.startGame();
+      return true;
     }
     if (allPlayed) {
       switch (this.currentTurn) {
@@ -251,29 +211,73 @@ class GameInstance {
           break;
         case "RIVER":
           this.checkWinner();
-          this.currentTurn = turns.RIVER;
+          for (let player of this.players) {
+            if (player.stack === 0) {
+              player.status = Player.allStatus.ELIMINATED;
+            }
+          }
+          _.remove(this.players, p => p.status === Player.allStatus.ELIMINATED);
           this.startGame();
-          break;
+          return true;
       }
       this.lastBet = 0;
       for (let player of this.players) {
         player.lastBet = 0;
       }
+      return false;
     }
   }
 
   checkWinner() {
-    //TODO
+    let allHands = [];
+    let playersIn = [];
+    for(let player of this.players) {
+      if (player.status === Player.allStatus.FOLD || player.status === Player.allStatus.ELIMINATED) continue;
+      allHands.push(player.hand);
+      playersIn.push(player);
+    }
+    let HandComparator = new Hc(allHands, this.board);
+    let results = HandComparator.compareHands(playersIn);
+    let playerIdx;
+    if(results.length === 1) {
+      playerIdx = this.players.findIndex(x => x.email === results[0].player.email);
+      for (let p of this.players) {
+        if (this.players[playerIdx].lastBet < p.lastBet) {
+          p.stack += p.lastBet - this.players[playerIdx];
+          this.pot -= p.lastBet - this.players[playerIdx];
+        }
+      }
+      this.players[playerIdx].stack += this.pot;
+      console.log('Il y a un gagnant : ' + results[0].player.email);
+    } else {
+      console.log('Il y a une égalité : ');
+      let playersIn = [];
+      for(let r of results) {
+        playerIdx = this.players.findIndex(x => x.email === r.player.email);
+        playersIn.push(playerIdx);
+        this.players[playerIdx].stack += this.players[playerIdx].personnalPot;
+        this.pot -= this.players[playerIdx].personnalPot;
+        console.log(r.player.email);
+      }
+      if (this.pot > 0) {
+        for (let i of playersIn) {
+          this.players[i].stack += this.pot / results.length;
+        }
+      } 
+    }
   }
+
   nextActivePlayer() {
-    this.checkTurn();
+    let newGame = this.checkTurn();
+    if (newGame) return;
     let playerIdx = this.players.findIndex(x => x.email === this.activePlayer.email);
     if (playerIdx + 1 > this.players.length - 1) {
       this.activePlayer = this.players[0];
-      return;
+    } else {
+      this.activePlayer = this.players[playerIdx + 1];
     }
-    this.activePlayer = this.players[playerIdx + 1];
-    if (this.activePlayer.status === Player.allStatus.FOLD) {
+    if (this.activePlayer.status === Player.allStatus.FOLD
+        || this.activePlayer.status === Player.allStatus.ELIMINATED) {
       this.nextActivePlayer();
     }
   }
