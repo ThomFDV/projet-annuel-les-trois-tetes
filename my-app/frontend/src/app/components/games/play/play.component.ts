@@ -33,6 +33,10 @@ export class PlayComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser().subscribe(user => {
         this.user = user;
+        this.gameService.easyRefresh
+            .subscribe(() => {
+              this.getGame();
+            });
         this.getGame();
       },
       error => {
@@ -51,6 +55,7 @@ export class PlayComponent implements OnInit {
         if (this.userIdx > -1) {
           this.isUserIn = true;
         }
+        if (game.activePlayer) { this.hide = false; }
         this.getHand(this.userIdx, game);
         this.getBoard(game);
       }, (err) => {
@@ -72,7 +77,6 @@ export class PlayComponent implements OnInit {
       this.userIdx = this.getUserIdx(game);
       this.getHand(this.userIdx, game);
       this.getBoard(game);
-      this.hide = !this.hide;
       alert('La partie commence !');
     }, err => {
       console.log(err);

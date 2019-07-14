@@ -9,7 +9,7 @@ const UserTheme = require("../models/userTheme");
 /*
     Création d'un theme sans cours
  */
-exports.create = async (req, res, next) => {
+exports.create = async (req, res) => {
 
     const title = req.body.title.trim();
     if (title.length > 2) {
@@ -57,8 +57,6 @@ exports.getThemeById = async (req, res) => {
 
     ]);
     res.json(theme);
-
-    //{$project : {"courses.content": 0}}
 };
 
 /*

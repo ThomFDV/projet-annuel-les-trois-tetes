@@ -2,7 +2,7 @@
 
 const Ao = require('./array.operations');
 const Combinations = require('../models/combinations');
-const CombinationsComparator = require('./combinations.comparator')
+const CombinationsComparator = require('./combinations.comparator');
 
 class HandCombinationMapping {
   fourOfAKindMapping(hand, FOAKValue) {

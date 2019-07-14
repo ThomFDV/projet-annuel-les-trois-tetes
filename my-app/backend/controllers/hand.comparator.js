@@ -3,7 +3,6 @@
 const Ao = require('./array.operations');
 const Hcm = require('./hand.combination.mapping');
 const HandValues = require('./hand.values');
-const Combinations = require('../models/combinations');
 const CombinationsComparator = require('./combinations.comparator');
 
 class HandComparator {

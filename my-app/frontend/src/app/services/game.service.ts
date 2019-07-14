@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TokenStorageService} from './token-storage.service';
 import {Game} from '../models/game';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,12 @@ export class GameService {
   url = 'http://localhost:3000/game';
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
+
+  private easyRefresh$ = new Subject<void>();
+
+  get easyRefresh() {
+      return this.easyRefresh$;
+  }
 
   createGame(game: Game): Observable <any> {
     return this.http.post(this.url + '/create', {
@@ -56,6 +63,10 @@ export class GameService {
         {
           headers: this.tokenStorage.getHeaderToken()
         }
+    ).pipe(
+        tap(() => {
+            this.easyRefresh$.next();
+        })
     );
   }
 

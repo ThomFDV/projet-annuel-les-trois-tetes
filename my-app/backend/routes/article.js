@@ -3,8 +3,6 @@ const passport = require("passport");
 
 const ArticleController = require("../controllers/article");
 
-const checkAuth = require("../middleware/check-auth");
-
 const isAdmin = require('../middleware/isAdmin');
 
 const isTeacher = require('../middleware/isTeacher');
@@ -20,8 +18,6 @@ router.get("/:id", passport.authenticate("jwt", { session: false }), ArticleCont
 router.post("/:id", passport.authenticate("jwt", { session: false }), ArticleController.addComment);
 
 router.delete("/:id", passport.authenticate("jwt", { session: false }), isAdmin, ArticleController.removeArticle);
-
-//router.get("/:articleId/comment/:commentId", passport.authenticate("jwt", { session: false }), isAdmin, ArticleController.removeComment);
 
 
 module.exports = router;

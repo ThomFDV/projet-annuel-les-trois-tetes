@@ -132,7 +132,6 @@ exports.removeComment = async (req, res) => {
     const articleId = req.params.articleId;
     const commentId = req.params.commentId;
 
-
     const article = await Article.aggregate([
         {$match: {"_id": mongoose.Types.ObjectId(articleId)}},
         {$unwind: "$comments"},
@@ -140,17 +139,5 @@ exports.removeComment = async (req, res) => {
 
     ]);
 
-
-    // article[0].comments.remove();
-
-
     return res.json(article).status(200).end();
-
-
-    // const article = await Article.findById(articleId, (err, doc) => {
-    //     if (doc === null || err) return res.json({"message": `L'article ${articleId} n'a pas pu etre supprime`}).status(409).end();
-    //     doc.remove();
-    //     return res.json({"message": `L'article ${articleId} a bien ete supprime`}).status(200).end();
-    // });
-
 };

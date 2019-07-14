@@ -1,93 +1,103 @@
 <section class="container-fluid" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <h1 class="text-center mb-5">{{game.title}}</h1>
-  <div class="w-100" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
-    <div class="d-inline-flex justify-content-around w-100">
-      <div *ngIf="game.players.length > 0 && (game.players[0].email !== game.players[userIdx].email)"
-           [class.highlight]="game.activePlayer.email === game.players[0].email">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <div class="rounded bg-light my-2">
-          <p class="w-100 text-center m-0">{{game.players[0].email}}</p>
-          <p class="w-100 text-center m-0">{{game.players[0].stack}}</p>
-          <p class="w-100 text-center m-0">{{game.players[0].personnalPot}}</p>
-          <p class="w-100 text-center m-0">{{game.players[0].status}}</p>
+  <div class="w-100 d-flex" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+    <div class="w-100">
+      <div class="d-inline-flex justify-content-around w-100">
+        <div *ngIf="game.players.length > 0 && (game.players[0].email !== game.players[userIdx].email)"
+             [class.highlight]="game.activePlayer.email === game.players[0].email">
+          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+          <div class="rounded bg-light my-2">
+            <p class="w-100 text-center m-0">{{game.players[0].email}}</p>
+            <p class="w-100 text-center m-0">{{game.players[0].stack}}</p>
+            <p class="w-100 text-center m-0">{{game.players[0].personnalPot}}</p>
+            <p class="w-100 text-center m-0">{{game.players[0].status}}</p>
+          </div>
+        </div>
+        <div *ngIf="game.players.length > 1 && (game.players[1].email !== game.players[userIdx].email)"
+             [class.highlight]="game.activePlayer.email === game.players[1].email">
+          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+          <div class="rounded bg-light my-2">
+            <p class="w-100 text-center m-0">{{game.players[1].email}}</p>
+            <p class="w-100 text-center m-0">{{game.players[1].stack}}</p>
+            <p class="w-100 text-center m-0">{{game.players[1].personnalPot}}</p>
+            <p class="w-100 text-center m-0">{{game.players[1].status}}</p>
+          </div>
         </div>
       </div>
-      <div *ngIf="game.players.length > 1 && (game.players[1].email !== game.players[userIdx].email)"
-           [class.highlight]="game.activePlayer.email === game.players[1].email">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <div class="rounded bg-light my-2">
-          <p class="w-100 text-center m-0">{{game.players[1].email}}</p>
-          <p class="w-100 text-center m-0">{{game.players[1].stack}}</p>
-          <p class="w-100 text-center m-0">{{game.players[1].personnalPot}}</p>
-          <p class="w-100 text-center m-0">{{game.players[1].status}}</p>
+      <div class="d-inline-flex align-items-center w-100">
+        <div class="col-2">
+          <div *ngIf="game.players.length > 2 && (game.players[2].email !== game.players[userIdx].email)"
+               class="text-center"
+               [class.highlight]="game.activePlayer.email === game.players[2].email">
+            <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+            <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+            <div class="rounded bg-light mt-2">
+              <p class="w-100 text-center m-0">{{game.players[2].email}}</p>
+              <p class="w-100 text-center m-0">{{game.players[2].stack}}</p>
+              <p class="w-100 text-center m-0">{{game.players[2].personnalPot}}</p>
+              <p class="w-100 text-center m-0">{{game.players[2].status}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="m-auto" style="height: 400px;">
+          <div class="d-flex flex-column align-items-center border border-dark rounded-circle bg-dark" style="width: 600px; height: 400px;">
+            <div class="d-flex c-player__board" style="height: 85px">
+              <img [src]="boardImg[0]" alt="Dos de carte" class="p-0" style="width: 60px">
+              <img [src]="boardImg[1]" alt="Dos de carte" class="p-0" style="width: 60px">
+              <img [src]="boardImg[2]" alt="Dos de carte" class="p-0" style="width: 60px">
+              <img [src]="boardImg[3]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
+              <img [src]="boardImg[4]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
+            </div>
+            <h2 class="text-white">Les Trois Têtes</h2>
+          </div>
+        </div>
+        <div class="col-2">
+          <div *ngIf="game.players.length > 3 && (game.players[3].email !== game.players[userIdx].email)"
+               class="text-center"
+               [class.highlight]="game.activePlayer.email === game.players[3].email">
+            <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+            <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+            <div class="rounded bg-light mt-2">
+              <p class="w-100 text-center m-0">{{game.players[3].email}}</p>
+              <p class="w-100 text-center m-0">{{game.players[3].stack}}</p>
+              <p class="w-100 text-center m-0">{{game.players[3].personnalPot}}</p>
+              <p class="w-100 text-center m-0">{{game.players[3].status}}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="d-inline-flex align-items-center w-100">
-      <div class="col-2">
-        <div *ngIf="game.players.length > 2 && (game.players[2].email !== game.players[userIdx].email)"
-             class="text-center"
-             [class.highlight]="game.activePlayer.email === game.players[2].email">
+      <div class="d-inline-flex justify-content-around w-100 mt-4">
+        <div *ngIf="game.players.length > 4 && (game.players[4].email !== game.players[userIdx].email)"
+             [class.highlight]="game.activePlayer.email === game.players[4].email">
           <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
           <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
           <div class="rounded bg-light mt-2">
-            <p class="w-100 text-center m-0">{{game.players[2].email}}</p>
-            <p class="w-100 text-center m-0">{{game.players[2].stack}}</p>
-            <p class="w-100 text-center m-0">{{game.players[2].personnalPot}}</p>
-            <p class="w-100 text-center m-0">{{game.players[2].status}}</p>
+            <p class="w-100 text-center m-0">{{game.players[4].email}}</p>
+            <p class="w-100 text-center m-0">{{game.players[4].stack}}</p>
+            <p class="w-100 text-center m-0">{{game.players[4].personnalPot}}</p>
+            <p class="w-100 text-center m-0">{{game.players[4].status}}</p>
           </div>
         </div>
-      </div>
-      <div class="m-auto" style="height: 400px;">
-        <div class="d-flex flex-column align-items-center border border-dark rounded-circle bg-dark" style="width: 600px; height: 400px;">
-          <div class="d-flex c-player__board" style="height: 85px">
-            <img [src]="boardImg[0]" alt="Dos de carte" class="p-0" style="width: 60px">
-            <img [src]="boardImg[1]" alt="Dos de carte" class="p-0" style="width: 60px">
-            <img [src]="boardImg[2]" alt="Dos de carte" class="p-0" style="width: 60px">
-            <img [src]="boardImg[3]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
-            <img [src]="boardImg[4]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
-          </div>
-          <h2 class="text-white">Les Trois Têtes</h2>
-        </div>
-      </div>
-      <div class="col-2">
-        <div *ngIf="game.players.length > 3 && (game.players[3].email !== game.players[userIdx].email)"
-             class="text-center"
-             [class.highlight]="game.activePlayer.email === game.players[3].email">
-          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-          <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
+        <div *ngIf="isUserIn" [class.highlight-me]="game.activePlayer.email === game.players[userIdx].email">
+          <img [src]="imgPath" alt="Dos de carte" class="p-0" style="width: 60px">
+          <img [src]="imgPath2" alt="Dos de carte" class="p-0" style="width: 60px">
           <div class="rounded bg-light mt-2">
-            <p class="w-100 text-center m-0">{{game.players[3].email}}</p>
-            <p class="w-100 text-center m-0">{{game.players[3].stack}}</p>
-            <p class="w-100 text-center m-0">{{game.players[3].personnalPot}}</p>
-            <p class="w-100 text-center m-0">{{game.players[3].status}}</p>
+            <p class="w-100 text-center text-success m-0">Moi</p>
+            <p class="w-100 text-center m-0">{{game.players[userIdx].stack}}</p>
+            <p class="w-100 text-center m-0">{{game.players[userIdx].personnalPot}}</p>
+            <p class="w-100 text-center m-0">{{game.players[userIdx].status}}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="d-inline-flex justify-content-around w-100 mt-4">
-      <div *ngIf="game.players.length > 4 && (game.players[4].email !== game.players[userIdx].email)"
-           [class.highlight]="game.activePlayer.email === game.players[4].email">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <img src="../../../../assets/images/cards/back.png" alt="Dos de carte" class="p-0" style="width: 60px">
-        <div class="rounded bg-light mt-2">
-          <p class="w-100 text-center m-0">{{game.players[4].email}}</p>
-          <p class="w-100 text-center m-0">{{game.players[4].stack}}</p>
-          <p class="w-100 text-center m-0">{{game.players[4].personnalPot}}</p>
-          <p class="w-100 text-center m-0">{{game.players[4].status}}</p>
-        </div>
-      </div>
-      <div *ngIf="isUserIn" [class.highlight-me]="game.activePlayer.email === game.players[userIdx].email">
-        <img [src]="imgPath" alt="Dos de carte" class="p-0" style="width: 60px">
-        <img [src]="imgPath2" alt="Dos de carte" class="p-0" style="width: 60px">
-        <div class="rounded bg-light mt-2">
-          <p class="w-100 text-center text-success m-0">Moi</p>
-          <p class="w-100 text-center m-0">{{game.players[userIdx].stack}}</p>
-          <p class="w-100 text-center m-0">{{game.players[userIdx].personnalPot}}</p>
-          <p class="w-100 text-center m-0">{{game.players[userIdx].status}}</p>
-        </div>
+    <div class="col-2 bg-light rounded" *ngIf="game.result.length > 0">
+      <h4 class="mt-2">Résultat précédent :</h4>
+      <p>Gagnant(s) :</p>
+      <div *ngFor="let winner of game.result">
+        <p>{{winner.player.email}} avec {{winner.player.hand[0]}}</p>
+        <p>Grâce à un(e) {{winner.combination.combination.STR}}</p>
       </div>
     </div>
   </div>
@@ -119,13 +129,6 @@
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
-  <div>
-    <p>{{game.result | json}}</p>
-    <div>
-      <p>Players :</p>
-      <p *ngFor="let player of game.players">{{player.email}}</p>
-    </div>
   </div>
   <button mat-raised-button color="warn" routerLink="../home" (click)="leave(game.id)">Quitter la partie</button>
 </section>

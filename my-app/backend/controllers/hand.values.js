@@ -1,7 +1,6 @@
 'use strict';
 
 const ArrayOperations = require('./array.operations');
-const Combinations = require('../models/combinations');
 const Hcm = require('./hand.combination.mapping');
 
 class HandValues {
@@ -32,7 +31,7 @@ class HandValues {
     let counter = 1;
     for(let i = 5; i >= 0; i -= 1) {
       if(hand[i][0] === combinationValue) {
-        if((counter += 1) == 3) return combinationValue;
+        if((counter += 1) === 3) return combinationValue;
       } else {
         combinationValue = hand[i][0];
         counter = 1;
@@ -65,17 +64,13 @@ class HandValues {
 
   getStraightFlush(hand, maxStraightValue) {
     let index = 6;
-    while(hand[index][0] != maxStraightValue) index -= 1;
+    while(hand[index][0] !== maxStraightValue) index -= 1;
     let colorToFind = hand[index][1];
     index -= 1;
     for(let i = 0; i < 4; i += 1) {
       if(hand[index - i][1] !== colorToFind) return false;
     }
     return true;
-  }
-
-  getHighValue(hand) {
-    return hand[6][0];
   }
 }
 

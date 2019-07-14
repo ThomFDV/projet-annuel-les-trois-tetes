@@ -3,8 +3,6 @@ const passport = require("passport");
 
 const GameController = require("../controllers/game");
 
-const checkAuth = require("../middleware/check-auth");
-
 const isAdmin = require('../middleware/isAdmin');
 
 const isTeacher = require('../middleware/isTeacher');
@@ -26,5 +24,7 @@ router.put("/fold/:id", passport.authenticate("jwt", { session: false }), GameCo
 router.put("/join/:id", passport.authenticate("jwt", { session: false }), GameController.join);
 
 router.put("/leave/:id", passport.authenticate("jwt", { session: false }), GameController.leave);
+
+router.get("/delete/:id", passport.authenticate("jwt", { session: false }), isAdmin, GameController.removeGame);
 
 module.exports = router;

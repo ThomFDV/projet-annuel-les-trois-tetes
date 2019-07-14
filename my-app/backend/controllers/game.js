@@ -154,42 +154,21 @@ exports.leave = async (req, res) => {
     const index = findGame(id);
     const email = req.user.email;
     try {
-        await games[index].players.forEach((player, i) => {
-            if (player.email === email) {
-                delete games[index].players[i];
-                //Voir si le fait d'avoir un null et ne pas le retirer est génant plus tard
-            }
-        });
+        await _.remove(games[index].players, p => p.email === email);
         return res.status(200).json(games[index].players).end();
     } catch (e) {
         return res.sendStatus(400).end();
     }
-    // const game = await Game.updateOne({
-    //   _id: req.params.id
-    // }, {
-    //   $pull: {
-    //     players: {
-    //       email: req.user.email
-    //     }
-    //   }
-    // }, (err) => {
-    //   if (err) {
-    //     return res.sendStatus(400);
-    //   }
-    // });
-    // res.sendStatus(200).end();
 };
 
 exports.removeGame = async (req, res) => {
 
     const gameId = req.params.id;
 
-
-    const game = await Game.findById(gameId, (err, doc) => {
-        if (doc === null || err) return res.json({"message": `Le game ${gameId} n'a pas pu etre supprime`}).status(409).end();
-        doc.remove();
-        return res.json({"message": `Le game ${gameId} a bien ete supprime`}).status(200).end();
-    });
-
-
+    try {
+        await _.remove(games, g => g.id === gameId);
+        return res.status(200).json({"message": `Le game ${gameId} a bien été supprimée`}).end();
+    } catch (e) {
+        return res.sendStatus(409).end();
+    }
 };

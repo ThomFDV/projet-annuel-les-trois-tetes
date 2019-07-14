@@ -55,7 +55,7 @@ function generateToken(user) {
 exports.getStatistics = async (req, res) => {
   const userId = req.user._id;
 
-  const user = await User.findById(userId, (err, doc) => {
+  const user = await User.findById(userId, (err) => {
     if (err) return err;
   });
   res.json(user);

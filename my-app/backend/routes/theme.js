@@ -3,8 +3,6 @@ const passport = require("passport");
 
 const ThemeController = require('../controllers/theme');
 
-const checkAuth = require("../middleware/check-auth");
-
 const isAdmin = require('../middleware/isAdmin');
 
 const isTeacher = require('../middleware/isTeacher');
