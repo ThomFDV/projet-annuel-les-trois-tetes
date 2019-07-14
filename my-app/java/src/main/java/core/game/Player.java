@@ -77,4 +77,11 @@ public class Player {
         this.personnalPot = 0;
         this.status = Status.INGAME;
     }
+
+    public void resetPlayer() {
+        this.stack += this.personnalPot;
+        this.personnalPot = 0;
+        this.lastBet = 0;
+        this.status = Status.INGAME;
+    }
 }

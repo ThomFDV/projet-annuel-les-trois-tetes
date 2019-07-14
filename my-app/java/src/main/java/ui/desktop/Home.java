@@ -4,13 +4,16 @@ import core.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class Home {
 
@@ -120,7 +123,19 @@ public class Home {
 
     @FXML
     public void onQuitPressed() {
+        Alert returnAlert = new Alert(Alert.AlertType.WARNING);
+        returnAlert.setTitle("Attention");
+        returnAlert.setHeaderText("Voulez-vous vraiment quitter l'application ?");
 
+        ButtonType confirm = new ButtonType("Oui");
+        ButtonType cancel = new ButtonType("Non");
+        returnAlert.getButtonTypes().clear();
+        returnAlert.getButtonTypes().addAll(confirm, cancel);
+
+        Optional<ButtonType> confirmationChoice = returnAlert.showAndWait();
+        if(confirmationChoice.isPresent() && confirmationChoice.get() == confirm) {
+            this.mainApp.close();
+        }
     }
 
 }

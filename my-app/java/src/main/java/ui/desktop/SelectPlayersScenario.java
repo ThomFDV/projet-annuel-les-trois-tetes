@@ -297,6 +297,7 @@ public class SelectPlayersScenario {
             playGameController.setStage(mainStage);
             playGameController.setMainContainer(mainContainer);
             playGameController.setPlayGameContainer(pane);
+            playGameController.previousContainer = selectPlayersScenarioContainer;
             mainContainer.setCenter(pane);
             playGameController.setGameInstance(newScenarioInstance);
             playGameController.startGame();

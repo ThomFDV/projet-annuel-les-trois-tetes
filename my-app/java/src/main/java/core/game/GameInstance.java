@@ -12,7 +12,7 @@ import java.util.Optional;
  * Gère tout ce qui est relatif au déroulement d'une partie de poker
  */
 
-public class GameInstance {
+public class GameInstance implements Cloneable{
 
     private ArrayList<Card> board;
     private ArrayList<Player> players;
@@ -65,21 +65,30 @@ public class GameInstance {
         //betBlinds();
     }
 
-    /**
-     * A la fin de chaque main, met chaque joueur au statut éliminé si ils n'ont plus de jetons,
-     * sinon les réinitialise pour commencer la prochaine main
-     */
+    public GameInstance(GameInstance otherInstance) {
+        this.players = new ArrayList<Player>();
+        for(Player p: otherInstance.getPlayers()) this.players.add(p);
+        initializeDeck();
+        initializeDealer(otherInstance.getDealer().getName());
+        this.currentTurn = Turn.PREFLOP;
+        this.lastBet = 0;
+        this.bigBlind = otherInstance.getBigBlind() * 100;
+        this.smallBlind = this.bigBlind / 2;
+        this.endTurn = otherInstance.getEndTurn();
+        this.scenarioName = otherInstance.getScenarioName();
+        this.difficulty = otherInstance.getDifficulty();
+        this.create = otherInstance.getCreate();
+    }
 
-    public void updatePlayersStatusForNextHand() {
-        for(Player player: this.players) {
-            if(player.getStatus() != Status.ELIMINATED) {
-                if(player.getStack() == 0) {
-                    player.setStatus(Status.ELIMINATED);
-                } else {
-                    player.setStatus(Status.INGAME);
-                }
-            }
+    @Override
+    public Object clone() {
+        Object newInstance = null;
+        try {
+            newInstance = super.clone();
+        } catch(CloneNotSupportedException e) {
+            e.printStackTrace();
         }
+        return newInstance;
     }
 
     /**
@@ -156,6 +165,26 @@ public class GameInstance {
         this.lastBet = value;
     }
 
+    public String getScenarioName() {
+        return this.scenarioName;
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
+     public boolean getCreate() {
+        return this.create;
+     }
+
+    public Turn getEndTurn() {
+        return this.endTurn;
+    }
+
+    public Deck getDeck() {
+        return this.deck;
+    }
+
     public Turn getCurrentTurn() {
         return this.currentTurn;
     }
@@ -180,7 +209,6 @@ public class GameInstance {
         }
         this.pot += betValue;
         this.lastBet = getActivePlayer().getLastBet();
-        System.out.println(getActivePlayer().getName() + " a misé " + betValue);
     }
 
     /**
@@ -200,9 +228,13 @@ public class GameInstance {
         status.add(Status.BET);
         status.add(Status.CHECK);
         Player p = getNextPlayer(status, getActivePlayer());
-        System.out.println("Prochain joueur: " + p.getName());
         if(action == Action.CHECK) {
-            return p.getStatus() == Status.INGAME ? 0 : 1;
+            if(p.getStatus() == Status.INGAME) {
+                this.activePlayer = p;
+                return 0;
+            } else {
+                return 1;
+            }
         }
         if(p.getLastBet() == this.lastBet && p.getStatus() != Status.INGAME) {
             return 1;
@@ -336,16 +368,20 @@ public class GameInstance {
      */
 
     public void betBlinds() {
-//        int index = (players.indexOf(dealer) + 1) % players.size();
+        System.out.println("start of betBlinds");
         ArrayList<Status> status = new ArrayList<Status>();
         status.add(Status.INGAME);
+        System.out.println("Before getNextPlayer");
         Player player = getNextPlayer(status, getDealer());
+        System.out.println("After getNextPlayer");
         setActivePlayer(player);
+        System.out.println("First setActivePlayer");
         if(player.getStack() <= getSmallBlind()) {
             bet(player.getStack());
         } else {
             bet(getSmallBlind());
         }
+        System.out.println("After smallBlindBet");
         if(getActivePlayer().getStatus() != Status.ALLIN) getActivePlayer().setStatus(Status.INGAME);
         player = getNextPlayer(status, player);
         setActivePlayer(player);
@@ -356,6 +392,7 @@ public class GameInstance {
         }
         if(getActivePlayer().getStatus() != Status.ALLIN) getActivePlayer().setStatus(Status.INGAME);
         setActivePlayer(getNextPlayer(status, player));
+        System.out.println("Joueur actif: " + getActivePlayer().getName());
     }
 
     /**
@@ -397,6 +434,7 @@ public class GameInstance {
             distributedCards.add(player.getHand()[0]);
             distributedCards.add(player.getHand()[1]);
         }
+        System.out.println("Taille des cartes distribuees: " + distributedCards.size());
         this.deck = new Deck(distributedCards);
     }
 

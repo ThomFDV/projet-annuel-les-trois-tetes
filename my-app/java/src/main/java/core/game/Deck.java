@@ -12,8 +12,8 @@ public class Deck {
 
     public Deck() {
         this.decklist = new ArrayList<Card>();
-        for(Value v: Value.values()) {
-            for(Color c: Color.values()) {
+        for(Color  c: Color.values()) {
+            for(Value v: Value.values()) {
                 this.decklist.add(new Card(v, c));
             }
         }
