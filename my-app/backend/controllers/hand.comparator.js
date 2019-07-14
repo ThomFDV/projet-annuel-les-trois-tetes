@@ -66,7 +66,7 @@ class HandComparator {
   checkIfWinnersAreEven(results) {
     let i = 1;
     while(i < results.length) {
-      if(results[0].combination.INT === results[i].combination.INT) {
+      if(results[0].combination.combination.INT === results[i].combination.combination.INT) {
         if(CombinationsComparator.compareCombinations(results[0].combination, results[i].combination) === 'TIE') {
           i += 1;
         } else {

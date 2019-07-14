@@ -161,10 +161,11 @@ class GameInstance {
       } else if (player.status === Player.allStatus.BET || player.status === Player.allStatus.ALLIN) {
         for (let p of this.players) {
           if ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
-              && p.personnalPot !== player.personnalPot) {
+              && (p.personnalPot !== player.personnalPot && player.status !== Player.allStatus.ALLIN)) {
             allPlayed = false;
           } else if (player.status === Player.allStatus.ALLIN &&
-              (p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)) {
+              ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
+                  && p.lastBet !== player.lastBet)) {
             allPlayed = false;
           }
         }
@@ -241,26 +242,26 @@ class GameInstance {
     let playerIdx;
     if(results.length === 1) {
       playerIdx = this.players.findIndex(x => x.email === results[0].player.email);
-      for (let p of this.players) {
+      for (let p of playersIn) {
         if (this.players[playerIdx].lastBet < p.lastBet) {
-          p.stack += p.lastBet - this.players[playerIdx];
-          this.pot -= p.lastBet - this.players[playerIdx];
+          p.stack += p.personnalPot - this.players[playerIdx].personnalPot;
+          this.pot -= p.personnalPot - this.players[playerIdx].personnalPot;
         }
       }
       this.players[playerIdx].stack += this.pot;
       console.log('Il y a un gagnant : ' + results[0].player.email);
     } else {
       console.log('Il y a une égalité : ');
-      let playersIn = [];
+      let playersConcerned = [];
       for(let r of results) {
         playerIdx = this.players.findIndex(x => x.email === r.player.email);
-        playersIn.push(playerIdx);
+        playersConcerned.push(playerIdx);
         this.players[playerIdx].stack += this.players[playerIdx].personnalPot;
         this.pot -= this.players[playerIdx].personnalPot;
         console.log(r.player.email);
       }
       if (this.pot > 0) {
-        for (let i of playersIn) {
+        for (let i of playersConcerned) {
           this.players[i].stack += this.pot / results.length;
         }
       } 
