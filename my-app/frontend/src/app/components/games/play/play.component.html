@@ -1,4 +1,4 @@
-<section class="container" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+<section class="container-fluid" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
   <h1 class="text-center mb-5">{{game.title}}</h1>
   <div class="w-100" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
     <div class="d-inline-flex justify-content-around w-100">
@@ -49,10 +49,7 @@
             <img [src]="boardImg[3]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
             <img [src]="boardImg[4]" alt="Dos de carte" class="p-0 ml-2" style="width: 60px">
           </div>
-          <h2 class="text-black-50">Les Trois Têtes</h2>
-          <p>{{game.pot}}</p>
-          <p>BB : {{game.bigBlind}}</p>
-          <p>SB : {{game.smallBlind}}</p>
+          <h2 class="text-white">Les Trois Têtes</h2>
         </div>
       </div>
       <div class="col-2">
@@ -95,7 +92,8 @@
     </div>
   </div>
   <div class="d-flex">
-    <button mat-raised-button color="accent" class="m-auto" (click)="playGame(game.id)" *ngIf="hide">Commencer</button>
+    <button mat-raised-button color="primary" class="m-auto rounded-circle" style="width: 150px; height: 150px"
+            (click)="playGame(game.id)" *ngIf="hide">Commencer</button>
     <mat-card class="col-6 bg-light ml-auto mr-0 my-4">
       <mat-card-content class="d-flex flex-column">
         <div class="d-flex justify-content-around">
@@ -115,16 +113,15 @@
                       thumbLabel></mat-slider>
           <p class="col-2 my-auto">{{game.activePlayer.stack}}</p>
         </div>
-        <button mat-raised-button color="primary" class="w-25 mx-auto" (click)="bet(value, game.id)">Miser</button>
+        <div class="d-flex">
+          <button mat-raised-button class="w-25 mx-auto" (click)="fold(game.id)">Se coucher</button>
+          <button mat-raised-button color="primary" class="w-25 mx-auto" (click)="bet(value, game.id)">Miser</button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
   <div>
-    <p>{{game.id}}</p>
-    <p>{{game.buyIn}}</p>
-    <p>{{game.maxPlayer}}</p>
-    <p>{{game.mode}}</p>
-    <p>{{game.pot}}</p>
+    <p>{{game.result | json}}</p>
     <div>
       <p>Players :</p>
       <p *ngFor="let player of game.players">{{player.email}}</p>

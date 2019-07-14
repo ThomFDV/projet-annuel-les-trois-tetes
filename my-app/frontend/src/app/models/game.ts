@@ -20,5 +20,6 @@ export class Game {
     initialStack: number;
     bigBlind: number;
     smallBlind: number;
+    result: any;
     deck: any;
 }

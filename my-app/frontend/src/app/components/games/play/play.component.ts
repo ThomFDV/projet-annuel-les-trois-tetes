@@ -83,7 +83,15 @@ export class PlayComponent implements OnInit {
     this.gameService.bet(value, gameId).subscribe(game => {
       this.game = game;
     }, err => {
-      alert(JSON.stringify(err));
+      alert(err.error);
+    });
+  }
+
+  fold(gameId) {
+    this.gameService.fold(gameId).subscribe(game => {
+      this.game = game;
+    }, err => {
+      alert(err.error);
     });
   }
 

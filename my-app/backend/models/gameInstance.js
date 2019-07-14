@@ -35,6 +35,7 @@ class GameInstance {
     this.initialStack = game.initialStack;
     this.bigBlind = game.initialStack / 100;
     this.smallBlind = this.bigBlind / 2;
+    this.result = [];
     this.deck = [];
   }
 
@@ -155,20 +156,6 @@ class GameInstance {
   checkTurn() {
     let allPlayed = true;
     let playersOut = [];
-    /*
-    Si le joueur est Allin :
-     - Tous les autres doivent être FOLD ou ELIMINATED
-     - Ou alors ils sont en bet mais leur personalPot est = au personalPot du joueur
-     - Ou il est en allin aussi
-     - Si ils sont en check c'est false
-
-    Si le joueur est en bet :
-     - Tous les autres joueur doivent soit être en allin
-     - Soit être en bet et avoir le même montant de personalPot
-
-    Si le joueur est en check :
-     - Tous les autres doivent être en check
-     */
     for (const player of this.players) {
       if (player.status === Player.allStatus.INGAME) {
         allPlayed = false;
@@ -181,7 +168,7 @@ class GameInstance {
           } else if (player.status === Player.allStatus.BET &&
               (p.status === Player.allStatus.BET && p.personnalPot !== player.personnalPot)) {
             allPlayed = false;
-          } else if (player.status === Player.allStatus.CHECK && p.status !== Player.allStatus.CHECK) {
+          } else if (player.status === Player.allStatus.CHECK && (p.status !== Player.allStatus.CHECK && p.status !== Player.allStatus.FOLD)) {
             allPlayed = false;
           }
         }
@@ -283,6 +270,7 @@ class GameInstance {
         }
       } 
     }
+    this.result = results;
   }
 
   nextActivePlayer() {

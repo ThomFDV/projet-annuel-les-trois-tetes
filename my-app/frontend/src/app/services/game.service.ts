@@ -75,4 +75,13 @@ export class GameService {
         }
     );
   }
+
+  fold(gameId): Observable <Game> {
+    return this.http.put<Game>(`${this.url}/fold/${gameId}`,
+        null,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
+  }
 }
