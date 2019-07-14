@@ -1,9 +1,9 @@
 export class Player {
-    _id: string;
     email: string;
-    cards: string;
-    chipsAmount: number;
+    hand: any;
+    stack: number;
     rank: number;
-    updateAt: string;
-    createdAt: string;
+    status: string;
+    personnalPot: number;
+    lastBet: number;
 }

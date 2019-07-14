@@ -44,12 +44,35 @@ export class GameService {
   }
 
   getCollection() {
-    return this.http.get(this.url + '/collection');
+    return this.http.get(`${this.url}/collection`,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
   }
 
   getGame(gameId): Observable <Game> {
-    return this.http.get<Game>(`${this.url}/${gameId}`);
+    return this.http.get<Game>(`${this.url}/${gameId}`,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
   }
 
+  playGame(gameId): Observable <Game> {
+    return this.http.get<Game>(`${this.url}/play/${gameId}`,
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
+  }
 
+  bet(value, gameId): Observable <Game> {
+    return this.http.put<Game>(`${this.url}/bet/${gameId}`,
+        {value},
+        {
+          headers: this.tokenStorage.getHeaderToken()
+        }
+    );
+  }
 }

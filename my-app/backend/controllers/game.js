@@ -70,6 +70,7 @@ exports.create = async (req, res, next) => {
 };
 
 exports.getCollection = async (req, res) => {
+    if (!games) res.status(200).send("No games yet").end();
     res.status(200).json(games).end();
 };
 

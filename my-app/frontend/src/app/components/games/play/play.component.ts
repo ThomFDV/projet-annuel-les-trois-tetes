@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GameService} from '../../../services/game.service';
 import {Game} from '../../../models/game';
-import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {Player} from '../../../models/player';
 import {UserService} from '../../../services/user.service';
 import {User} from "../../../models/user";
@@ -15,13 +14,15 @@ import {User} from "../../../models/user";
 export class PlayComponent implements OnInit {
 
   game: Game;
-  userS: any;
-  connectedPlayer: Player;
-  tapis = 1000;
-  max = this.tapis;
-  min = 10;
+  min = 0;
   value = this.min;
   user: User;
+  userIdx: -1;
+  isUserIn = false;
+  imgPath: string;
+  imgPath2: string;
+  boardImg: string[];
+  hide = true;
 
   constructor(private route: ActivatedRoute,
               private gameService: GameService,
@@ -32,10 +33,7 @@ export class PlayComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser().subscribe(user => {
         this.user = user;
-
-        this.getUser();
         this.getGame();
-
       },
       error => {
         alert('Vous devez vous connecter');
@@ -49,6 +47,12 @@ export class PlayComponent implements OnInit {
     this.gameService.getGame(id)
       .subscribe(game => {
         this.game = game;
+        this.userIdx = this.getUserIdx(game);
+        if (this.userIdx > -1) {
+          this.isUserIn = true;
+        }
+        this.getHand(this.userIdx, game);
+        this.getBoard(game);
       }, (err) => {
         console.error(err);
       });
@@ -62,19 +66,62 @@ export class PlayComponent implements OnInit {
     });
   }
 
-  getUser() {
-    this.userS = this.userService.profile().subscribe(user => {
-      this.userS = user.user;
-    }, (err) => {
-      console.error(err);
+  playGame(gameId) {
+    this.gameService.playGame(gameId).subscribe(game => {
+      this.game = game;
+      this.userIdx = this.getUserIdx(game);
+      this.getHand(this.userIdx, game);
+      this.getBoard(game);
+      this.hide = !this.hide;
+      alert('La partie commence !');
+    }, err => {
+      console.log(err);
     });
   }
 
-  playerStuff() {
-    // for (let player of this.game.players) {
-    //   if (player.email === 'toto@toto.toto') {
-    //     alert('found you !');
-    //   }
-    // }
+  bet(value, gameId) {
+    this.gameService.bet(value, gameId).subscribe(game => {
+      this.game = game;
+    }, err => {
+      alert(JSON.stringify(err));
+    });
+  }
+
+  getUserIdx(game) {
+    return game.players.findIndex(x => x.email === this.user.email);
+  }
+
+  getHand(user, game) {
+    this.imgPath = '../../../../assets/images/cards/';
+    this.imgPath2 = '../../../../assets/images/cards/';
+    if (user > -1 && this.user.email === game.players[user].email && game.players[user].hand !== null) {
+      this.imgPath += game.players[user].hand[0][0];
+      this.imgPath2 += game.players[user].hand[1][0];
+      this.imgPath += game.players[user].hand[0][1];
+      this.imgPath2 += game.players[user].hand[1][1];
+    } else {
+      this.imgPath += 'back';
+      this.imgPath2 += 'back';
+    }
+    this.imgPath += '.png';
+    this.imgPath2 += '.png';
+    console.log(this.imgPath);
+  }
+
+  getBoard(game) {
+    this.boardImg = [
+        '../../../../assets/images/cards/back.png',
+        '../../../../assets/images/cards/back.png',
+        '../../../../assets/images/cards/back.png',
+        '../../../../assets/images/cards/back.png',
+        '../../../../assets/images/cards/back.png'
+    ];
+    let counter = 0;
+    if (game.board.length > 0) {
+      for (const card of game.board) {
+        this.boardImg[counter] = `../../../../assets/images/cards/${card[0]}${card[1]}.png`;
+        counter += 1;
+      }
+    }
   }
 }

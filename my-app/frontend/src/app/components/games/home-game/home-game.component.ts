@@ -23,8 +23,6 @@ export class HomeGameComponent implements OnInit {
 
     this.userService.getUser().subscribe(user => {
         this.user = user;
-
-
         this.gameService.getCollection().subscribe((res: Game[]) => {
           this.games = res;
         }, (err) => {
