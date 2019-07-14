@@ -4,8 +4,6 @@ import {ArticleService} from '../../../services/article.service';
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Theme} from "../../../models/theme";
-import {Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-article-collection',
@@ -46,7 +44,6 @@ export class ArticleCollectionComponent implements OnInit {
         this.articles = [data, ...this.articles];
       }
     });
-    // this.articleService.subscribeArticle().emit('message', 'test');
   }
 
   view(articleId) {
@@ -61,9 +58,9 @@ export class ArticleCollectionComponent implements OnInit {
     this.articleService.removeArticle(articleId).subscribe(() => {
       alert("L'article a bien ete supprime");
       window.location.reload();
-    }), () => {
+    }, () => {
       alert('Une erreur est survenue');
-    };
+    });
   }
 }
 

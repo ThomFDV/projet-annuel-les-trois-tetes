@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Theme} from '../../../models/theme';
 import {ThemeService} from '../../../services/theme.service';
-import {Course} from "../../../models/course";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user";
