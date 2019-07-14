@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.desktop.RunScenario">
+   <children>
+      <ImageView fitHeight="431.0" fitWidth="678.0" layoutX="143.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="143.0">
+         <image>
+            <Image url="@../img/board.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="800.0" />
+         </viewport>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -23,6 +23,10 @@ public enum Value {
         this.name = name;
     }
 
+    public int getVal() {
+        return this.val;
+    }
+
     public String toString(){
         return name;
     }

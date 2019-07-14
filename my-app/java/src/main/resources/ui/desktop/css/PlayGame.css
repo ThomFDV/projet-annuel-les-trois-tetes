@@ -1,0 +1,9 @@
+.card1 .card2{
+    -fx-max-width: 50px;
+    -fx-min-width: 50px;
+    -fx-min-height: 100px;
+    -fx-max-height: 100px;
+}
+
+Label.playerName {
+}

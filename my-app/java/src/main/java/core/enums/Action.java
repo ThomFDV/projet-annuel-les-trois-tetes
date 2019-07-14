@@ -5,9 +5,10 @@ package core.enums;
  */
 
 public enum Action {
-    BET("Mise"),
+    BET("Miser"),
     CHECK("Parole"),
-    FOLD("Passe");
+    FOLD("Passer"),
+    CALL("Suivre");
 
     String value;
 

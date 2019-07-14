@@ -5,6 +5,7 @@ import core.enums.Status;
 
 public class Player {
     private User user;
+    private String name;
     private int stack;
     private Status status;
     private Card[] hand;
@@ -31,6 +32,10 @@ public class Player {
 
     public User getUser() {
         return this.user;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public void setLastBet(int lastBetValue) {
@@ -60,5 +65,23 @@ public class Player {
         this.lastBet = 0;
         this.personnalPot = 0;
         this.hand = new Card[2];
+    }
+
+    public Player(String name, int initialStack, Card cardOne, Card cardTwo) {
+        this.name = name;
+        this.stack = initialStack;
+        this.hand = new Card[2];
+        this.hand[0] = cardOne;
+        this.hand[1] = cardTwo;
+        this.lastBet = 0;
+        this.personnalPot = 0;
+        this.status = Status.INGAME;
+    }
+
+    public void resetPlayer() {
+        this.stack += this.personnalPot;
+        this.personnalPot = 0;
+        this.lastBet = 0;
+        this.status = Status.INGAME;
     }
 }

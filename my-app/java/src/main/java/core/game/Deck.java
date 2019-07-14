@@ -12,9 +12,22 @@ public class Deck {
 
     public Deck() {
         this.decklist = new ArrayList<Card>();
+        for(Color  c: Color.values()) {
+            for(Value v: Value.values()) {
+                this.decklist.add(new Card(v, c));
+            }
+        }
+        this.counter = 0;
+    }
+
+    public Deck(ArrayList<Card> distributedCard) {
+        this.decklist = new ArrayList<Card>();
         for(Value v: Value.values()) {
             for(Color c: Color.values()) {
-                this.decklist.add(new Card(v, c));
+                Card newCard = new Card(v ,c);
+                if(!distributedCard.contains(newCard)) {
+                    this.decklist.add(newCard);
+                }
             }
         }
         this.counter = 0;
@@ -33,5 +46,9 @@ public class Deck {
 
     public Card drawCard() {
         return decklist.get(this.counter++);
+    }
+
+    public ArrayList<Card> getDecklist() {
+        return this.decklist;
     }
 }
