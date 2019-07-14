@@ -55,7 +55,7 @@ export class PlayComponent implements OnInit {
         if (this.userIdx > -1) {
           this.isUserIn = true;
         }
-        if (game.activePlayer) { this.hide = false; }
+        if (game.board.length > 1 ) { this.hide = false; }
         this.getHand(this.userIdx, game);
         this.getBoard(game);
       }, (err) => {
