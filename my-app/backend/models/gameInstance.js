@@ -95,7 +95,7 @@ class GameInstance {
       this.activePlayer.status = Player.allStatus.CHECK;
       console.log(`\nCheck de ${this.activePlayer.email}!\n`);
       return code;
-    } else if (value + this.activePlayer.personnalPot < this.lastBet || value + this.activePlayer.lastBet < this.bigBlind) {
+    } else if (value + this.activePlayer.lastBet < this.lastBet || value + this.activePlayer.lastBet < this.bigBlind) {
       code = -1;
     } else if (value > this.activePlayer.stack) {
       //Relance pas
@@ -155,17 +155,33 @@ class GameInstance {
   checkTurn() {
     let allPlayed = true;
     let playersOut = [];
+    /*
+    Si le joueur est Allin :
+     - Tous les autres doivent être FOLD ou ELIMINATED
+     - Ou alors ils sont en bet mais leur personalPot est = au personalPot du joueur
+     - Ou il est en allin aussi
+     - Si ils sont en check c'est false
+
+    Si le joueur est en bet :
+     - Tous les autres joueur doivent soit être en allin
+     - Soit être en bet et avoir le même montant de personalPot
+
+    Si le joueur est en check :
+     - Tous les autres doivent être en check
+     */
     for (const player of this.players) {
       if (player.status === Player.allStatus.INGAME) {
         allPlayed = false;
-      } else if (player.status === Player.allStatus.BET || player.status === Player.allStatus.ALLIN) {
+      } else if (player.status !== Player.allStatus.ELIMINATED) {
+        //If the player is Bet, Check or Allin
         for (let p of this.players) {
-          if ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
-              && (p.personnalPot !== player.personnalPot && player.status !== Player.allStatus.ALLIN)) {
+          if (player.status === Player.allStatus.ALLIN && (p.status === Player.allStatus.CHECK
+              || (p.status === Player.allStatus.BET && p.personnalPot !== player.personnalPot))) {
             allPlayed = false;
-          } else if (player.status === Player.allStatus.ALLIN &&
-              ((p.status === Player.allStatus.BET || p.status === Player.allStatus.CHECK)
-                  && p.lastBet !== player.lastBet)) {
+          } else if (player.status === Player.allStatus.BET &&
+              (p.status === Player.allStatus.BET && p.personnalPot !== player.personnalPot)) {
+            allPlayed = false;
+          } else if (player.status === Player.allStatus.CHECK && p.status !== Player.allStatus.CHECK) {
             allPlayed = false;
           }
         }
@@ -174,6 +190,7 @@ class GameInstance {
       }
     }
     if (playersOut.length >= this.players.length - 1) {
+      //Restart the game if there is only 1 player left
       this.players[this.players.findIndex(x => x.status !== Player.allStatus.FOLD)].stack += this.pot;
       this.startGame();
       return true;
