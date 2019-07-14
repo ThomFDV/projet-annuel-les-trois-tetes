@@ -31,4 +31,8 @@ public class BoardCard extends VBox {
     public void setNewImage(Card card) {
         this.cardImageView.setImage(card.getImgPath());
     }
+
+    public Card getChoiceBoxValue() {
+        return this.cardChoiceBox.getSelectionModel().getSelectedItem();
+    }
 }

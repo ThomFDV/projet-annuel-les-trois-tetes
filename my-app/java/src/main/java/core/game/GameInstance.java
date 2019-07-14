@@ -368,20 +368,15 @@ public class GameInstance implements Cloneable{
      */
 
     public void betBlinds() {
-        System.out.println("start of betBlinds");
         ArrayList<Status> status = new ArrayList<Status>();
         status.add(Status.INGAME);
-        System.out.println("Before getNextPlayer");
         Player player = getNextPlayer(status, getDealer());
-        System.out.println("After getNextPlayer");
         setActivePlayer(player);
-        System.out.println("First setActivePlayer");
         if(player.getStack() <= getSmallBlind()) {
             bet(player.getStack());
         } else {
             bet(getSmallBlind());
         }
-        System.out.println("After smallBlindBet");
         if(getActivePlayer().getStatus() != Status.ALLIN) getActivePlayer().setStatus(Status.INGAME);
         player = getNextPlayer(status, player);
         setActivePlayer(player);
@@ -392,7 +387,6 @@ public class GameInstance implements Cloneable{
         }
         if(getActivePlayer().getStatus() != Status.ALLIN) getActivePlayer().setStatus(Status.INGAME);
         setActivePlayer(getNextPlayer(status, player));
-        System.out.println("Joueur actif: " + getActivePlayer().getName());
     }
 
     /**

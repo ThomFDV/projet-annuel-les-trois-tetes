@@ -95,6 +95,11 @@ public class SelectPlayersScenario {
             }
         });
         this.setUpCoicesValues();
+        this.scenarioName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[A-Za-z\\s]")) {
+                this.scenarioName.setText(newValue.replaceAll("[^A-Za-z\\s]", ""));
+            }
+        });
     }
 
     /**
@@ -263,6 +268,8 @@ public class SelectPlayersScenario {
         // Vérifie que le nom du scénario n'est pas vide
         if(scenarioName.getText().isBlank()) {
             return Optional.of("Le nom du scénario n'est pas renseigné");
+        } else if(scenarioName.getText().length() > 50) {
+            return Optional.of("Le nom du scénario est limité à 50 caractères");
         }
         // Vérifie que toutes les cartes sélectionnées sont différentes
         ArrayList<Card> selectedCards = new ArrayList<Card>();

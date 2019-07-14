@@ -40,5 +40,10 @@
          </content>
       </ScrollPane>
       <Button fx:id="continueButton" layoutX="1140.0" layoutY="457.0" mnemonicParsing="false" onAction="#goToLastScenarioScene" text="CONTINUE" />
+      <Label fx:id="errorMessageLabel" layoutX="645.0" layoutY="615.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

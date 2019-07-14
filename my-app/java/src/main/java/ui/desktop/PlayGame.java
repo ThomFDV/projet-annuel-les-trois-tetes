@@ -7,8 +7,11 @@ import core.enums.Turn;
 import core.game.Card;
 import core.game.GameInstance;
 import core.game.Player;
+import core.scenario.ScenarioActions;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -30,6 +33,8 @@ public class PlayGame {
     private GameInstance gameInstance;
 
     private ArrayList<PlayerHandMapping> playerHandMappings;
+
+    private ArrayList<ScenarioActions> actions;
 
     @FXML
     public StackPane boardPane;
@@ -72,6 +77,9 @@ public class PlayGame {
 
     @FXML
     public Label handTurn;
+
+    @FXML
+    private Label errorMessageLabel;
 
     @FXML
     public VBox actionList;
@@ -140,6 +148,8 @@ public class PlayGame {
         cardsBoardPane.getRowConstraints().add(new RowConstraints(50));
         boardPane.getChildren().add(cardsBoardPane);
         this.continueButton.setVisible(false);
+        this.actions = new ArrayList<ScenarioActions>();
+        this.errorMessageLabel.setText("");
     }
 
     /**
@@ -150,7 +160,6 @@ public class PlayGame {
     @FXML
     public void feedPlayerInfos(Player player) {
         if(player.getName() == "Vous" && this.gameInstance.getCurrentTurn() == this.gameInstance.getEndTurn()) {
-            System.out.println("Ah oui oui !");
             this.goToLastScenarioScene();
         } else {
             activePlayerName.setText("Joueur : " + player.getName());
@@ -174,7 +183,7 @@ public class PlayGame {
         int betValue = -1;
         String betValueText = this.betInput.getText();
         if(betValueText.length() == 0) {
-            System.out.println("Empty bet");
+            this.errorMessageLabel.setText("Vous n'avez pas rentré de valeur pour la mise !");
             return;
         }
         try {
@@ -183,13 +192,13 @@ public class PlayGame {
             e.printStackTrace();
         }
         Optional<String> errorMessage = this.gameInstance.checkBet(betValue);
-        if(!errorMessage.isEmpty()) {
-            System.out.println(errorMessage.get());
+        if(errorMessage.isPresent()) {
+            this.errorMessageLabel.setText(errorMessage.get());
             return;
         }
         this.gameInstance.bet(betValue);
         updatePlayerDisplay(this.gameInstance.getActivePlayer());
-        this.addPlayerAction(this.gameInstance.getActivePlayer().getName() + " a misé " + betValue);
+        this.addPlayerAction(this.gameInstance.getActivePlayer(), Action.BET, betValue);
         int action = this.gameInstance.setNewCurrentPlayer(Action.BET);
         switch(action) {
             case 0:
@@ -211,7 +220,7 @@ public class PlayGame {
     @FXML
     public void onFoldButtonClicked() {
         this.gameInstance.getActivePlayer().setStatus(Status.FOLD);
-        this.addPlayerAction(this.gameInstance.getActivePlayer().getName() + " a passé");
+        this.addPlayerAction(this.gameInstance.getActivePlayer(), Action.FOLD, -1);
         int action = this.gameInstance.setNewCurrentPlayer(Action.FOLD);
         switch(action) {
             case 0:
@@ -223,6 +232,7 @@ public class PlayGame {
                 feedPlayerInfos(this.gameInstance.getActivePlayer());
                 break;
             case 2:
+                //TODO réinitialiser le scénario
                 System.out.println("On doit finir la main !");
                 break;
         }
@@ -235,12 +245,12 @@ public class PlayGame {
     @FXML
     public void onCheckButtonClicked() {
         Optional<String> errorMessage = this.gameInstance.checkCheck();
-        if(!errorMessage.isEmpty()) {
-            System.out.println(errorMessage.get());
+        if(errorMessage.isPresent()) {
+            this.errorMessageLabel.setText(errorMessage.get());
             return;
         }
         this.gameInstance.bet(0);
-        this.addPlayerAction(this.gameInstance.getActivePlayer().getName() + " a fait parole");
+        this.addPlayerAction(this.gameInstance.getActivePlayer(), Action.CHECK, 0);
         this.gameInstance.getActivePlayer().setStatus(Status.CHECK);
         int action = this.gameInstance.setNewCurrentPlayer(Action.CHECK);
         switch(action) {
@@ -314,8 +324,25 @@ public class PlayGame {
      * @param action
      */
 
-    public void addPlayerAction(String action) {
-        actionList.getChildren().addAll(new Label(action), new Separator(Orientation.HORIZONTAL));
+    public void addPlayerAction(Player p, Action action, int value) {
+        String verb = p.getName() == "Vous" ? " avez " : " a ";
+        String labelValue;
+        switch (action) {
+            case CHECK:
+                labelValue = p.getName() + verb + "fait parole";
+                break;
+            case BET:
+                labelValue = p.getName() + verb + "misé " + value;
+                break;
+            case FOLD:
+                labelValue = p.getName() + verb + "passé";
+                break;
+            default:
+                labelValue = "";
+                break;
+        }
+        actionList.getChildren().addAll(new Label(labelValue), new Separator(Orientation.HORIZONTAL));
+        this.actions.add(new ScenarioActions(p.getName(), action, value));
     }
 
     public void resetInstance() {
@@ -325,6 +352,9 @@ public class PlayGame {
         }
         this.gameInstance.setCurrentTurn(Turn.PREFLOP);
         cardsBoardPane.getChildren().clear();
+        actionList.getChildren().clear();
+        actions.clear();
+        this.errorMessageLabel.setText("");
         this.continueButton.setVisible(false);
         this.gameInstance.betBlinds();
         for(Player p: this.gameInstance.getPlayers()) {
@@ -333,8 +363,21 @@ public class PlayGame {
         feedPlayerInfos(this.gameInstance.getActivePlayer());
     }
 
+    /**
+     * - Lance la fonction de vérification de la saisie de l'utilisateur
+     * - Appelle le prochain écran
+     */
+
     public void goToLastScenarioScene() {
         this.continueButton.setVisible(true);
+        Optional<String> errorMessage = this.checkInputs();
+        if(errorMessage.isPresent()) {
+            this.errorMessageLabel.setText(errorMessage.get());
+            this.betButton.setDisable(true);
+            this.checkButton.setDisable(true);
+            this.foldButton.setDisable(true);
+            return;
+        }
         Alert returnAlert = new Alert(Alert.AlertType.INFORMATION);
         returnAlert.setTitle("Confirmation");
         returnAlert.setHeaderText("Vous êtes à la fin du scénario. Voulez-vous continuer ?");
@@ -347,7 +390,7 @@ public class PlayGame {
 
         Optional<ButtonType> confirmationChoice = returnAlert.showAndWait();
         if(confirmationChoice.isPresent() && confirmationChoice.get() == confirm) {
-            // ALLER A LA NEXT AND LAST PAGE
+            this.loadNextPage();
         } else if(confirmationChoice.isPresent() && confirmationChoice.get() == reinitialize) {
             this.resetInstance();
         } else {
@@ -367,6 +410,46 @@ public class PlayGame {
             if(phm.getPlayerName().getText() == player.getName()) {
                 phm.getPlayerStack().setText(Integer.toString(player.getStack()));
             }
+        }
+    }
+
+    /**
+     * Vérifie que l'utilisateur a bien choisi des cartes différentes
+     * @return un éventuel message d'erreur
+     */
+
+    public Optional<String> checkInputs() {
+        ArrayList<Card> selectedCards = new ArrayList<Card>();
+        for(Node node: cardsBoardPane.getChildren()) {
+            BoardCard card = (BoardCard) node;
+            if(selectedCards.contains(card.getChoiceBoxValue())) {
+                return Optional.of(card.getChoiceBoxValue() + " a été sélectionnée plusieurs fois");
+            }
+            selectedCards.add(card.getChoiceBoxValue());
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Chargement du prochain écran
+     */
+
+    public void loadNextPage() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/ValidScenario.fxml"));
+        try {
+            AnchorPane pane = loader.load();
+            ValidScenario validScenarioController = loader.getController();
+            validScenarioController.setMainStage(mainStage);
+            validScenarioController.setMainContainer(mainContainer);
+            validScenarioController.setValidScenarioContainer(pane);
+            validScenarioController.previousContainer = this.playGameContainer;
+            mainContainer.setCenter(pane);
+            validScenarioController.setGameInstance(this.gameInstance);
+            validScenarioController.setActions(this.actions);
+            validScenarioController.generateFileName();
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }
