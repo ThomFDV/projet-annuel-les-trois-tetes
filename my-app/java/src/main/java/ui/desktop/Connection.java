@@ -53,10 +53,9 @@ public class Connection {
         try {
             pane = FXMLLoader.load(Connection.class.getClassLoader().getResource("ui/desktop/fxml/Connection.fxml"));
         } catch(IOException e) {
-            System.out.println("ERROR 001: IOException\n" + e);
             e.printStackTrace();
         } catch(NullPointerException ne) {
-            System.out.println("ERROR 002: NullPointerException\n" + ne);
+            ne.printStackTrace();
         } finally {
             return pane == null ? null : new Scene(pane);
         }
@@ -86,12 +85,11 @@ public class Connection {
      */
 
     public void checkLoginInfos(String id, String pwd) {
-        System.out.println("id: " + id + ", pwd: " + pwd);
         if(isBlank(id) || isBlank(pwd) || isEmpty(id) || isEmpty(pwd)) {
             this.user = null;
             return;
         }
-        this.user = new User("Michel");
+        this.user = new User("");
     }
 
     /**

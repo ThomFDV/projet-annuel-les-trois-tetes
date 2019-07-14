@@ -14,7 +14,7 @@ public class CardImageView extends ImageView {
         try {
             this.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource(url))));
         } catch(Exception e) {
-            System.out.println("Nouvelle carte sur le board");
+            e.printStackTrace();
         }
 
     }

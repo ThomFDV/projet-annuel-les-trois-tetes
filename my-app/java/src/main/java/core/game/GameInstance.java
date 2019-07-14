@@ -271,7 +271,6 @@ public class GameInstance implements Cloneable{
         switch(this.currentTurn) {
             case TURN:
                 //TODO CheckWhoWins(): ArrayList<Player>
-                System.out.println("Fin de la main !");
                 break;
             case RIVER:
                 this.currentTurn = Turn.TURN;
@@ -428,7 +427,6 @@ public class GameInstance implements Cloneable{
             distributedCards.add(player.getHand()[0]);
             distributedCards.add(player.getHand()[1]);
         }
-        System.out.println("Taille des cartes distribuees: " + distributedCards.size());
         this.deck = new Deck(distributedCards);
     }
 

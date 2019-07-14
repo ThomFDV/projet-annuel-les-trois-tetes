@@ -228,12 +228,9 @@ public class PlayGame {
                 break;
             case 1:
                 this.updateTurn();
-                System.out.println("On doit passer au tour suivant !");
                 feedPlayerInfos(this.gameInstance.getActivePlayer());
                 break;
             case 2:
-                //TODO réinitialiser le scénario
-                System.out.println("On doit finir la main !");
                 break;
         }
     }

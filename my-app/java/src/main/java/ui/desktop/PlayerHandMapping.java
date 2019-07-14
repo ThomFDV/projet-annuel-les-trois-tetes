@@ -108,8 +108,6 @@ public class PlayerHandMapping {
                   (name.equals("Joueur 6") && nbPlayers == 10)) {
             this.X = 710;
             this.Y = 75;
-        } else {
-            System.out.println("Raté : " + name + ", nombre de joueurs: " + nbPlayers);
         }
         this.card1.setX(this.X);
         this.card1.setY(this.Y);

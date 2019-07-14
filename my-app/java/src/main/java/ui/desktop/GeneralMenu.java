@@ -36,7 +36,6 @@ public class GeneralMenu {
     public void initRootElements(BorderPane borderPane) {
         this.generalContainer = borderPane;
         this.mainScene = new Scene(this.generalContainer);
-        System.out.println(this.mainScene.toString());
     }
 
     public void setHomeContent() {
@@ -48,7 +47,7 @@ public class GeneralMenu {
             generalMenuContainer.setCenter(pane);
             homeController.setMainApp(mainStage);
             homeController.setMainAppContainer(generalMenuContainer);
-            homeController.setUserName("Michel");
+            homeController.setUserName("");
             this.centerContainer = pane;
         } catch(Exception e) {
             e.printStackTrace();
