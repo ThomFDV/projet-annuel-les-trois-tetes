@@ -1,0 +1,30 @@
+.c-account__image {
+  width: 100%;
+  height: 580px;
+  object-fit: contain;
+  position: relative;
+  z-index: -1;
+}
+
+.ahead {
+  width: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 0;
+  z-index: 1;
+  color: white;
+}
+
+.c-account__image--effect symbol img {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+
+  :hover {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+  }
+}

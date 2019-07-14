@@ -1,0 +1,22 @@
+<section class="container-fluid" *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+  <div class="d-flex justify-content-between bg-light rounded col-lg-6 m-auto px-5 py-2">
+    <div class="d-flex align-items-center">
+      <svg class="c-status-icons">
+        <use xlink:href="../../../assets/icons/icons.svg#user"></use>
+      </svg>
+      <p class="m-0">Pseudo</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <svg class="c-status-icons">
+        <use xlink:href="../../../assets/icons/icons.svg#coin"></use>
+      </svg>
+      <p class="m-0">Capital</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <svg class="c-status-icons">
+        <use xlink:href="../../../assets/icons/icons.svg#trophy"></use>
+      </svg>
+      <p class="m-0">Progression</p>
+    </div>
+  </div>
+</section>

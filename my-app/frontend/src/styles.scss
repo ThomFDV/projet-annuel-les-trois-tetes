@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  background: rgb(130,162,194);
+  background: -moz-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%);
+  background: linear-gradient(180deg, rgba(130,162,194,0.46122198879551823) 0%, rgba(213,213,213,0.4472163865546218) 100%) no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#82a2c2",endColorstr="#d5d5d5",GradientType=1);
+}
+
+svg {
+  fill: currentColor;
+}
+
+.c-account__icons {
+  width: 32px;
+  height: 32px;
+  padding-right: .5rem;
+}
+
+.c-account__inputs {
+  background-color: white;
+  border-bottom: 2px solid #007bff;
+  border-radius: 4px;
+  padding: 0 .5rem;
+}
+
+.c-account__field {
+  width: 300px;
+  height: 40px;
+  padding: .5rem;
+  border: 0;
+  border-radius: 4px;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(./assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+  url(./assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+  url(./assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

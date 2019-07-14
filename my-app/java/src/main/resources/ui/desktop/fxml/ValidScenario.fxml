@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.desktop.ValidScenario">
+   <children>
+      <TextArea fx:id="solutionArea" layoutX="315.0" layoutY="200.0" prefHeight="200.0" prefWidth="650.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="200.0" />
+      <Label layoutX="430.0" layoutY="97.0" text="Validation du scénario" AnchorPane.leftAnchor="394.0">
+         <font>
+            <Font name="Arial Black" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="147.0" layoutY="204.0" text="Explication :" AnchorPane.rightAnchor="1016.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="171.0" layoutY="446.0" text="Solution :" AnchorPane.rightAnchor="1016.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="solutionChoiceBox" layoutX="327.0" layoutY="447.0" prefWidth="150.0" AnchorPane.leftAnchor="315.0" />
+      <Button fx:id="saveButton" layoutX="788.0" layoutY="630.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" text="Enregistrer" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="315.0">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnButton" layoutX="636.0" layoutY="630.0" mnemonicParsing="false" onAction="#onReturnButtonPressed" prefWidth="151.0" text="Retour" AnchorPane.bottomAnchor="47.0">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="601.0" layoutY="447.0" text="Nom :" AnchorPane.topAnchor="447.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="fileNameLabel" layoutX="684.0" layoutY="448.0" text="fileName" AnchorPane.topAnchor="451.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="518.0" text="Sauvegarder dans :" AnchorPane.rightAnchor="1016.0" AnchorPane.topAnchor="518.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="browseButton" layoutX="334.0" layoutY="518.0" mnemonicParsing="false" onAction="#onBrowseButtonClicked" text="Parcourir..." AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="870.0">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="filePathLabel" layoutX="439.0" layoutY="520.0" text="fileName" AnchorPane.leftAnchor="439.0" AnchorPane.topAnchor="521.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+<section class="container" *ngIf="user && (user.type == 'teacher' || user.type == 'admin')">
+  <h2 class="text-center">Créer un article</h2>
+
+  <form action="" class="d-flex flex-column" [formGroup]="newArticleForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Titre de l'article" class="border mb-4 mt-5 py-3 px-2" formControlName="title">
+    <div class="border p-2 mb-4" formControlName="content" [ngxSummernote]></div>
+  <br>
+    <div class="d-flex justify-content-around">
+      <button mat-raised-button color="primary" type="submit">Valider</button>
+      <button mat-raised-button color="warn" type="reset">Annuler</button>
+    </div>
+  </form>
+
+
+</section>

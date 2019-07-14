@@ -1,0 +1,14 @@
+<app-status-bar class="my-3"></app-status-bar>
+<section *ngIf="user.type == 'user' || user.type == 'teacher' || user.type == 'admin'">
+  <div class="container-fluid col-lg-8 d-flex mt-5">
+    <div class="w-50 position-relative c-account__image--effect">
+      <figure><img src="../../../../assets/images/progress.png" alt="" class="c-account__image"></figure>
+      <a href="/statistics"><h3 class="ahead">Accéder aux statistiques</h3></a>
+    </div>
+    <hr>
+    <div class="w-50 position-relative c-account__image--effect">
+      <figure><img src="../../../../assets/images/avatar.jpg" alt="" class="c-account__image"></figure>
+      <a href="/account/info"><h3 class="ahead">Accèder au compte</h3></a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<section class="container">
+  <div class="d-flex justify-content-center mb-3" *ngIf="user && (user.type == 'teacher' || user.type == 'admin')">
+    <h5 class="mr-2">Nouveau cours pour le thème "{{theme.title}}"</h5>
+    <button mat-raised-button color="primary" routerLink="/theme/{{theme._id}}/newcourse">Créer votre cours !</button>
+  </div>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let course of theme.courses">
+    <div class="d-flex flex-column align-items-center border-right w-75 p-2">
+      <h5 class="m-auto">{{course.title}}</h5>
+      <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+        <li>{{course.creator}}</li>
+        <li>{{course.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+        <li>Cours numéro : {{course.orderId}}</li>
+      </ul>
+    </div>
+
+
+    <div class="d-flex flex-column align-items-center w-25 p-2 m-auto">
+      <button mat-raised-button color="primary"  routerLink="/theme/{{theme._id}}/course/{{course._id}}" (click)="view(theme._id, course._id)" *ngIf="course.orderId <= userTheme.orderId">Voir le cours</button>
+      <button mat-raised-button color="primary"  routerLink="/theme/{{theme._id}}/course/{{course._id}}" (click)="view(theme._id, course._id)" *ngIf="course.orderId > userTheme.orderId" disabled>Voir le cours</button>
+    </div>
+  </div>
+
+</section>
+

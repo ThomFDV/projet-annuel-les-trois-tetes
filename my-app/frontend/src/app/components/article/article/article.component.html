@@ -1,0 +1,53 @@
+<section class="container" *ngIf="user && (user.type == 'user' || user.type == 'teacher' || user.type == 'admin')">
+  <h2 class="text-center">{{article.title}}</h2>
+  <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+    <li>{{article.creator}} </li>
+    <li>{{article.updatedAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+  </ul>
+  <div class="d-inline-flex bg-light rounded mb-4 w-100 p-4 m-0">
+
+    <div [ngxSummernoteView]="article.content"></div>
+
+  </div>
+
+  <div class="col-12">
+    <h3 class="mb-4">Commentaires</h3>
+    <div class="d-inline-flex bg-light rounded mb-4 w-100" *ngFor="let comment of article.comments">
+      <div class="d-flex flex-column align-items-center border-right w-25 p-2">
+        <h5 class="m-auto">{{comment.title}}</h5>
+        <ul class="d-flex flex-column list-unstyled w-100 p-0 m-0">
+          <li>{{comment.email}}</li>
+          <li>{{comment.createdAt | date: "dd/MM/yyyy, à HH'h'mm" }}</li>
+        </ul>
+      </div>
+      <p class="p-4 w-75 m-0">
+        {{comment.content}}
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4>Ajouter un commentaire</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <form action="" class="d-flex flex-column" [formGroup]="newCommentForm" (ngSubmit)="onSubmit()">
+            <input type="text" placeholder="Titre du commentaire" class="border mb-4 mt-5 py-3 px-2"
+                   formControlName="title">
+            <textarea name="comment" id="" cols="10" rows="5" placeholder="Contenu du commentaire"
+                      class="border p-2 mb-4" formControlName="content"></textarea>
+
+            <div class="d-flex justify-content-around">
+              <button mat-raised-button color="primary" type="submit">Valider</button>
+              <button mat-raised-button color="warn" type="reset">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<section class="container">
+  <h2 class="text-center">Envoyer un message</h2>
+  <form action="" class="d-flex flex-column">
+    <span class="mx-0 mb-4 mt-5 w-100 row">
+      <label for="receiver" class="d-flex align-items-center justify-content-center bg-light font-weight-bold text-center p-2 col-1 m-0">À :</label>
+      <input id="receiver" type="text" class="border py-3 px-2 col-11">
+    </span>
+    <span class="mx-0 mb-4 w-100 row">
+      <label for="object" class="d-flex align-items-center justify-content-center bg-light font-weight-bold text-center p-2 col-1 m-0">Objet :</label>
+      <input id="object" type="text" class="border py-3 px-2 col-11">
+    </span>
+    <textarea name="article" id="" cols="20" rows="20" placeholder="Contenu du message" class="border p-2 mb-4"></textarea>
+    <div class="d-flex justify-content-around">
+      <button mat-raised-button color="primary">Envoyer</button>
+      <button mat-raised-button color="warn">Annuler</button>
+    </div>
+  </form>
+</section>
