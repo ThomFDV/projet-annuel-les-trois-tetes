@@ -12,6 +12,12 @@ public class Card {
         this.color = c;
     }
 
+    public Card(String card) {
+        String[] splittedCard = card.split(" de ");
+        this.value = Value.valueOf(splittedCard[0]);
+        this.color = Color.valueOf(splittedCard[1]);
+    }
+
     public Color getColor() {
         return this.color;
     }
