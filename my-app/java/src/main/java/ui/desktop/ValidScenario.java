@@ -1,5 +1,6 @@
 package ui.desktop;
 
+import core.csv.ScenarioWriter;
 import core.enums.Action;
 import core.game.GameInstance;
 import core.scenario.ScenarioActions;
@@ -91,13 +92,33 @@ public class ValidScenario {
     private Label filePathLabel;
 
     @FXML
+    private Label errorMessageLabel;
+
+    @FXML
     public void onReturnButtonPressed() {
         this.mainContainer.setCenter(previousContainer);
     }
 
     @FXML
     public void onSaveButtonPressed() {
-
+        Optional<String> errorMessage = this.checkInputs();
+        if(errorMessage.isPresent()) {
+            this.errorMessageLabel.setText(errorMessage.get());
+            return;
+        }
+        errorMessage = ScenarioWriter.saveScenarioAsCSV(
+                this.gameInstance,
+                this.actions,
+                this.fileName,
+                this.filePathLabel.getText(),
+                this.solutionArea.getText(),
+                this.solutionChoiceBox.getSelectionModel().getSelectedItem()
+        );
+        if(errorMessage.isPresent()) {
+            this.errorMessageLabel.setText(errorMessage.get());
+            return;
+        }
+        System.out.println("Réussi !!!");
     }
 
     @FXML
@@ -106,6 +127,9 @@ public class ValidScenario {
         File dir = directoryChooser.showDialog(mainStage);
         if(dir != null) {
             this.filePathLabel.setText(dir.getAbsolutePath());
+            this.errorMessageLabel.setText("");
+        } else {
+            this.filePathLabel.setText(this.initialPathValue);
         }
     }
 
@@ -116,6 +140,7 @@ public class ValidScenario {
         }
         this.solutionChoiceBox.getSelectionModel().selectFirst();
         this.filePathLabel.setText(this.initialPathValue);
+        this.errorMessageLabel.setText("");
     }
 
     public void generateFileName() {
@@ -124,6 +149,12 @@ public class ValidScenario {
     }
 
     public Optional<String> checkInputs() {
+        if(this.filePathLabel.getText() == this.initialPathValue) {
+            return Optional.of("Veuillez sélectionner un dossier pour enregistrer votre scénario");
+        }
+        if(this.solutionArea.getText() == "") {
+            return Optional.of("Veuillez saisir l'explication de la solution du scénario");
+        }
         return Optional.empty();
     }
 }

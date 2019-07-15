@@ -62,5 +62,10 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="errorMessageLabel" layoutX="315.0" layoutY="586.0" text="fileName" textFill="RED" AnchorPane.leftAnchor="315.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

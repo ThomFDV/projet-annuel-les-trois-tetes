@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -159,7 +160,7 @@ public class SelectPlayersScenario {
 
         Optional<ButtonType> confirmationChoice = returnAlert.showAndWait();
         if(confirmationChoice.isPresent() && confirmationChoice.get() == confirm) {
-            // retour au menu
+            this.loadHomePage();
         }
     }
 
@@ -308,6 +309,24 @@ public class SelectPlayersScenario {
             mainContainer.setCenter(pane);
             playGameController.setGameInstance(newScenarioInstance);
             playGameController.startGame();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadHomePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("ui/desktop/fxml/Home.fxml"));
+            try {
+                AnchorPane pane = loader.load();
+                Home homeController = loader.getController();
+                mainContainer.setCenter(pane);
+                homeController.setMainApp(mainStage);
+                homeController.setMainAppContainer(mainContainer);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }

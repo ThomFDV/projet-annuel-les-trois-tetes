@@ -17,4 +17,16 @@ public class ScenarioActions {
         this.playerName = name;
         this.action = action;
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
